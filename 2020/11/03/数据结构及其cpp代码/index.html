@@ -23,12 +23,12 @@
 <meta property="og:site_name" content="I am not allowed to write Chinese words here! That&#39;s it? That&#39;s it?">
 <meta property="og:description" content="邻接表邻接表的建立直接上cpp代码  12345678910111213141516171819202122struct edge&amp;#123;int w,v,next;&amp;#125;G[MAXM];int head [MAXN];int tot&#x3D;0;int n,m;void add(int u,int v,int w)&amp;#123;	G[++tot].next&#x3D;head[u];	G[tot].w&#x3D;w;">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/.com//blog/hexo/source/_posts/数据结构及其cpp代码/QQ图片20201104165325.jpg">
+<meta property="og:image" content="http://example.com/2020/11/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%85%B6cpp%E4%BB%A3%E7%A0%81/QQ%E5%9B%BE%E7%89%8720201104165325.jpg">
 <meta property="article:published_time" content="2020-11-03T11:39:36.000Z">
-<meta property="article:modified_time" content="2020-11-04T09:45:46.242Z">
+<meta property="article:modified_time" content="2020-11-04T10:13:01.535Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/.com//blog/hexo/source/_posts/数据结构及其cpp代码/QQ图片20201104165325.jpg">
+<meta name="twitter:image" content="http://example.com/2020/11/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%85%B6cpp%E4%BB%A3%E7%A0%81/QQ%E5%9B%BE%E7%89%8720201104165325.jpg">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -96,8 +96,9 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">edge</span>&#123;</span><span class="keyword">int</span> w,v,next;&#125;G[MAXM];</span><br><span class="line"><span class="keyword">int</span> head [MAXN];</span><br><span class="line"><span class="keyword">int</span> tot=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> n,m;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v,<span class="keyword">int</span> w)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	G[++tot].next=head[u];</span><br><span class="line">	G[tot].w=w;</span><br><span class="line">	G[tot].v=v;</span><br><span class="line">	head[u]=tot;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;</span><br><span class="line">	<span class="keyword">int</span> u,v,w;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=m; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; u &gt;&gt; v &gt;&gt; w;</span><br><span class="line">		add(u,v,w);   </span><br><span class="line">		<span class="comment">//如果是无向图再加上一句add(v,u,w);</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>n</strong>个点，<strong>m</strong>条边，<strong>MAXN</strong>、<strong>MAXM</strong>是数据范围<br><strong>w</strong>为当前边权值，<strong>v</strong>为当前边可到达的点，<strong>next</strong>为下一条边的位置<br><strong>G</strong>数组是邻接表主体，是图<br>具体来说，<strong>G[1]**是第一条边，</strong>G[2]<strong>是第二条边<br>**head[i]**存储：以</strong>i<strong>为起点的第一条边再数组里的位置，其中</strong>i<strong>是具体的点，即是</strong>u**<br><strong>tot</strong>为当前已经存在的边的数量</p>
-<p>理解用图片：  </p>
-<img src="/.com//blog\hexo\source\_posts\数据结构及其cpp代码\QQ图片20201104165325.jpg" alt="QQ图片20201104165325" style="zoom:25%;">
+<img src="/2020/11/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%85%B6cpp%E4%BB%A3%E7%A0%81/QQ%E5%9B%BE%E7%89%8720201104165325.jpg" class title="这是用于理解的图片">
+
+
 
 
 
