@@ -202,7 +202,8 @@
 <p>不难注意到，两段代码的差别只在第二重循环。<br><code>for (int j=T; j&gt;=t[i]; --j)//01背包</code><br><code>for (int j=t[i]; j&lt;=T; ++j)//完全背包</code></p>
 <p>01背包在判断是否要装下某物品时，根据其循环的特性，装下物品后的剩余空间内不会有相同物品；</p>
 <p>完全背包在判断时，根据其循环特性，装下物品后的剩余空间会存在相同的物品；</p>
-<h1 id="线性动态规划"><a href="#线性动态规划" class="headerlink" title="线性动态规划"></a>线性动态规划</h1>
+<h1 id="线性动态规划"><a href="#线性动态规划" class="headerlink" title="线性动态规划"></a>线性动态规划</h1><p>首先，动态规划和递推有些相似（尤其是线性动规），但是不同于递推的是：<br><strong>递推求出的是数据，所以只是针对数据进行操作；而动态规划求出的是最优状态，所以必然也是针对状态的操作，而状态自然可以出现在最优解中，也可以不出现——这便是决策的特性（布尔性）。</strong><br>其次，由于每个状态均可以由之前的状态演变形成，所以动态规划有<strong>可推导性</strong>，但同时，动态规划也有<strong>无后效性</strong>，即<strong>每个当前状态会且仅会决策出下一状态，而不直接对未来的所有状态负责</strong>，可以浅显的理解为——<br>Future has nothing to do with past, and everything to do with present.<br><strong>未来于过去无关，现在决定未来</strong><br>共勉</p>
+<h2 id="求一个序列中的最长上升子序列（LIS）"><a href="#求一个序列中的最长上升子序列（LIS）" class="headerlink" title="求一个序列中的最长上升子序列（LIS）"></a>求一个序列中的最长上升子序列（LIS）</h2>
       
     </div><!-- .entry-content -->
 
@@ -428,6 +429,38 @@
 <hr>
 <p>通过检擦十六进制数的最高有效（最高）位，就可以知道该数是整数还是负数。如果最高位大于等于8，该数是负数；如果最高位小于等于7，该数是正数。比如，十六进制数8A20是负数，而7FD9是正数。</p>
 <hr>
+<p>整数常量后缀声明</p>
+<table>
+<thead>
+<tr>
+<th align="center">二进制</th>
+<th align="center">十进制</th>
+<th align="center">八进制</th>
+<th align="center">十六进制</th>
+<th align="center">编码实数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">b/y</td>
+<td align="center">d/t</td>
+<td align="center">q/o</td>
+<td align="center">h</td>
+<td align="center">r</td>
+</tr>
+</tbody></table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">26			;十进制</span><br><span class="line">26d			;十进制</span><br><span class="line">11010011b	;二进制</span><br><span class="line">42q			;八进制</span><br><span class="line">42o			;八进制</span><br><span class="line">1Ah			;十六进制</span><br><span class="line">0A3h		;十六进制，以字母开头的十六进制数把必须加个0前置0，以防汇编器将其解释为标识符</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>第一个masm程序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">.386</span><br><span class="line">.modle flat,stdcall</span><br><span class="line">.stack 4096</span><br><span class="line">ExitProcess proto, dwexitcode:dword</span><br><span class="line"></span><br><span class="line">.data</span><br><span class="line">sum dword 999</span><br><span class="line"></span><br><span class="line">.code</span><br><span class="line">main proc</span><br><span class="line">	mov eax,8</span><br><span class="line">	mov ebx,8</span><br><span class="line">	add eax,ebx</span><br><span class="line">	inc eax</span><br><span class="line">	imul eax,sum,8</span><br><span class="line">comment !be太苣了!</span><br><span class="line">	invoke ExitProcess,0</span><br><span class="line">main endp</span><br><span class="line">end main</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>初期伪指令</p>
+<p>.model 它告诉汇编程序用的是哪一种存储模式</p>
+<p>.stack 它告诉汇编器应该为程序运行时保留多少内存字节</p>
+<p>.code 标记一个程序代码区的起点</p>
+<p>endp</p>
+<p>end</p>
 
       
     </div><!-- .entry-content -->
