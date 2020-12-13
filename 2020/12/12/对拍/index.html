@@ -20,19 +20,22 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="让计算机很快地求出 $a^b$暴力相乘的话，电脑要计算 b 次。用快速幂，计算次数在 $log_2b$ 级别，很实用。 原理假设我们需要计算$3^{11}$，因为$(11)_{10}&#x3D;(1011)_{2}$，即$ 11&#x3D;1 \cdot 2^0 + 1 \cdot 2^1 + 0 \cdot 2^2 + 1 \cdot 2^3&#x3D;1+3+0+8$，故$3^{11}&#x3D;3^{1+2+0+8}&#x3D;3^1\cd">
+  <meta name="description" content="在devC++中对拍（待更新） 在VSC中对拍遇到太多问题，一时语塞   如何解决vs2019中freopen等函数报错问题vs2019中使用freopen、fopen、sprintf等函数总是出现安全问题： error C4996: ‘xxxxx’:  This function or variable may be unsafe. Consider using xxxxxx instead.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="快速幂">
-<meta property="og:url" content="http://example.com/2020/11/25/%E5%BF%AB%E9%80%9F%E5%B9%82/index.html">
+<meta property="og:title" content="对拍">
+<meta property="og:url" content="http://example.com/2020/12/12/%E5%AF%B9%E6%8B%8D/index.html">
 <meta property="og:site_name" content="宇宙最蒻的博客，没有人比我更懂蒻">
-<meta property="og:description" content="让计算机很快地求出 $a^b$暴力相乘的话，电脑要计算 b 次。用快速幂，计算次数在 $log_2b$ 级别，很实用。 原理假设我们需要计算$3^{11}$，因为$(11)_{10}&#x3D;(1011)_{2}$，即$ 11&#x3D;1 \cdot 2^0 + 1 \cdot 2^1 + 0 \cdot 2^2 + 1 \cdot 2^3&#x3D;1+3+0+8$，故$3^{11}&#x3D;3^{1+2+0+8}&#x3D;3^1\cd">
+<meta property="og:description" content="在devC++中对拍（待更新） 在VSC中对拍遇到太多问题，一时语塞   如何解决vs2019中freopen等函数报错问题vs2019中使用freopen、fopen、sprintf等函数总是出现安全问题： error C4996: ‘xxxxx’:  This function or variable may be unsafe. Consider using xxxxxx instead.">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-11-25T13:48:30.000Z">
-<meta property="article:modified_time" content="2020-12-13T03:06:36.626Z">
+<meta property="og:image" content="http://example.com/2020/12/12/%E5%AF%B9%E6%8B%8D/%E5%BF%83%E5%BE%97%E4%BD%93%E4%BC%9A1.jpg">
+<meta property="og:image" content="http://example.com/2020/12/12/%E5%AF%B9%E6%8B%8D/%E5%BF%83%E5%BE%97%E4%BD%93%E4%BC%9A2.jpg">
+<meta property="article:published_time" content="2020-12-12T08:52:41.000Z">
+<meta property="article:modified_time" content="2020-12-13T03:32:05.991Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2020/12/12/%E5%AF%B9%E6%8B%8D/%E5%BF%83%E5%BE%97%E4%BD%93%E4%BC%9A1.jpg">
 
-<link rel="canonical" href="http://example.com/2020/11/25/%E5%BF%AB%E9%80%9F%E5%B9%82/">
+<link rel="canonical" href="http://example.com/2020/12/12/%E5%AF%B9%E6%8B%8D/">
 
 
 <script id="page-configurations">
@@ -45,7 +48,7 @@
   };
 </script>
 
-  <title>快速幂 | 宇宙最蒻的博客，没有人比我更懂蒻</title>
+  <title>对拍 | 宇宙最蒻的博客，没有人比我更懂蒻</title>
   
 
 
@@ -151,7 +154,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/25/%E5%BF%AB%E9%80%9F%E5%B9%82/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/12/%E5%AF%B9%E6%8B%8D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -164,7 +167,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          快速幂
+          对拍
         </h1>
 
         <div class="post-meta">
@@ -174,14 +177,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-11-25 21:48:30" itemprop="dateCreated datePublished" datetime="2020-11-25T21:48:30+08:00">2020-11-25</time>
+              <time title="Created: 2020-12-12 16:52:41" itemprop="dateCreated datePublished" datetime="2020-12-12T16:52:41+08:00">2020-12-12</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-13 11:06:36" itemprop="dateModified" datetime="2020-12-13T11:06:36+08:00">2020-12-13</time>
+                <time title="Modified: 2020-12-13 11:32:05" itemprop="dateModified" datetime="2020-12-13T11:32:05+08:00">2020-12-13</time>
               </span>
 
           
@@ -195,14 +198,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="让计算机很快地求出-a-b"><a href="#让计算机很快地求出-a-b" class="headerlink" title="让计算机很快地求出 $a^b$"></a>让计算机很快地求出 $a^b$</h2><p>暴力相乘的话，电脑要计算 b 次。<br>用快速幂，计算次数在 $log_2b$ 级别，很实用。</p>
-<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>假设我们需要计算$3^{11}$，因为$(11)_{10}=(1011)_{2}$，即$ 11=1 \cdot 2^0 + 1 \cdot 2^1 + 0 \cdot 2^2 + 1 \cdot 2^3=1+3+0+8$，故$3^{11}=3^{1+2+0+8}=3^1\cdot3^2\cdot 3^0\cdot3^8=3^{1\cdot2^0}\cdot3^{1\cdot2^1}\cdot 3^{0\cdot2^2}\cdot3^{1\cdot2^3}$。</p>
-<p>原本需要3累乘11次如今只需要操作4次</p>
-<p>那么问题的关键就是：b如何展开提取</p>
-<p>b&amp;1<br>&amp;在这里做运算符，叫做按位与<br>c=a&amp;b<br>则c等于a与b分别的二进制的每一位进行“与运算”的结果<br>b    =1011<br>1    =0001<br>b&amp;1    =0001</p>
-<p>1.只有b的二进制的最后一位是1时，b&amp;1才会是1<br>2.同时十进制b/2相当于二进制b砍掉最低位，又或者直接b&gt;&gt;1也有一样的效果<br>相结合，妙啊，阿sir</p>
-<p>代码（函数）<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">quickpower</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ans = <span class="number">1</span>, base = a;<span class="comment">//ans是要返回的答案； base是用于累乘的每一项</span></span><br><span class="line">	<span class="keyword">while</span> (b)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (b &amp; <span class="number">1</span>)ans *= base;</span><br><span class="line">		base *= base;<span class="comment">//base: a^1 --&gt; a^2 --&gt; a^4 --&gt; a^8</span></span><br><span class="line">		b /= <span class="number">2</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans; <span class="comment">//总结：base累乘增长很快，而我只需判断每一个base要不要乘上去，根据前面乱七八糟的推理，能成。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>完结撒花</p>
+        <h1 id="在devC-中对拍"><a href="#在devC-中对拍" class="headerlink" title="在devC++中对拍"></a>在devC++中对拍</h1><p>（待更新）</p>
+<h1 id="在VSC中对拍"><a href="#在VSC中对拍" class="headerlink" title="在VSC中对拍"></a>在VSC中对拍</h1><p>遇到太多问题，一时语塞</p>
+<img src="/2020/12/12/%E5%AF%B9%E6%8B%8D/%E5%BF%83%E5%BE%97%E4%BD%93%E4%BC%9A1.jpg" class>
+<img src="/2020/12/12/%E5%AF%B9%E6%8B%8D/%E5%BF%83%E5%BE%97%E4%BD%93%E4%BC%9A2.jpg" class>
+<h2 id="如何解决vs2019中freopen等函数报错问题"><a href="#如何解决vs2019中freopen等函数报错问题" class="headerlink" title="如何解决vs2019中freopen等函数报错问题"></a>如何解决vs2019中freopen等函数报错问题</h2><p>vs2019中使用freopen、fopen、sprintf等函数总是出现安全问题：<br> error C4996: ‘xxxxx’:  This function or variable may be unsafe. Consider using xxxxxx instead.  To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.</p>
+<p>解决方法<br>（1）打开项目里的属性<br>（2）配置属性——C/C++——预处理器——预处理器定义中加入一条指令：_CRT_SECURE_NO_WARNINGS，确认即可。</p>
 
     </div>
 
@@ -218,13 +219,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/11/25/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E2%80%94%E2%80%94%E4%BB%8E%E8%83%8C%E5%8C%85%E5%88%B0%E8%A2%AB%E6%9A%B4%E6%89%93/" rel="prev" title="动态规划——从背包到被暴打">
-      <i class="fa fa-chevron-left"></i> 动态规划——从背包到被暴打
+    <a href="/2020/12/12/VSC-%E5%90%84%E7%A7%8D%E6%96%87%E4%BB%B6%E7%9A%84%E4%BD%9C%E7%94%A8/" rel="prev" title="VSC++各种文件的作用">
+      <i class="fa fa-chevron-left"></i> VSC++各种文件的作用
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/12/03/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E6%96%B0%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB%EF%BC%8C%E5%8F%8AMicrosoft%20MASM%E8%AF%AD%E6%B3%95/" rel="next" title="汇编语言入门新知识点汇总，及Microsoft MASM语法">
-      汇编语言入门新知识点汇总，及Microsoft MASM语法 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -283,7 +281,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A9%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%BE%88%E5%BF%AB%E5%9C%B0%E6%B1%82%E5%87%BA-a-b"><span class="nav-number">1.</span> <span class="nav-text">让计算机很快地求出 $a^b$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">原理</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9C%A8devC-%E4%B8%AD%E5%AF%B9%E6%8B%8D"><span class="nav-number">1.</span> <span class="nav-text">在devC++中对拍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9C%A8VSC%E4%B8%AD%E5%AF%B9%E6%8B%8D"><span class="nav-number">2.</span> <span class="nav-text">在VSC中对拍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3vs2019%E4%B8%ADfreopen%E7%AD%89%E5%87%BD%E6%95%B0%E6%8A%A5%E9%94%99%E9%97%AE%E9%A2%98"><span class="nav-number">2.1.</span> <span class="nav-text">如何解决vs2019中freopen等函数报错问题</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -384,59 +382,6 @@
   
 
   
-      
-
-<script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
-
-    
 
   
 

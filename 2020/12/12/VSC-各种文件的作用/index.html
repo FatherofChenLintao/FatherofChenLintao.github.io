@@ -20,19 +20,19 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="让计算机很快地求出 $a^b$暴力相乘的话，电脑要计算 b 次。用快速幂，计算次数在 $log_2b$ 级别，很实用。 原理假设我们需要计算$3^{11}$，因为$(11)_{10}&#x3D;(1011)_{2}$，即$ 11&#x3D;1 \cdot 2^0 + 1 \cdot 2^1 + 0 \cdot 2^2 + 1 \cdot 2^3&#x3D;1+3+0+8$，故$3^{11}&#x3D;3^{1+2+0+8}&#x3D;3^1\cd">
+  <meta name="description" content="VC++各种文件的作用.APS：存放二进制资源的中间文件，VC把当前资源文件转换成二进制格式，并存放在APS文件中，以加快资源装载速度。资源辅助文件。 .BMP：位图资源文件。 .BSC：浏览信息文件，由浏览信息维护工具（BSCMAKE）从原始浏览信息文件（.SBR）中生成，BSC文件可以用来在源代码编辑窗口中进行快速定位。用于浏览项目信息的，如果用source brower的话就必须有这个文件。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="快速幂">
-<meta property="og:url" content="http://example.com/2020/11/25/%E5%BF%AB%E9%80%9F%E5%B9%82/index.html">
+<meta property="og:title" content="VSC++各种文件的作用">
+<meta property="og:url" content="http://example.com/2020/12/12/VSC-%E5%90%84%E7%A7%8D%E6%96%87%E4%BB%B6%E7%9A%84%E4%BD%9C%E7%94%A8/index.html">
 <meta property="og:site_name" content="宇宙最蒻的博客，没有人比我更懂蒻">
-<meta property="og:description" content="让计算机很快地求出 $a^b$暴力相乘的话，电脑要计算 b 次。用快速幂，计算次数在 $log_2b$ 级别，很实用。 原理假设我们需要计算$3^{11}$，因为$(11)_{10}&#x3D;(1011)_{2}$，即$ 11&#x3D;1 \cdot 2^0 + 1 \cdot 2^1 + 0 \cdot 2^2 + 1 \cdot 2^3&#x3D;1+3+0+8$，故$3^{11}&#x3D;3^{1+2+0+8}&#x3D;3^1\cd">
+<meta property="og:description" content="VC++各种文件的作用.APS：存放二进制资源的中间文件，VC把当前资源文件转换成二进制格式，并存放在APS文件中，以加快资源装载速度。资源辅助文件。 .BMP：位图资源文件。 .BSC：浏览信息文件，由浏览信息维护工具（BSCMAKE）从原始浏览信息文件（.SBR）中生成，BSC文件可以用来在源代码编辑窗口中进行快速定位。用于浏览项目信息的，如果用source brower的话就必须有这个文件。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-11-25T13:48:30.000Z">
-<meta property="article:modified_time" content="2020-12-13T03:06:36.626Z">
+<meta property="article:published_time" content="2020-12-12T07:58:36.000Z">
+<meta property="article:modified_time" content="2020-12-12T08:00:29.974Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2020/11/25/%E5%BF%AB%E9%80%9F%E5%B9%82/">
+<link rel="canonical" href="http://example.com/2020/12/12/VSC-%E5%90%84%E7%A7%8D%E6%96%87%E4%BB%B6%E7%9A%84%E4%BD%9C%E7%94%A8/">
 
 
 <script id="page-configurations">
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>快速幂 | 宇宙最蒻的博客，没有人比我更懂蒻</title>
+  <title>VSC++各种文件的作用 | 宇宙最蒻的博客，没有人比我更懂蒻</title>
   
 
 
@@ -151,7 +151,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/25/%E5%BF%AB%E9%80%9F%E5%B9%82/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/12/VSC-%E5%90%84%E7%A7%8D%E6%96%87%E4%BB%B6%E7%9A%84%E4%BD%9C%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -164,7 +164,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          快速幂
+          VSC++各种文件的作用
         </h1>
 
         <div class="post-meta">
@@ -173,16 +173,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2020-11-25 21:48:30" itemprop="dateCreated datePublished" datetime="2020-11-25T21:48:30+08:00">2020-11-25</time>
+              <time title="Created: 2020-12-12 15:58:36 / Modified: 16:00:29" itemprop="dateCreated datePublished" datetime="2020-12-12T15:58:36+08:00">2020-12-12</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-13 11:06:36" itemprop="dateModified" datetime="2020-12-13T11:06:36+08:00">2020-12-13</time>
-              </span>
 
           
 
@@ -195,14 +189,49 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="让计算机很快地求出-a-b"><a href="#让计算机很快地求出-a-b" class="headerlink" title="让计算机很快地求出 $a^b$"></a>让计算机很快地求出 $a^b$</h2><p>暴力相乘的话，电脑要计算 b 次。<br>用快速幂，计算次数在 $log_2b$ 级别，很实用。</p>
-<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>假设我们需要计算$3^{11}$，因为$(11)_{10}=(1011)_{2}$，即$ 11=1 \cdot 2^0 + 1 \cdot 2^1 + 0 \cdot 2^2 + 1 \cdot 2^3=1+3+0+8$，故$3^{11}=3^{1+2+0+8}=3^1\cdot3^2\cdot 3^0\cdot3^8=3^{1\cdot2^0}\cdot3^{1\cdot2^1}\cdot 3^{0\cdot2^2}\cdot3^{1\cdot2^3}$。</p>
-<p>原本需要3累乘11次如今只需要操作4次</p>
-<p>那么问题的关键就是：b如何展开提取</p>
-<p>b&amp;1<br>&amp;在这里做运算符，叫做按位与<br>c=a&amp;b<br>则c等于a与b分别的二进制的每一位进行“与运算”的结果<br>b    =1011<br>1    =0001<br>b&amp;1    =0001</p>
-<p>1.只有b的二进制的最后一位是1时，b&amp;1才会是1<br>2.同时十进制b/2相当于二进制b砍掉最低位，又或者直接b&gt;&gt;1也有一样的效果<br>相结合，妙啊，阿sir</p>
-<p>代码（函数）<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">quickpower</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ans = <span class="number">1</span>, base = a;<span class="comment">//ans是要返回的答案； base是用于累乘的每一项</span></span><br><span class="line">	<span class="keyword">while</span> (b)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (b &amp; <span class="number">1</span>)ans *= base;</span><br><span class="line">		base *= base;<span class="comment">//base: a^1 --&gt; a^2 --&gt; a^4 --&gt; a^8</span></span><br><span class="line">		b /= <span class="number">2</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans; <span class="comment">//总结：base累乘增长很快，而我只需判断每一个base要不要乘上去，根据前面乱七八糟的推理，能成。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>完结撒花</p>
+        <h1 id="VC-各种文件的作用"><a href="#VC-各种文件的作用" class="headerlink" title="VC++各种文件的作用"></a>VC++各种文件的作用</h1><p>.APS：存放二进制资源的中间文件，VC把当前资源文件转换成二进制格式，并存放在APS文件中，以加快资源装载速度。资源辅助文件。</p>
+<p>.BMP：位图资源文件。</p>
+<p>.BSC：浏览信息文件，由浏览信息维护工具（BSCMAKE）从原始浏览信息文件（.SBR）中生成，BSC文件可以用来在源代码编辑窗口中进行快速定位。用于浏览项目信息的，如果用source brower的话就必须有这个文件。可以在project options里去掉Generate Browse Info  File，这样可以加快编译进度。</p>
+<p>.C：用C语言编写的源代码文件。</p>
+<p>.CLW：ClassWizard生成的用来存放类信息的文件。classwizard信息文件，ini文件的格式。</p>
+<p>.CNT：用来定义帮助文件中“Contents”的结构。</p>
+<p>.CPP或.CXX：用C++语言编写的源代码文件。</p>
+<p>.CUR：光标资源文件。</p>
+<p>.DEF：模块定义文件，供生成动态链接库时使用。</p>
+<p>.DLG：定义对话框资源的独立文件。这种文件对于VC工程来说并非必需，因为VC一般把对话框资源放在.RC资源定义文件中。</p>
+<p>.DSP：VC开发环境生成的工程文件，VC4及以前版本使用MAK文件来定义工程。项目文件，文本格式。</p>
+<p>.DSW：VC开发环境生成的WorkSpace文件，用来把多个工程组织到一个WorkSpace中。工作区文件，与.dsp差不多。</p>
+<p>.EXP：由LIB工具从DEF文件生成的输出文件，其中包含了函数和数据项目的输出信息，LINK工具将使用EXP文件来创建动态链接库。只有在编译DLL时才会生成，记录了DLL文件中的一些信息。</p>
+<p>.H、.HPP或.HXX：用C/C++语言编写的头文件，通常用来定义数据类型，声明变量、函数、结构和类。</p>
+<p>.HLP：Windows帮助文件。</p>
+<p>.HM：在Help工程中，该文件定义了帮助文件与对话框、菜单或其它资源之间ID值的对应关系。</p>
+<p>.HPJ：由Help Workshop生成的Help工程文件，用来控制Help文件的生成过程。</p>
+<p>.HPG，生成帮助的文件的工程。</p>
+<p>.ICO：图标资源文件。</p>
+<p>.ILK：连接过程中生成的一种中间文件，只供LINK工具使用。</p>
+<p>.INI：配置文件。</p>
+<p>.LIB：库文件，LINK工具将使用它来连接各种输入库，以便最终生成EXE文件。</p>
+<p>.LIC：用户许可证书文件，使用某些ActiveX控件时需要该文件。</p>
+<p>.MAK：即MAKE文件，VC4及以前版本使用的工程文件，用来指定如何建立一个工程，VC6把MAK文件转换成DSP文件来处理。</p>
+<p>.MAP：由LINK工具生成的一种文本文件，其中包含有被连接的程序的某些信息，例如程序中的组信息和公共符号信息等。执行文件的映像信息记录文件。</p>
+<p>.MDP：旧版本的项目文件，相当于.dsp</p>
+<p>.NCB：NCB是“No Compile Browser”的缩写，其中存放了供ClassView、WizardBar和Component  Gallery使用的信息，由VC开发环境自动生成。无编译浏览文件。当自动完成功能出问题时可以删除此文件。编译工程后会自动生成。</p>
+<p>.OBJ：由编译器或汇编工具生成的目标文件，是模块的二进制中间文件。</p>
+<p>.ODL：用对象描述语言编写的源代码文件，VC用它来生成TLB文件。</p>
+<p>.OLB：带有类型库资源的一种特殊的动态链接库，也叫对象库文件。</p>
+<p>.OPT：VC开发环境自动生成的用来存放WorkSpace中各种选项的文件。工程关于开发环境的参数文件。如工具条位置信息等。</p>
+<p>.PBI、.PBO和.PBT：由VC的性能分析工具PROFILE生成并使用的三种文件。</p>
+<p>.PCH：预编译头文件，比较大，由编译器在建立工程时自动生成，其中存放有工程中已经编译的部分代码，在以后建立工程时不再重新编译这些代码，以便加快整个编译过程的速度。</p>
+<p>.PDB：程序数据库文件，在建立工程时自动生成，其中存放程序的各种信息，用来加快调试过程的速度。记录了程序有关的一些数据和调试信息。</p>
+<p>.PLG：编译信息文件，编译时的error和warning信息文件。</p>
+<p>.RC：资源定义文件。</p>
+<p>.RC2：资源定义文件，供一些特殊情况下使用。</p>
+<p>.REG：注册表信息文件。</p>
+<p>.RES：二进制资源文件，资源编译器编译资源定义文件后即生成RES文件。</p>
+<p>.RTF：Rich Text Format（丰富文本格式）文档，可由Word或写字板来创建，常被用来生成Help文件。</p>
+<p>.SBR：VC编译器为每个OBJ文件生成的原始浏览信息文件，浏览信息维护工具（BSCMAKE）将利用SBR文件来生成BSC文件。</p>
+<p>.TLB：OLE库文件，其中存放了OLE自动化对象的数据类型、模块和接口定义，自动化服务器通过TLB文件就能了解自动化对象的使用方法。</p>
+<p>.WAV：声音资源文件。 </p>
 
     </div>
 
@@ -218,12 +247,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/11/25/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E2%80%94%E2%80%94%E4%BB%8E%E8%83%8C%E5%8C%85%E5%88%B0%E8%A2%AB%E6%9A%B4%E6%89%93/" rel="prev" title="动态规划——从背包到被暴打">
-      <i class="fa fa-chevron-left"></i> 动态规划——从背包到被暴打
+    <a href="/2020/12/07/%E5%85%A8%E6%8E%92%E5%BA%8F/" rel="prev" title="全排序">
+      <i class="fa fa-chevron-left"></i> 全排序
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/12/03/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E6%96%B0%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB%EF%BC%8C%E5%8F%8AMicrosoft%20MASM%E8%AF%AD%E6%B3%95/" rel="next" title="汇编语言入门新知识点汇总，及Microsoft MASM语法">
-      汇编语言入门新知识点汇总，及Microsoft MASM语法 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/12/12/%E5%AF%B9%E6%8B%8D/" rel="next" title="对拍">
+      对拍 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -283,7 +312,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A9%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%BE%88%E5%BF%AB%E5%9C%B0%E6%B1%82%E5%87%BA-a-b"><span class="nav-number">1.</span> <span class="nav-text">让计算机很快地求出 $a^b$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">原理</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#VC-%E5%90%84%E7%A7%8D%E6%96%87%E4%BB%B6%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">VC++各种文件的作用</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -384,59 +413,6 @@
   
 
   
-      
-
-<script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
-
-    
 
   
 
