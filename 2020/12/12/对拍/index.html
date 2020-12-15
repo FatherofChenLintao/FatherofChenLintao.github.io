@@ -31,8 +31,11 @@
 <meta property="og:image" content="http://example.com/2020/12/12/%E5%AF%B9%E6%8B%8D/%E4%BE%8B%E5%AD%902.png">
 <meta property="og:image" content="http://example.com/2020/12/12/%E5%AF%B9%E6%8B%8D/%E5%BF%83%E5%BE%97%E4%BD%93%E4%BC%9A1.jpg">
 <meta property="og:image" content="http://example.com/2020/12/12/%E5%AF%B9%E6%8B%8D/%E5%BF%83%E5%BE%97%E4%BD%93%E4%BC%9A2.jpg">
+<meta property="og:image" content="http://example.com/2020/12/12/%E5%AF%B9%E6%8B%8D/eg1.png">
+<meta property="og:image" content="http://example.com/2020/12/12/%E5%AF%B9%E6%8B%8D/eg2.png">
+<meta property="og:image" content="http://example.com/2020/12/12/%E5%AF%B9%E6%8B%8D/eg3.png">
 <meta property="article:published_time" content="2020-12-12T08:52:41.000Z">
-<meta property="article:modified_time" content="2020-12-13T07:16:58.810Z">
+<meta property="article:modified_time" content="2020-12-15T08:12:27.381Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2020/12/12/%E5%AF%B9%E6%8B%8D/%E4%BE%8B%E5%AD%90.png">
@@ -186,7 +189,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-13 15:16:58" itemprop="dateModified" datetime="2020-12-13T15:16:58+08:00">2020-12-13</time>
+                <time title="Modified: 2020-12-15 16:12:27" itemprop="dateModified" datetime="2020-12-15T16:12:27+08:00">2020-12-15</time>
               </span>
 
           
@@ -215,7 +218,10 @@
 <img src="/2020/12/12/%E5%AF%B9%E6%8B%8D/%E5%BF%83%E5%BE%97%E4%BD%93%E4%BC%9A2.jpg" class>
 <h2 id="如何解决vs2019中freopen等函数报错问题"><a href="#如何解决vs2019中freopen等函数报错问题" class="headerlink" title="如何解决vs2019中freopen等函数报错问题"></a>如何解决vs2019中freopen等函数报错问题</h2><p>vs2019中使用freopen、fopen、sprintf等函数总是出现安全问题：<br> error C4996: ‘xxxxx’:  This function or variable may be unsafe. Consider using xxxxxx instead.  To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.</p>
 <p>解决方法<br>（1）打开项目里的属性<br>（2）配置属性——C/C++——预处理器——预处理器定义中加入一条指令：_CRT_SECURE_NO_WARNINGS，确认即可。</p>
-<p>（待更新）</p>
+<h2 id="兄弟，这些我都不会"><a href="#兄弟，这些我都不会" class="headerlink" title="兄弟，这些我都不会"></a>兄弟，这些我都不会</h2><p>一个解决方案可以包含多个项目<br>其中有一个是主项目<br>每个项目中只能有一个主函数</p>
+<img src="/2020/12/12/%E5%AF%B9%E6%8B%8D/eg1.png" class>
+<p>这是一个叫做“测试”的解决方案<br><img src="/2020/12/12/%E5%AF%B9%E6%8B%8D/eg2.png" class><br>其中文件“测试.sln”用VS打开即可<br>其中两个名字分别叫“project1”，“project2”的项目，源文件分别存放在其中<br><img src="/2020/12/12/%E5%AF%B9%E6%8B%8D/eg3.png" class><br>解决方案中的debug文件夹存放了以命名项目的运行文件</p>
+<h2 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h2><p>创建四个项目分别对应，其中“对比”项目设置为主项目<br>打开解决方案中的“debug文件夹”运行其中的“对比.exe”<br>系统会自行创建文本<br>猜想：打开“对比.cpp”运行，该文件原地暂时变成exe文件，并在当前目录搜寻所需，运行结束后回复原状。<br>如果将对拍所需文件放入“对比”项目文件夹，确实也可以完成对拍，但太麻烦了。</p>
 
     </div>
 
@@ -235,8 +241,8 @@
       <i class="fa fa-chevron-left"></i> VSC++各种文件的作用
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/12/13/%E5%86%99cpp%E5%A4%B4%E6%96%87%E4%BB%B6/" rel="next" title="写cpp头文件">
-      写cpp头文件 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/12/13/cpp%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A4%B4%E6%96%87%E4%BB%B6/" rel="next" title="cpp自定义头文件">
+      cpp自定义头文件 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -296,7 +302,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9C%A8devC-%E4%B8%AD%E5%AF%B9%E6%8B%8D"><span class="nav-number">1.</span> <span class="nav-text">在devC++中对拍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80"><span class="nav-number">1.0.1.</span> <span class="nav-text">基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E9%98%B6"><span class="nav-number">1.0.2.</span> <span class="nav-text">进阶</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9C%A8VSC%E4%B8%AD%E5%AF%B9%E6%8B%8D"><span class="nav-number">2.</span> <span class="nav-text">在VSC中对拍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3vs2019%E4%B8%ADfreopen%E7%AD%89%E5%87%BD%E6%95%B0%E6%8A%A5%E9%94%99%E9%97%AE%E9%A2%98"><span class="nav-number">2.1.</span> <span class="nav-text">如何解决vs2019中freopen等函数报错问题</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9C%A8devC-%E4%B8%AD%E5%AF%B9%E6%8B%8D"><span class="nav-number">1.</span> <span class="nav-text">在devC++中对拍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80"><span class="nav-number">1.0.1.</span> <span class="nav-text">基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E9%98%B6"><span class="nav-number">1.0.2.</span> <span class="nav-text">进阶</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9C%A8VSC%E4%B8%AD%E5%AF%B9%E6%8B%8D"><span class="nav-number">2.</span> <span class="nav-text">在VSC中对拍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3vs2019%E4%B8%ADfreopen%E7%AD%89%E5%87%BD%E6%95%B0%E6%8A%A5%E9%94%99%E9%97%AE%E9%A2%98"><span class="nav-number">2.1.</span> <span class="nav-text">如何解决vs2019中freopen等函数报错问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%84%E5%BC%9F%EF%BC%8C%E8%BF%99%E4%BA%9B%E6%88%91%E9%83%BD%E4%B8%8D%E4%BC%9A"><span class="nav-number">2.2.</span> <span class="nav-text">兄弟，这些我都不会</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%A1%88"><span class="nav-number">2.3.</span> <span class="nav-text">方案</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
