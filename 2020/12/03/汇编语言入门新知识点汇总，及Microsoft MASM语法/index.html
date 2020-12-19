@@ -29,7 +29,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2020/12/03/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E6%96%B0%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB%EF%BC%8C%E5%8F%8AMicrosoft%20MASM%E8%AF%AD%E6%B3%95/1.jpg">
 <meta property="article:published_time" content="2020-12-03T11:40:10.000Z">
-<meta property="article:modified_time" content="2020-12-18T16:22:12.620Z">
+<meta property="article:modified_time" content="2020-12-19T07:04:06.034Z">
 <meta property="article:author" content="带废物">
 <meta property="article:tag" content="PWN">
 <meta name="twitter:card" content="summary">
@@ -189,7 +189,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-19 00:22:12" itemprop="dateModified" datetime="2020-12-19T00:22:12+08:00">2020-12-19</time>
+                <time title="Modified: 2020-12-19 15:04:06" itemprop="dateModified" datetime="2020-12-19T15:04:06+08:00">2020-12-19</time>
               </span>
 
           
@@ -234,7 +234,7 @@
 </div>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">26			;十进制</span><br><span class="line">26d			;十进制</span><br><span class="line">11010011b	;二进制</span><br><span class="line">42q			;八进制</span><br><span class="line">42o			;八进制</span><br><span class="line">1Ah			;十六进制</span><br><span class="line">0A3h		;十六进制，以字母开头的十六进制数把必须加个0前置0，以防汇编器将其解释为标识符</span><br></pre></td></tr></table></figure>
 <hr>
-<h2 id="第一个masm程序"><a href="#第一个masm程序" class="headerlink" title="第一个masm程序"></a>第一个masm程序</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">.386									伪指令，表示这是一个32位程序，能访问32位寄存器的地址</span><br><span class="line">.modle flat,stdcall	</span><br><span class="line">;选择程序的内存模式为（flat），并确定了子程序的调用规范（stdcall）（32位windows服务要求使用stdcall规范）</span><br><span class="line">.stack 4096								;STACK伪指令标识的程序区段定义了运行时堆栈，并设置了其大小，4096字节</span><br><span class="line">ExitProcess proto, dwexitcode:dword</span><br><span class="line">;这是一个函数原型的声明，声明ExitProcess函数（一个标准的windows服务）</span><br><span class="line">;原型包括：函数名、PROTO关键字、一个逗号、以及一个输入参数列表</span><br><span class="line">;ExitProcess的输入参数为dwexitcode</span><br><span class="line"></span><br><span class="line">.data					;此为数据区</span><br><span class="line">sum dword 999			;定义名为sum的变量,大小为32位，使用了关键字DWORD</span><br><span class="line"></span><br><span class="line">.code					;此为代码区</span><br><span class="line">main proc				;声明，标记了程序开始执行的地址</span><br><span class="line">	mov eax,8</span><br><span class="line">	mov ebx,8</span><br><span class="line">	add eax,ebx</span><br><span class="line">	inc eax</span><br><span class="line">	imul eax,sum,8</span><br><span class="line">comment !be太苣了!</span><br><span class="line">	invoke ExitProcess,0		</span><br><span class="line">	;调用Windows服务（也被成为函数）ExitProcess停止程序，并将控制权交还给操作系统。还有invoke也是伪指令</span><br><span class="line">main endp						;是主程序结束的标记</span><br><span class="line">end main						;end伪指令，标记汇编的最后一行，标识程序入口main</span><br></pre></td></tr></table></figure>
+<h2 id="第一个masm程序"><a href="#第一个masm程序" class="headerlink" title="第一个masm程序"></a>第一个masm程序</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">.386									伪指令，表示这是一个32位程序，能访问32位寄存器的地址</span><br><span class="line">.modle flat,stdcall	</span><br><span class="line">;选择程序的内存模式为（flat），并确定了子程序的调用规范（stdcall）（32位windows服务要求使用stdcall规范）</span><br><span class="line">.stack 4096								;STACK伪指令标识的程序区段定义了运行时堆栈，并设置了其大小，4096字节</span><br><span class="line">ExitProcess proto, dwexitcode:dword</span><br><span class="line">;这是一个函数原型的声明，声明ExitProcess函数（一个标准的windows服务）</span><br><span class="line">;原型包括：函数名、PROTO关键字、一个逗号、以及一个输入参数列表</span><br><span class="line">;ExitProcess的输入参数为dwexitcode</span><br><span class="line"></span><br><span class="line">.data					;此为数据区</span><br><span class="line">sum dword 999			;定义名为sum的变量,大小为32位，使用了关键字DWORD</span><br><span class="line"></span><br><span class="line">.code					;此为代码区</span><br><span class="line">main proc				;声明，标记了程序开始执行的地址</span><br><span class="line">	mov eax,8</span><br><span class="line">	mov ebx,8</span><br><span class="line">	add eax,ebx</span><br><span class="line">	inc eax</span><br><span class="line">	imul eax,sum,8				;X86指令集不允许将变量直接与变量相加，但允许变量与寄存器相加</span><br><span class="line">comment !be太苣了!</span><br><span class="line">	invoke ExitProcess,0		</span><br><span class="line">	;调用Windows服务（也被成为函数）ExitProcess停止程序，并将控制权交还给操作系统。还有invoke也是伪指令</span><br><span class="line">main endp						;是主程序结束的标记</span><br><span class="line">end main						;end伪指令，标记汇编的最后一行，标识程序入口main</span><br></pre></td></tr></table></figure>
 <hr>
 <p><strong>保留字</strong>由计算机保留，<strong>标识符</strong>由程序员定义</p>
 <p><strong>伪指令</strong><br>伪指令是嵌入源代码中的命令，有汇编器识别和执行。伪指令不在运行时执行，但是可以定义变量、宏和子程序，为内存段分配名称等等。</p>
@@ -251,6 +251,97 @@
 <p>end标记一个程序的结束，并要引用入口</p>
 <h2 id="一个适合初学者的模板"><a href="#一个适合初学者的模板" class="headerlink" title="一个适合初学者的模板"></a>一个适合初学者的模板</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">.386</span><br><span class="line">.model flat,stdcall</span><br><span class="line">.stack 4096</span><br><span class="line">ExitProcess PROTO, dwExitCode:DWORD</span><br><span class="line"></span><br><span class="line">.data</span><br><span class="line">	;在这里声明变量</span><br><span class="line">.code</span><br><span class="line">main PROC</span><br><span class="line">	;在这里编写自己的代码</span><br><span class="line">	INVOKEN ExitProcess,0</span><br><span class="line">main PROC</span><br><span class="line">END main</span><br></pre></td></tr></table></figure>
 <p>汇编器生成包含机器语言的文件（目标文件object file），传递给链接器（linker）程序，从而生成可执行文件（exe）——在操作系统命令提示符下执行。</p>
+<h2 id="数据定义伪指令"><a href="#数据定义伪指令" class="headerlink" title="数据定义伪指令"></a>数据定义伪指令</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>伪指令</th>
+<th>用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BYTE</td>
+<td>8位无符号整数，B代表字节</td>
+</tr>
+<tr>
+<td>WORD</td>
+<td>16位无符号整数</td>
+</tr>
+<tr>
+<td>REAL4</td>
+<td>32位（4字节）IEEE短实数</td>
+</tr>
+<tr>
+<td>QWORD</td>
+<td>64位整数，Q代表四（字）</td>
+</tr>
+<tr>
+<td>DWORD</td>
+<td>32位整数，D代表双（字）</td>
+</tr>
+<tr>
+<td>DB/SBYTE</td>
+<td>8位整数</td>
+</tr>
+<tr>
+<td>DW/SWORD</td>
+<td>16位整数</td>
+</tr>
+<tr>
+<td>DD</td>
+<td>32位整数或实数</td>
+</tr>
+<tr>
+<td>DQ</td>
+<td>64位整数或实数</td>
+</tr>
+<tr>
+<td>DT/TBYTE</td>
+<td>定义80位（10字节）整数</td>
+</tr>
+<tr>
+<td>剩余遇到后补充</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>定义</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">greeting1 \</span><br><span class="line">BYTE &quot;welcome,&quot;,0dh,0da</span><br><span class="line">BYTE &quot;Allow me.&quot;,0</span><br><span class="line">;可分行；“\”把两源代码行连接成一条语句；“0dh”“0da”换行；“0”空字节作为结束标记</span><br><span class="line">a DWORD 20 DUP(0)	;分配空间20字节，初始值为0</span><br></pre></td></tr></table></figure>
+<p><strong>将实数编码压缩为BCD编码</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.data</span><br><span class="line">a REAL8 1.5</span><br><span class="line">b TBYTE ?	;未初始化时减小编译程序大小</span><br><span class="line">.code</span><br><span class="line">fld a		;加载到浮点堆栈</span><br><span class="line">fbstp b		;向上舍入到2，压缩BCD码值</span><br></pre></td></tr></table></figure></p>
+<h2 id="一些符号"><a href="#一些符号" class="headerlink" title="一些符号"></a>一些符号</h2><p><strong>键盘定义</strong><br>键盘有对应的ASCII码，如Esc键的ASCII码为27<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mov a,Esc_key </span><br></pre></td></tr></table></figure></p>
+<p><strong>计算数组和字符串大小</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">list BYTE 10,20,30,404</span><br><span class="line">List &#x3D; ($ - list)</span><br></pre></td></tr></table></figure><br>从当前地址计数器（$）中减去list的偏移量<br>当计算元素数量的数组中包含的不是字节时，应用数组总字节数除以单个元素大小，一般来说单个元素为1字节，所以没有这步</p>
+<p><strong>等号、EQU、TEXTQU伪指令</strong></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>伪指令</th>
+<th>跟着的</th>
+<th>注意</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EQU</td>
+<td>整数表达式，符号，&lt;文本&gt;</td>
+<td>不能重新定义</td>
+</tr>
+<tr>
+<td>TEXTEQU</td>
+<td>&lt;文本&gt;，%整数表达式，TEXTEQU</td>
+<td>可以套娃</td>
+</tr>
+<tr>
+<td>=</td>
+<td>整数表达式，</td>
+<td>可重新定义</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="64位编程"><a href="#64位编程" class="headerlink" title="64位编程"></a>64位编程</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">;省略了一堆东西</span><br><span class="line">ExitProcess PROTO		;PROTO不带参数</span><br><span class="line">.data</span><br><span class="line">	;定义变量</span><br><span class="line">.code</span><br><span class="line">main PROC</span><br><span class="line">	;代码</span><br><span class="line">	mov ecx,0			;64位不带INVOKE，用mov，call结束程序</span><br><span class="line">	call ExitProcess</span><br><span class="line">main endp</span><br><span class="line">END						;未指定程序入口点</span><br></pre></td></tr></table></figure>
+<p>8ui哦九年</p>
 
     </div>
 
@@ -334,7 +425,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%84%E5%BC%9F%EF%BC%8C%E6%89%93%E5%AD%97%E6%98%AF%E7%9C%9F%E6%BB%B4%E7%B4%AF"><span class="nav-number">1.</span> <span class="nav-text">兄弟，打字是真滴累</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E4%B8%AAmasm%E7%A8%8B%E5%BA%8F"><span class="nav-number">1.1.</span> <span class="nav-text">第一个masm程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%B8%AA%E9%80%82%E5%90%88%E5%88%9D%E5%AD%A6%E8%80%85%E7%9A%84%E6%A8%A1%E6%9D%BF"><span class="nav-number">1.2.</span> <span class="nav-text">一个适合初学者的模板</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%84%E5%BC%9F%EF%BC%8C%E6%89%93%E5%AD%97%E6%98%AF%E7%9C%9F%E6%BB%B4%E7%B4%AF"><span class="nav-number">1.</span> <span class="nav-text">兄弟，打字是真滴累</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E4%B8%AAmasm%E7%A8%8B%E5%BA%8F"><span class="nav-number">1.1.</span> <span class="nav-text">第一个masm程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%B8%AA%E9%80%82%E5%90%88%E5%88%9D%E5%AD%A6%E8%80%85%E7%9A%84%E6%A8%A1%E6%9D%BF"><span class="nav-number">1.2.</span> <span class="nav-text">一个适合初学者的模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%AE%9A%E4%B9%89%E4%BC%AA%E6%8C%87%E4%BB%A4"><span class="nav-number">1.3.</span> <span class="nav-text">数据定义伪指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E7%AC%A6%E5%8F%B7"><span class="nav-number">1.4.</span> <span class="nav-text">一些符号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#64%E4%BD%8D%E7%BC%96%E7%A8%8B"><span class="nav-number">1.5.</span> <span class="nav-text">64位编程</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
