@@ -1005,7 +1005,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-17 11:43:50" itemprop="dateModified" datetime="2020-12-17T11:43:50+08:00">2020-12-17</time>
+                <time title="Modified: 2020-12-19 00:22:12" itemprop="dateModified" datetime="2020-12-19T00:22:12+08:00">2020-12-19</time>
               </span>
 
           
@@ -1050,18 +1050,23 @@
 </div>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">26			;十进制</span><br><span class="line">26d			;十进制</span><br><span class="line">11010011b	;二进制</span><br><span class="line">42q			;八进制</span><br><span class="line">42o			;八进制</span><br><span class="line">1Ah			;十六进制</span><br><span class="line">0A3h		;十六进制，以字母开头的十六进制数把必须加个0前置0，以防汇编器将其解释为标识符</span><br></pre></td></tr></table></figure>
 <hr>
-<p>第一个masm程序</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">.386</span><br><span class="line">.modle flat,stdcall</span><br><span class="line">.stack 4096</span><br><span class="line">ExitProcess proto, dwexitcode:dword</span><br><span class="line"></span><br><span class="line">.data					;此为数据区</span><br><span class="line">sum dword 999			;定义名为sum的变量</span><br><span class="line"></span><br><span class="line">.code					;此为代码区</span><br><span class="line">main proc</span><br><span class="line">	mov eax,8</span><br><span class="line">	mov ebx,8</span><br><span class="line">	add eax,ebx</span><br><span class="line">	inc eax</span><br><span class="line">	imul eax,sum,8</span><br><span class="line">comment !be太苣了!</span><br><span class="line">	invoke ExitProcess,0</span><br><span class="line">main endp</span><br><span class="line">end main</span><br></pre></td></tr></table></figure>
-<p>invoke ExitProcess,0<br>调用Windows服务（也被成为函数）ExitProcess停止程序，并将控制权交还给操作系统<br>main endp<br>是主程序结束的标记</p>
+<h2 id="第一个masm程序"><a href="#第一个masm程序" class="headerlink" title="第一个masm程序"></a>第一个masm程序</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">.386									伪指令，表示这是一个32位程序，能访问32位寄存器的地址</span><br><span class="line">.modle flat,stdcall	</span><br><span class="line">;选择程序的内存模式为（flat），并确定了子程序的调用规范（stdcall）（32位windows服务要求使用stdcall规范）</span><br><span class="line">.stack 4096								;STACK伪指令标识的程序区段定义了运行时堆栈，并设置了其大小，4096字节</span><br><span class="line">ExitProcess proto, dwexitcode:dword</span><br><span class="line">;这是一个函数原型的声明，声明ExitProcess函数（一个标准的windows服务）</span><br><span class="line">;原型包括：函数名、PROTO关键字、一个逗号、以及一个输入参数列表</span><br><span class="line">;ExitProcess的输入参数为dwexitcode</span><br><span class="line"></span><br><span class="line">.data					;此为数据区</span><br><span class="line">sum dword 999			;定义名为sum的变量,大小为32位，使用了关键字DWORD</span><br><span class="line"></span><br><span class="line">.code					;此为代码区</span><br><span class="line">main proc				;声明，标记了程序开始执行的地址</span><br><span class="line">	mov eax,8</span><br><span class="line">	mov ebx,8</span><br><span class="line">	add eax,ebx</span><br><span class="line">	inc eax</span><br><span class="line">	imul eax,sum,8</span><br><span class="line">comment !be太苣了!</span><br><span class="line">	invoke ExitProcess,0		</span><br><span class="line">	;调用Windows服务（也被成为函数）ExitProcess停止程序，并将控制权交还给操作系统。还有invoke也是伪指令</span><br><span class="line">main endp						;是主程序结束的标记</span><br><span class="line">end main						;end伪指令，标记汇编的最后一行，标识程序入口main</span><br></pre></td></tr></table></figure>
 <hr>
-<p>保留字：指令助记符（mov，add，mul）</p>
-<p>初期伪指令</p>
+<p><strong>保留字</strong>由计算机保留，<strong>标识符</strong>由程序员定义</p>
+<p><strong>伪指令</strong><br>伪指令是嵌入源代码中的命令，有汇编器识别和执行。伪指令不在运行时执行，但是可以定义变量、宏和子程序，为内存段分配名称等等。</p>
+<p><strong>指令</strong><br>一条指令有四个组成部分：<br>标号（可选）<br>指令助记符<br>操作数<br>注释（可选）</p>
+<p><strong>标号</strong></p>
+<img src="/2020/12/03/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E6%96%B0%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB%EF%BC%8C%E5%8F%8AMicrosoft%20MASM%E8%AF%AD%E6%B3%95/1.jpg" class>
+<p><strong>指令助记符</strong><br>如：MOV, ADD, SUB, MUL, JMP, CALL</p>
+<p><strong>操作数</strong><br>可以为：整数常量，整数表达式，寄存器，内存<br>注：有一些些指令可以无操作数</p>
+<p><strong>NOP（空操作）指令</strong><br>安全无用，占用一个字节，被用于将代码对齐到有效的地址边界</p>
+<p><strong>回顾一些重要伪指令</strong></p>
 <p>.model 它告诉汇编程序用的是哪一种存储模式</p>
-<p>.stack 它告诉汇编器应该为程序运行时保留多少内存字节</p>
 <p>.code 标记一个程序代码区的起点</p>
-<p>endp</p>
-<p>end</p>
-<p>（待更新）</p>
+<p>endp标记一个过程的结束，在此处为对应main的过程。<br>main PROC············main ENDP</p>
+<p>end标记一个程序的结束，并要引用入口</p>
+<h2 id="一个适合初学者的模板"><a href="#一个适合初学者的模板" class="headerlink" title="一个适合初学者的模板"></a>一个适合初学者的模板</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">.386</span><br><span class="line">.model flat,stdcall</span><br><span class="line">.stack 4096</span><br><span class="line">ExitProcess PROTO, dwExitCode:DWORD</span><br><span class="line"></span><br><span class="line">.data</span><br><span class="line">	;在这里声明变量</span><br><span class="line">.code</span><br><span class="line">main PROC</span><br><span class="line">	;在这里编写自己的代码</span><br><span class="line">	INVOKEN ExitProcess,0</span><br><span class="line">main PROC</span><br><span class="line">END main</span><br></pre></td></tr></table></figure>
+<p>汇编器生成包含机器语言的文件（目标文件object file），传递给链接器（linker）程序，从而生成可执行文件（exe）——在操作系统命令提示符下执行。</p>
 
       
     </div>
