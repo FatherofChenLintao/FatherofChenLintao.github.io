@@ -29,7 +29,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2020/12/19/pwn%E7%94%A8%E5%88%B0%E7%9A%84%E5%B7%A5%E5%85%B7%E6%B1%87%E6%80%BB/3.png">
 <meta property="article:published_time" content="2020-12-19T07:53:00.000Z">
-<meta property="article:modified_time" content="2020-12-19T08:46:39.047Z">
+<meta property="article:modified_time" content="2020-12-19T09:32:11.030Z">
 <meta property="article:author" content="带废物">
 <meta property="article:tag" content="PWN">
 <meta name="twitter:card" content="summary">
@@ -128,7 +128,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">17</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">19</span></a>
 
   </li>
   </ul>
@@ -183,7 +183,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-12-19 15:53:00 / Modified: 16:46:39" itemprop="dateCreated datePublished" datetime="2020-12-19T15:53:00+08:00">2020-12-19</time>
+              <time title="Created: 2020-12-19 15:53:00 / Modified: 17:32:11" itemprop="dateCreated datePublished" datetime="2020-12-19T15:53:00+08:00">2020-12-19</time>
             </span>
 
           
@@ -214,7 +214,7 @@
 <img src="/2020/12/19/pwn%E7%94%A8%E5%88%B0%E7%9A%84%E5%B7%A5%E5%85%B7%E6%B1%87%E6%80%BB/3.png" class>
 <p>（这张是我在网上随便找的）</p>
 <p><strong>Arch</strong><br>程序架构信息，判断是64位还是32位，exp编写的时候是p64还是p32</p>
-<p><strong>RELRO</strong><br>Relocation Read-Onl（RELRO）此项技术主要针对GOT改写的攻击方式，它分成两种，Partial RELRO和FULL RELRO<br>Partial RELRO容易受到攻击，例如攻击者可以atoi.got为system.plt进而输入/bin/sh\x00获得shell，Full RELRO使整个GOT只读，从而无法被覆盖，但这样会大大增加程序的启动时间，因为程序在启动之前需要解析所有的符号。</p>
+<p><strong>RELRO</strong><br>Relocation Read-Onl（RELRO）此项技术主要针对GOT改写的攻击方式，它分成两种，Partial RELRO和FULL RELRO<br>Partial RELRO容易受到攻击，例如攻击者可以atoi.got为system.plt进而输入/bin/sh\x00获得shell，<br>Full RELRO使整个GOT只读，从而无法被覆盖，但这样会大大增加程序的启动时间，因为程序在启动之前需要解析所有的符号。</p>
 <p><strong>Stack-canary</strong><br>栈溢出保护是一种缓冲区溢出攻击缓解手段，当函数存在缓冲区溢出攻击漏洞是，攻击者可以覆盖栈上的返回地址来让shellcode能够得到执行，当启用栈保护后，函数开始执行的时候先会往栈里插入类似cookie信息，当函数真正返回的时候会验证cookie信息是否合法，如果不合法就停止程序运行，攻击者在覆盖返回地址的时候往往会将cookie信息给覆盖掉，导致栈保护检车失败而阻止shellcode的执行，在linux中我们将cookie信息称为canary。因此我们需要获取 Canary 的值，或者防止触发 stack_chk_fail 函数，或是利用此函数。</p>
 <p><strong>NX</strong><br>Non-Executable Memory，不可执行内存。了解 Linux 的都知道其文件有三种属性，即 rwx，而 NX 即没有 x 属性。如果没有 w 属性，我们就不能向内存单元中写入数据，如果没有 x 属性，写入的 shellcode 就无法执行。所以，我们此时应该使用其他方法来 pwn 掉程序，其中最常见的方法为 ROP (Return-Oriented Programming 返回导向编程)，利用栈溢出在栈上布置地址，每个内存地址对应一个 gadget，利用 ret 等指令进行衔接来执行某项功能，最终达到 pwn 掉程序的目的。<br>NX enabled如果这个保护开启就是意味着栈中数据没有执行权限，如此一来，当攻击者在堆栈上部署自己的shellcode并触发时，智慧直接造成程序的崩溃，但是可以利用rop这种方法绕过</p>
 <p><strong>PIE</strong><br>PTE（Position-Independent  Executable，位置无关可执行文件）技术与ASLR技术类似，ASLR将程序运行时的堆栈以及共享库的加载地址随机化，而PIE及时则在编译时将程序编译为位置无关，即程序运行时各个段（如代码但等）加载的虚拟地址也是在装载时才确定，这就意味着。在PIE和ASLR同时开启的情况下，攻击者将对程序的内存布局一无所知，传统改写GOT表项也难以进行，因为攻击者不能获得程序的.got段的虚地址。若开始一般需在攻击时歇够地址信息</p>
@@ -239,7 +239,10 @@
     <a href="/2020/12/18/AD-hello-pwn/" rel="prev" title="AD_hello_pwn">
       <i class="fa fa-chevron-left"></i> AD_hello_pwn
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/12/19/AD-when-did-you-born/" rel="next" title="AD_when_did_you_born">
+      AD_when_did_you_born <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -312,7 +315,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">19</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
