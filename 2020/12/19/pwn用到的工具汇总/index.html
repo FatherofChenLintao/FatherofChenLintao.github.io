@@ -27,13 +27,14 @@
 <meta property="og:site_name" content="全宇宙最蒻的博客">
 <meta property="og:description" content="注：随手找的，如果没有找想要的用法再去搜 natcatnetcat通过TCP和UDP在网络中读写数据。通过与其他工具结合和重定向，可以在脚本中以多种方式使用它。 netcat所做的就是在两台电脑之间建立链接并返回两个数据流。能建立一个服务器，传输文件，与朋友聊天，传输流媒体或者用它作为其它协议的独立客户端。 用于打开一个shell当在题目网页点击获取在线环境，云端便搭建了一个服务器我在客户端仅仅简">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2020/12/19/pwn%E7%94%A8%E5%88%B0%E7%9A%84%E5%B7%A5%E5%85%B7%E6%B1%87%E6%80%BB/1.png">
 <meta property="og:image" content="http://example.com/2020/12/19/pwn%E7%94%A8%E5%88%B0%E7%9A%84%E5%B7%A5%E5%85%B7%E6%B1%87%E6%80%BB/3.png">
 <meta property="article:published_time" content="2020-12-19T07:53:00.000Z">
-<meta property="article:modified_time" content="2020-12-19T09:32:11.030Z">
+<meta property="article:modified_time" content="2020-12-22T09:08:27.224Z">
 <meta property="article:author" content="带废物">
 <meta property="article:tag" content="PWN">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2020/12/19/pwn%E7%94%A8%E5%88%B0%E7%9A%84%E5%B7%A5%E5%85%B7%E6%B1%87%E6%80%BB/3.png">
+<meta name="twitter:image" content="http://example.com/2020/12/19/pwn%E7%94%A8%E5%88%B0%E7%9A%84%E5%B7%A5%E5%85%B7%E6%B1%87%E6%80%BB/1.png">
 
 <link rel="canonical" href="http://example.com/2020/12/19/pwn%E7%94%A8%E5%88%B0%E7%9A%84%E5%B7%A5%E5%85%B7%E6%B1%87%E6%80%BB/">
 
@@ -181,10 +182,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-12-19 15:53:00 / Modified: 17:32:11" itemprop="dateCreated datePublished" datetime="2020-12-19T15:53:00+08:00">2020-12-19</time>
+              <time title="Created: 2020-12-19 15:53:00" itemprop="dateCreated datePublished" datetime="2020-12-19T15:53:00+08:00">2020-12-19</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-12-22 17:08:27" itemprop="dateModified" datetime="2020-12-22T17:08:27+08:00">2020-12-22</time>
+              </span>
 
           
 
@@ -209,7 +216,15 @@
 <p><strong>IO模块</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sh.send(data)  发送数据</span><br><span class="line">sh.sendline(data)  发送一行数据，相当于在数据后面加\n</span><br><span class="line">sh.recv(numb &#x3D; 2048, timeout &#x3D; dufault)  接受数据，numb指定接收的字节，timeout指定超时</span><br><span class="line">sh.recvline(keepends&#x3D;True)  接受一行数据，keepends为是否保留行尾的\n</span><br><span class="line">sh.recvuntil(&quot;Hello,World\n&quot;,drop&#x3D;fasle)  接受数据直到我们设置的标志出现</span><br><span class="line">sh.recvall()  一直接收直到EOF</span><br><span class="line">sh.recvrepeat(timeout &#x3D; default)  持续接受直到EOF或timeout</span><br><span class="line">sh.interactive()  直接进行交互，相当于回到shell的模式，在取得shell之后使用</span><br></pre></td></tr></table></figure></p>
 <p><strong>ELF文件操作</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; e &#x3D; ELF(&#39;&#x2F;bin&#x2F;cat&#39;)</span><br><span class="line">&gt;&gt;&gt; print hex(e.address)  # 文件装载的基地址</span><br><span class="line">0x400000</span><br><span class="line">&gt;&gt;&gt; print hex(e.symbols[&#39;write&#39;]) # 函数地址</span><br><span class="line">0x401680</span><br><span class="line">&gt;&gt;&gt; print hex(e.got[&#39;write&#39;]) # GOT表的地址</span><br><span class="line">0x60b070</span><br><span class="line">&gt;&gt;&gt; print hex(e.plt[&#39;write&#39;]) # PLT的地址</span><br><span class="line">0x401680</span><br><span class="line">&gt;&gt;&gt; print hex(e.search(&#39;&#x2F;bin&#x2F;sh&#39;).next())# 字符串&#x2F;bin&#x2F;sh的地址</span><br></pre></td></tr></table></figure></p>
 <p><strong>整数pack与数据unpack</strong><br>pack：p32，p64<br>unpack：u32，u64<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">from pwn import *</span><br><span class="line">elf &#x3D; ELF(&#39;.&#x2F;a&#39;)</span><br><span class="line">b &#x3D; elf.symbols[&#39;system&#39;]</span><br><span class="line">payload &#x3D; &#39;a&#39; * (0x80 + 0x8) + p64(b)</span><br><span class="line">...	</span><br></pre></td></tr></table></figure><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">io.p32()</span><br><span class="line">io.p64(<span class="number">0xdeadbeefdeadbeef</span>)</span><br><span class="line">io.u32(<span class="string">&quot;1234&quot;</span>)</span><br><span class="line">io.u64(<span class="string">&quot;12345678&quot;</span>)</span><br><span class="line"><span class="comment"># 将字节数组与数组进行以小端对齐的方式相互转化，32负责转化dword，64负责转化qword</span></span><br></pre></td></tr></table></figure></p>
-<h1 id="IDA"><a href="#IDA" class="headerlink" title="IDA"></a>IDA</h1><p>新建选GO<br>将文件拖入<br>得到汇编码<br>F5得到伪C代码（也许能看得懂）<br>双击函数、变量跳出所在位置</p>
+<h1 id="IDA"><a href="#IDA" class="headerlink" title="IDA"></a>IDA</h1><p>新建选GO<br>将文件拖入<br><img src="/2020/12/19/pwn%E7%94%A8%E5%88%B0%E7%9A%84%E5%B7%A5%E5%85%B7%E6%B1%87%E6%80%BB/1.png" class><br>得到汇编码</p>
+<p>找到入口点F5得到伪C代码（也许能看得懂）<br>shift+F6找出字符串（带””的内容，可能有重要内容<br>双击函数、变量跳出所在位置</p>
+<p>菜单工具栏中View Toolbars下有两个子菜单，分别时Basci mode 和 Advanced mode<br>逆向工作区一般有7个子窗口：<br> IDA View-A 反汇编试图A<br> Hex View-A 16进制试图A<br> Functions Window 函数窗口<br> Structures 结构体<br> Enums 枚举<br> Imports 导入数据<br> Exports 导出数据</p>
+<p>IDA在静态分析时会自动分析已知和未知的函数，通常有如下几种标识：<br> Sub_XXXXX 子程序<br> loc_XXXXXX 地址，多用于跳转指令的目的地<br> byte_XXXXX 标识一个字节型的数据<br> word_XXXX 字型数据<br> dword_XXX 双字型数据<br> unk_XXXXX 未知类型数据</p>
+<p>跳转至某个位置，快捷键G</p>
+<p>一个程序运行先存放在内存中<br>IDA分析寄存器地址（CPU），内存地址（内存）的数据完成反汇编    </p>
+<p>IDA解析数据和代码之间的转换<br>很多程序为了防止被破解，加入了花指令。所谓花指令，是在代码中插入了数据使得反汇编引擎错误的将数据解析成为代码，因此从错误解析的位置开始往后的汇编代码都会被错误的解析。它是一种常用的对抗静态分析的手段。<br>如果逆向者发现IDA错误地将代码解析成为了数据或者错误地将数据解析成为了代码，可以通过快捷键“C”和快捷键“D”，在数据和代码之间解析。</p>
+<p>int_64分为两种储存方式（存进内存）<br>大端存储<br>ABCDEFG<br>小端存储<br>GFEDCBA</p>
+<p>遇到大数据+0LL后缀可能是没被转化的原进制数，因为花指令的干扰。<br>选中数据按R键转化</p>
 <h1 id="checksec"><a href="#checksec" class="headerlink" title="checksec"></a>checksec</h1><p><strong>checksec：</strong><br>checksec是一个脚本软件，也就是用脚本写的一个文件，不到2000行，可用来学习shell。<br>checksec是用来检查可执行文件属性，例如PIE, RELRO, PaX, Canaries, ASLR, Fortify Source等等属性。<br>checksec的使用方法：<br>checksec –file /usr/sbin/sshd</p>
 <img src="/2020/12/19/pwn%E7%94%A8%E5%88%B0%E7%9A%84%E5%B7%A5%E5%85%B7%E6%B1%87%E6%80%BB/3.png" class>
 <p>（这张是我在网上随便找的）</p>
