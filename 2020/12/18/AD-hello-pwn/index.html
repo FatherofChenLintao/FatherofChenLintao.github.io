@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="诶呀。。。。。。没人告诉我pwntools是用python写的，我看到题解有python语法就先去学python语法，看半天找不到我要的，因为用法在pwntools里。诶呀，恶心啊。。。。 Pwntools主要模块及其使用Tubes模块包含remote和process子模块1234567891011from pwn import *io &#x3D; remote(&quot;127.0.0.1&amp;quot">
+  <meta name="description" content="诶呀。。。。。。没人告诉我pwntools是用python写的，我看到题解有python语法就先去学python语法，看半天找不到我要的，因为用法在pwntools里。诶呀，恶心啊。。。。 Pwntools主要模块及其使用Tubes模块包含remote和process子模块 1234567891011from pwn import *io &#x3D; remote(&quot;127.0.0.1&amp;quo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AD_hello_pwn">
 <meta property="og:url" content="http://example.com/2020/12/18/AD-hello-pwn/index.html">
 <meta property="og:site_name" content="全宇宙最蒻的博客">
-<meta property="og:description" content="诶呀。。。。。。没人告诉我pwntools是用python写的，我看到题解有python语法就先去学python语法，看半天找不到我要的，因为用法在pwntools里。诶呀，恶心啊。。。。 Pwntools主要模块及其使用Tubes模块包含remote和process子模块1234567891011from pwn import *io &#x3D; remote(&quot;127.0.0.1&amp;quot">
+<meta property="og:description" content="诶呀。。。。。。没人告诉我pwntools是用python写的，我看到题解有python语法就先去学python语法，看半天找不到我要的，因为用法在pwntools里。诶呀，恶心啊。。。。 Pwntools主要模块及其使用Tubes模块包含remote和process子模块 1234567891011from pwn import *io &#x3D; remote(&quot;127.0.0.1&amp;quo">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2020/12/18/AD-hello-pwn/1.jpg">
 <meta property="og:image" content="http://example.com/2020/12/18/AD-hello-pwn/3.jpg">
@@ -34,7 +34,7 @@
 <meta property="og:image" content="http://example.com/2020/12/18/AD-hello-pwn/4.png">
 <meta property="og:image" content="http://example.com/2020/12/18/AD-hello-pwn/5.png">
 <meta property="article:published_time" content="2020-12-18T10:54:01.000Z">
-<meta property="article:modified_time" content="2020-12-25T13:25:20.224Z">
+<meta property="article:modified_time" content="2020-12-26T04:11:47.507Z">
 <meta property="article:author" content="带废物">
 <meta property="article:tag" content="PWN">
 <meta name="twitter:card" content="summary">
@@ -194,7 +194,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-25 21:25:20" itemprop="dateModified" datetime="2020-12-25T21:25:20+08:00">2020-12-25</time>
+                <time title="Modified: 2020-12-26 12:11:47" itemprop="dateModified" datetime="2020-12-26T12:11:47+08:00">2020-12-26</time>
               </span>
 
           
@@ -210,7 +210,8 @@
       
         <img src="/2020/12/18/AD-hello-pwn/1.jpg" class>
 <p>诶呀。。。。。。<br>没人告诉我pwntools是用python写的，我看到题解有python语法就先去学python语法，看半天找不到我要的，因为用法在pwntools里。<br>诶呀，恶心啊。。。。</p>
-<h1 id="Pwntools主要模块及其使用"><a href="#Pwntools主要模块及其使用" class="headerlink" title="Pwntools主要模块及其使用"></a>Pwntools主要模块及其使用</h1><h3 id="Tubes模块包含remote和process子模块"><a href="#Tubes模块包含remote和process子模块" class="headerlink" title="Tubes模块包含remote和process子模块"></a>Tubes模块包含remote和process子模块</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">io = remote(<span class="string">&quot;127.0.0.1&quot;</span>, <span class="number">32152</span>)</span><br><span class="line"><span class="comment"># 与互联网主机交互</span></span><br><span class="line">io.sendline(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">io.send(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line"><span class="comment"># sendline发送数据会在最后多添加一个回车</span></span><br><span class="line">io.recv(<span class="number">1024</span>)</span><br><span class="line">io.revuntil(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">io.recvline()</span><br><span class="line"><span class="comment"># recv()读取1024个字节，revuntil()读取到指定数据，recvline()会读取一直到回车</span></span><br><span class="line">io.interactive() <span class="comment">#爷不晓得</span></span><br></pre></td></tr></table></figure>
+<h1 id="Pwntools主要模块及其使用"><a href="#Pwntools主要模块及其使用" class="headerlink" title="Pwntools主要模块及其使用"></a>Pwntools主要模块及其使用</h1><p><strong>Tubes模块包含remote和process子模块</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">io = remote(<span class="string">&quot;127.0.0.1&quot;</span>, <span class="number">32152</span>)</span><br><span class="line"><span class="comment"># 与互联网主机交互</span></span><br><span class="line">io.sendline(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">io.send(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line"><span class="comment"># sendline发送数据会在最后多添加一个回车</span></span><br><span class="line">io.recv(<span class="number">1024</span>)</span><br><span class="line">io.revuntil(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">io.recvline()</span><br><span class="line"><span class="comment"># recv()读取1024个字节，revuntil()读取到指定数据，recvline()会读取一直到回车</span></span><br><span class="line">io.interactive() <span class="comment">#爷不晓得</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">io = process(<span class="string">&quot;./bin&quot;</span>, shell=<span class="literal">True</span>)</span><br><span class="line"><span class="comment">#启动本地程序进行交互，用于gdb调试</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">io.p32(<span class="number">0xdeadbeef</span>)</span><br><span class="line">io.p64(<span class="number">0xdeadbeefdeadbeef</span>)</span><br><span class="line">io.u32(<span class="string">&quot;1234&quot;</span>)</span><br><span class="line">io.u64(<span class="string">&quot;12345678&quot;</span>)</span><br><span class="line"><span class="comment"># 将字节数组与数组进行以小端对齐的方式相互转化，32负责转化dword，64负责转化qword</span></span><br></pre></td></tr></table></figure>
 <p>之前昨天速成python是在本机VS2019（我现在还没找到解释器），现在去VMLinux写。</p>
@@ -218,7 +219,7 @@
 <p><strong>新建文件</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; text.py</span><br></pre></td></tr></table></figure>
 <p>右键修改权限后可执行</p>
-<h1 id="开始做题"><a href="#开始做题" class="headerlink" title="开始做题"></a>开始做题</h1><p>本题附件用于反编译，查找漏洞，然后写脚本，用脚本连接对准环境直接攻击（我拿着脚本对附件打了半天）</p>
+<h1 id="做题"><a href="#做题" class="headerlink" title="做题"></a>做题</h1><p>本题附件用于反编译，查找漏洞，然后写脚本，用脚本连接对准环境直接攻击（我拿着脚本对附件打了半天）</p>
 <img src="/2020/12/18/AD-hello-pwn/3.jpg" class>
 <p>把附件先扔到IDA反编译</p>
 <img src="/2020/12/18/AD-hello-pwn/2.png" class>
@@ -262,6 +263,8 @@
 <p>[类别名]<br>连接时用于相关段组合在一起，如代码段’code’，数据段’Data’，堆栈段’Stack’</p>
 <p>例子: stack segment para stack ‘stack’<br>解释: para表明该段起始地址对齐到para。 1 para= 16 bytes。stack声明该段是堆栈段，这样在最后的链接link时，会将该最终创建的exe文件头部的SS：SP域指向该段的末尾<br>‘stack’表明该段的组合名为’stack’。同一程序不同模块中，相同组合名的段会组合到一起。组合名也决定了最后exe文件中各个段的排列顺序</p>
 <p><strong>hlt</strong><br>HLT是暂停指令，当计算机程序运行一条HLT指令的时候，处理器就会进入传统的暂停模式。bai部的时钟信号停止下来了。在收到中断指令后，处理器又可以回到正常运作形态，同时时钟信号也恢复正常。 </p>
+<p><strong>栈堆相关寄存器</strong><br>运行时堆栈是内存数组，CPU用ESP寄存器（堆栈指针寄存器），对其进行管理。<br>ESP存放的是堆栈中某个位置的32位偏移量，每个堆栈位置都是32位长。<br>对应64位下的rsp（低位为esp）</p>
+<p>几个常用的寄存器<br>sp/esp/rsp（16bit/32bit/64bit）栈寄存器—-指向栈顶<br>bp/ebp/rbp 栈基址寄存器—-指向栈底<br>ip/eip/rip 程序指令寄存器—-指向下一条待执行指令</p>
 
     </div>
 
@@ -345,7 +348,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Pwntools%E4%B8%BB%E8%A6%81%E6%A8%A1%E5%9D%97%E5%8F%8A%E5%85%B6%E4%BD%BF%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">Pwntools主要模块及其使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tubes%E6%A8%A1%E5%9D%97%E5%8C%85%E5%90%ABremote%E5%92%8Cprocess%E5%AD%90%E6%A8%A1%E5%9D%97"><span class="nav-number">1.0.1.</span> <span class="nav-text">Tubes模块包含remote和process子模块</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E5%81%9A%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">开始做题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IDA%E5%8F%8D%E7%BC%96%E8%AF%91%E6%B1%87%E7%BC%96%E6%BA%90%E4%BB%A3%E7%A0%81%E5%A4%8D%E7%9B%98"><span class="nav-number">3.</span> <span class="nav-text">IDA反编译汇编源代码复盘</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Pwntools%E4%B8%BB%E8%A6%81%E6%A8%A1%E5%9D%97%E5%8F%8A%E5%85%B6%E4%BD%BF%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">Pwntools主要模块及其使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%81%9A%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">做题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IDA%E5%8F%8D%E7%BC%96%E8%AF%91%E6%B1%87%E7%BC%96%E6%BA%90%E4%BB%A3%E7%A0%81%E5%A4%8D%E7%9B%98"><span class="nav-number">3.</span> <span class="nav-text">IDA反编译汇编源代码复盘</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
