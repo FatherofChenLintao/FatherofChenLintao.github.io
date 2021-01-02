@@ -121,7 +121,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">19</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">20</span></a>
 
   </li>
   </ul>
@@ -147,6 +147,89 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/12/%E5%AF%B9%E6%8B%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="带废物">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="全宇宙最蒻的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/12/%E5%AF%B9%E6%8B%8D/" class="post-title-link" itemprop="url">对拍</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-12-12 16:52:41" itemprop="dateCreated datePublished" datetime="2020-12-12T16:52:41+08:00">2020-12-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-12-17 10:31:16" itemprop="dateModified" datetime="2020-12-17T10:31:16+08:00">2020-12-17</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="在devC-中对拍"><a href="#在devC-中对拍" class="headerlink" title="在devC++中对拍"></a>在devC++中对拍</h1><h3 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h3><p>尝试.cpp 尝试.exe<br>暴力.cpp 暴力.exe<br>数据.cpp 数据.exe<br>对比.cpp 对比.exe<br>数据.in（来自数据.exe的执行，用于尝试.exe和暴力.exe的执行）<br>暴力数据.out（来自暴力.exe的执行，用于对比.exe的执行）<br>尝试数据.in（来自尝试.exe的执行，用于对比.exe的执行）<br>将以上全部放入同一个文件夹（方便精简代码）（如若不然，需要在代码中写明每个文件的地址）</p>
+<p>对比.cpp代码（文件输入输出）<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		system(<span class="string">&quot;数据.exe&quot;</span>);</span><br><span class="line">		system(<span class="string">&quot;暴力.exe&quot;</span>);</span><br><span class="line">		system(<span class="string">&quot;尝试.exe&quot;</span>);</span><br><span class="line">		<span class="keyword">if</span>(system(<span class="string">&quot;fc be1.out be2.out&quot;</span>))<span class="keyword">break</span>;</span><br><span class="line">		<span class="comment">//当fc返回1时，说明这时数据不一样</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>运行对比.cpp或直接运行对比.exe<br><img src="/2020/12/12/%E5%AF%B9%E6%8B%8D/%E4%BE%8B%E5%AD%90.png" class><br>找不到差异，说明这两份代码输出的两个文件是一样的。<br>那么我们可以一直拍着，如果长时间都是找不到差异，那么你写的正解就可能是对的了。<br>如果找到差异，它会分别返回两个文件的数据（这个是真滴nb，不是假的nb），这样我们就有了一组错误数据，方便我们 debug 。</p>
+<h3 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h3><p>大多比赛用不上文件输入输出，额外去写一堆文件输入输出浪费时间，建议采用标准输入输出<br>（需用到<code>#include&lt;cstdlib&gt;</code> ）</p>
+<p>对比.cpp代码（标准输入输出）<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>) <span class="comment">//一直循环，直到找到不一样的数据</span></span><br><span class="line">	&#123;</span><br><span class="line">		system(<span class="string">&quot;数据.exe &gt; be.in&quot;</span>);  <span class="comment">//运行 数据.exe，把结果输出（&gt;）到 be.in 中。</span></span><br><span class="line">		system(<span class="string">&quot;尝试.exe &lt; be.in &gt; be1.out&quot;</span>);<span class="comment">//运行 尝试.exe，从 be.in 中读入（&lt;）数据，把结果输出（&gt;）到 be1.in 中。</span></span><br><span class="line">		system(<span class="string">&quot;暴力.exe &lt; be.in &gt; be2.out&quot;</span>);</span><br><span class="line">		<span class="keyword">if</span>(system(<span class="string">&quot;fc be1.out be2.out&quot;</span>))<span class="keyword">break</span>;</span><br><span class="line">		<span class="comment">//不需要在其他文件写文件输入输出</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>节约对拍次数<br>在对拍时，你有没有发现在 cmd 的黑色框框里面，“找不到差异” 这几行输出的很快，看起来对拍的频率好像很高的样子。实际上，这样浪费了很多次对拍，数据生成需要一定的时间，而文件的读取输出等都需要一定时间。但是两个输出文件的对比却在不停地运行着，数据生成器生成的文件在一定的时间内是相同的，这样就浪费了许多次对拍。（更重要的是没法同一个点测n次，写不了无敌版）<br>为此，我们可以使每次对拍完毕后休眠1秒，给四个程序留给一定的缓冲时间，使得每次对拍时，数据生成器生成的数据都不同。<br>那么，我们可以使用 <code>#include&lt;windows.h&gt;</code>库里的 Sleep(t) ，t为时间，单位是毫秒。它可以使程序休眠 t 毫秒。我们可以在每次对拍之后加上<code>Sleep(1000);</code> ，这样每次对拍之后休眠1秒，就不会出现浪费对拍的情况了。</p>
+<p>超时测试<br>用一个计时函数”clock()”，来计算我们写的正解用的时间，判断它是否超时（本地测出的时间和评测机测的时间一般不同），并把所用时间在对拍程序上体现出来。</p>
+<p>不必每次发现错误就退出，给定有限次数测试也行。还可以给把一个通过的数据当作一个测试点，还可以给他赋予编号，这些都能在对拍程序直观地体现出来。</p>
+<p>对比.cpp代码（无敌版，没有人比我更懂无敌）<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt; //md万用库就这</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n; <span class="built_in">cin</span> &gt;&gt; n; <span class="comment">//输入要测试几组数据 </span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; ++i)</span><br><span class="line">	&#123; </span><br><span class="line">		system(<span class="string">&quot;数据.exe &gt; be.in&quot;</span>);</span><br><span class="line">		system(<span class="string">&quot;暴力.exe &lt; be.in &gt; be2.out&quot;</span>);</span><br><span class="line">		<span class="keyword">double</span> begin=clock();</span><br><span class="line">		system(<span class="string">&quot;尝试.exe &lt; be.in &gt; be1.out&quot;</span>);</span><br><span class="line">		<span class="keyword">double</span> end=clock();</span><br><span class="line">		<span class="keyword">double</span> t=(end-begin);</span><br><span class="line">		<span class="keyword">if</span>(system(<span class="string">&quot;fc be1.out be2.out&quot;</span>))<span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">&quot; WA&quot;</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (t&gt;<span class="number">1000</span>)<span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">&quot; TLE &quot;</span> &lt;&lt; t &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="built_in">endl</span>;<span class="comment">//clock()单位是毫秒</span></span><br><span class="line">		<span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">&quot; AC &quot;</span> &lt;&lt; t &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">		Sleep(<span class="number">1000</span>);</span><br><span class="line">	&#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>结果<br><img src="/2020/12/12/%E5%AF%B9%E6%8B%8D/%E4%BE%8B%E5%AD%902.png" class></p>
+<h1 id="在VSC中对拍"><a href="#在VSC中对拍" class="headerlink" title="在VSC中对拍"></a>在VSC中对拍</h1><p>遇到太多问题，一时语塞</p>
+<img src="/2020/12/12/%E5%AF%B9%E6%8B%8D/%E5%BF%83%E5%BE%97%E4%BD%93%E4%BC%9A1.jpg" class>
+<img src="/2020/12/12/%E5%AF%B9%E6%8B%8D/%E5%BF%83%E5%BE%97%E4%BD%93%E4%BC%9A2.jpg" class>
+<h2 id="如何解决vs2019中freopen等函数报错问题"><a href="#如何解决vs2019中freopen等函数报错问题" class="headerlink" title="如何解决vs2019中freopen等函数报错问题"></a>如何解决vs2019中freopen等函数报错问题</h2><p>vs2019中使用freopen、fopen、sprintf等函数总是出现安全问题：<br> error C4996: ‘xxxxx’:  This function or variable may be unsafe. Consider using xxxxxx instead.  To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.</p>
+<p>解决方法<br>（1）打开项目里的属性<br>（2）配置属性——C/C++——预处理器——预处理器定义中加入一条指令：_CRT_SECURE_NO_WARNINGS，确认即可。</p>
+<h2 id="兄弟，这些我都不会"><a href="#兄弟，这些我都不会" class="headerlink" title="兄弟，这些我都不会"></a>兄弟，这些我都不会</h2><p>一个解决方案可以包含多个项目<br>其中有一个是主项目<br>每个项目中只能有一个主函数</p>
+<img src="/2020/12/12/%E5%AF%B9%E6%8B%8D/eg1.png" class>
+<p>这是一个叫做“测试”的解决方案<br><img src="/2020/12/12/%E5%AF%B9%E6%8B%8D/eg2.png" class><br>其中文件“测试.sln”用VS打开即可<br>其中两个名字分别叫“project1”，“project2”的项目，源文件分别存放在其中<br><img src="/2020/12/12/%E5%AF%B9%E6%8B%8D/eg3.png" class><br>解决方案中的debug文件夹存放了以命名项目的运行文件</p>
+<h2 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h2><p>创建四个项目分别对应，其中“对比”项目设置为主项目<br>打开解决方案中的“debug文件夹”运行其中的“对比.exe”<br>系统会自行创建文本<br>猜想：打开“对比.cpp”运行，该文件原地暂时变成exe文件，并在当前目录搜寻所需，运行结束后回复原状。<br>如果将对拍所需文件放入“对比”项目文件夹，确实也可以完成对拍，但太麻烦了。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -359,7 +442,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-26 13:35:07" itemprop="dateModified" datetime="2020-12-26T13:35:07+08:00">2020-12-26</time>
+                <time title="Modified: 2021-01-02 15:14:38" itemprop="dateModified" datetime="2021-01-02T15:14:38+08:00">2021-01-02</time>
               </span>
 
           
@@ -578,7 +661,9 @@
 </div>
 <p>注：<br> 乘除指令默认使用EAX<br> CPU默认使用ECX为循环计数器<br> ESP用于寻址堆栈数据。<br> ESI和EDI用于高速储存器传输指令<br><img src="/2020/12/03/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E6%96%B0%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB%EF%BC%8C%E5%8F%8AMicrosoft%20MASM%E8%AF%AD%E6%B3%95/2.jpg" class><br><img src="/2020/12/03/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E6%96%B0%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB%EF%BC%8C%E5%8F%8AMicrosoft%20MASM%E8%AF%AD%E6%B3%95/3.jpg" class></p>
 <h2 id="offset-运算符"><a href="#offset-运算符" class="headerlink" title="offset 运算符"></a>offset 运算符</h2><p>offset运算符返回数据标号的偏移量。这个偏移量按字节计算，表示的是该数据标号距离数据段起始地址的距离。</p>
-<h2 id="第五章-过程"><a href="#第五章-过程" class="headerlink" title="第五章-过程"></a>第五章-过程</h2>
+<h2 id="第五章-过程"><a href="#第五章-过程" class="headerlink" title="第五章-过程"></a>第五章-过程</h2><p><strong>栈堆相关寄存器</strong><br>运行时堆栈是内存数组，CPU用ESP寄存器（堆栈指针寄存器），对其进行管理。<br>ESP存放的是堆栈中某个位置的32位偏移量，每个堆栈位置都是32位长。<br>对应64位下的rsp（低位为esp）</p>
+<p>几个常用的寄存器<br>sp/esp/rsp（16bit/32bit/64bit）栈寄存器—-指向栈顶<br>bp/ebp/rbp 栈基址寄存器—-指向栈底<br>ip/eip/rip 程序指令寄存器—-指向下一条待执行指令</p>
+
       
     </div>
 
@@ -1092,7 +1177,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1126,7 +1211,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
