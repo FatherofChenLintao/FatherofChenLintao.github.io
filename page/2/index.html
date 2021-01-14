@@ -442,7 +442,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-14 08:57:44" itemprop="dateModified" datetime="2021-01-14T08:57:44+08:00">2021-01-14</time>
+                <time title="Modified: 2021-01-14 17:11:58" itemprop="dateModified" datetime="2021-01-14T17:11:58+08:00">2021-01-14</time>
               </span>
 
           
@@ -566,7 +566,7 @@
 <h2 id="一些符号"><a href="#一些符号" class="headerlink" title="一些符号"></a>一些符号</h2><p><strong>键盘定义</strong><br>键盘有对应的ASCII码，如Esc键的ASCII码为27</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mov a,Esc_key </span><br></pre></td></tr></table></figure>
 <p><strong>计算数组和字符串大小</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a BYTE 10,20,30,404</span><br><span class="line">l &#x3D; ($ - a)</span><br><span class="line"></span><br><span class="line">name BYTE 1,2,3</span><br><span class="line">name_len &#x3D; ($ - name)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a BYTE 10,20,30,404</span><br><span class="line">l &#x3D; ($ - a)</span><br><span class="line"></span><br><span class="line">name BYTE &quot;123&quot;,0</span><br><span class="line">name_len &#x3D; ($ - name)-1	;0也占一个字符</span><br></pre></td></tr></table></figure>
 <p>显示声明数组的大小会导致编程错误，尤其是如果后续还会插入或删除数组元素。<br>声明数组大小更好的方法是，让汇编器来计算这个值。<br>从当前地址计数器（$）中减去name的偏移量<br>name_len紧跟着name<br>当计算元素数量的数组中包含的不是字节时，应用数组总字节数除以单个元素大小，一般来说单个元素为1字节，所以没有这步</p>
 <p><strong>等号、EQU、TEXTQU伪指令</strong></p>
 <div class="table-container">
@@ -666,10 +666,13 @@
 <h2 id="间接寻址（数组）"><a href="#间接寻址（数组）" class="headerlink" title="间接寻址（数组）"></a>间接寻址（数组）</h2><p><strong>间接操作数</strong><br>任何一个32位通用寄存器（eax，ebx等）加上中括号就能构成一个间接操作数。寄存器中存放的是数据的地址。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.data</span><br><span class="line">a BYTE 10h</span><br><span class="line">b BYTE 20h</span><br><span class="line">.code</span><br><span class="line">mov esi,offset a</span><br><span class="line">mov al,[esi]		;al是通用寄存器, al&#x3D;10h;</span><br><span class="line">mov [esi],b			;a&#x3D;b&#x3D;20h</span><br></pre></td></tr></table></figure>
 <p>在该示例中，esi存放的是a的偏移量，mov指令使用间接操作数作为源操作数，<strong>解析</strong>esi中的偏移量，并将一个字节送入al。再解析esi中的偏移量，将一个字节送入a。</p>
-<p><strong>变址操作数</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.data</span><br><span class="line">a BYTE 10h,20h,30h,40h</span><br><span class="line">.code</span><br><span class="line">mov esi,0</span><br><span class="line">mov al,[a+esi] ;也可以写成mov al,a[esi]</span><br></pre></td></tr></table></figure><br>在中括号内用变量名加上寄存器。变量名会由汇编器转化为常数，代表的是该变量的偏移量。</p>
+<p><strong>变址操作数</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.data</span><br><span class="line">a BYTE 10h,20h,30h,40h</span><br><span class="line">.code</span><br><span class="line">mov esi,0</span><br><span class="line">mov al,[a+esi] ;也可以写成mov al,a[esi]</span><br></pre></td></tr></table></figure>
+<p>在中括号内用变量名加上寄存器。变量名会由汇编器转化为常数，代表的是该变量的偏移量。</p>
 <h2 id="第五章-过程"><a href="#第五章-过程" class="headerlink" title="第五章-过程"></a>第五章-过程</h2><p><strong>栈堆相关寄存器</strong><br>运行时堆栈是内存数组，CPU用ESP寄存器（堆栈指针寄存器），对其进行管理。<br>ESP存放的是堆栈中某个位置的32位偏移量，每个堆栈位置都是32位长。<br>对应64位下的rsp（低位为esp）</p>
 <p>几个常用的寄存器<br>sp/esp/rsp（16bit/32bit/64bit）栈寄存器—-指向栈顶<br>bp/ebp/rbp 栈基址寄存器—-指向栈底<br>ip/eip/rip 程序指令寄存器—-指向下一条待执行指令</p>
 <p>运行时堆栈在内存中是向下生长的，即从高地址向低地址扩展，故栈顶指针指向低地址。</p>
+<p><strong>CALL和RET指令</strong><br>call指令调用一个过程，指挥处理器从新的内存地址开始执行。过程使用ret（从过程返回）指令将处理器转回到该过程被调用的程序点上。<br>从物理上来说，<br>call指令将其返回的地址压入堆栈，<br>再把被调用过程的地址复制到指令指针寄存器。<br>当过程准备返回时，它的ret指令从堆栈把返回地址弹回到指令指针寄存器。<br>32位模式下，cpu执行的指令由EIP（指令指针寄存器）在内存中指出。</p>
 
       
     </div>
