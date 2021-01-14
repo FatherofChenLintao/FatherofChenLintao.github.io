@@ -442,7 +442,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-11 21:49:41" itemprop="dateModified" datetime="2021-01-11T21:49:41+08:00">2021-01-11</time>
+                <time title="Modified: 2021-01-14 08:57:44" itemprop="dateModified" datetime="2021-01-14T08:57:44+08:00">2021-01-14</time>
               </span>
 
           
@@ -560,7 +560,7 @@
 </table>
 </div>
 <p><strong>定义</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">greeting1 \</span><br><span class="line">BYTE &quot;welcome,&quot;,0dh,0da</span><br><span class="line">BYTE &quot;Allow me.&quot;,0</span><br><span class="line">;可分行；“\”把两源代码行连接成一条语句；“0dh”“0da”换行；“0”空字节作为结束标记</span><br><span class="line">a DWORD 20 DUP(0)	;分配空间20字节，初始值为0</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">greeting1 \</span><br><span class="line">BYTE &quot;welcome,&quot;,0dh,0da</span><br><span class="line">BYTE &quot;Allow me.&quot;,0</span><br><span class="line">;可分行；“\”把两源代码行连接成一条语句；“0dh”“0da”换行（将光标移动到下一行）；“0”空字节作为结束标记</span><br><span class="line">a DWORD 20 DUP(0)	;分配空间20字节，初始值为0</span><br></pre></td></tr></table></figure>
 <p><strong>将实数编码压缩为BCD编码</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.data</span><br><span class="line">a REAL8 1.5</span><br><span class="line">b TBYTE ?	;未初始化时减小编译程序大小</span><br><span class="line">.code</span><br><span class="line">fld a		;加载到浮点堆栈</span><br><span class="line">fbstp b		;向上舍入到2，压缩BCD码值</span><br></pre></td></tr></table></figure>
 <h2 id="一些符号"><a href="#一些符号" class="headerlink" title="一些符号"></a>一些符号</h2><p><strong>键盘定义</strong><br>键盘有对应的ASCII码，如Esc键的ASCII码为27</p>
@@ -661,7 +661,12 @@
 </table>
 </div>
 <p>注：<br> 乘除指令默认使用EAX<br> CPU默认使用ECX为循环计数器<br> ESP用于寻址堆栈数据。<br> ESI和EDI用于高速储存器传输指令<br><img src="/2020/12/03/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E6%96%B0%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB%EF%BC%8C%E5%8F%8AMicrosoft%20MASM%E8%AF%AD%E6%B3%95/2.jpg" class><br><img src="/2020/12/03/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E6%96%B0%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB%EF%BC%8C%E5%8F%8AMicrosoft%20MASM%E8%AF%AD%E6%B3%95/3.jpg" class></p>
+<h2 id="MOVZX-MOVSX指令"><a href="#MOVZX-MOVSX指令" class="headerlink" title="MOVZX/MOVSX指令"></a>MOVZX/MOVSX指令</h2><p>movzx(进行全零扩展并传送)<br>movsx(进行符号扩展并传送)</p>
 <h2 id="offset-运算符"><a href="#offset-运算符" class="headerlink" title="offset 运算符"></a>offset 运算符</h2><p>offset运算符返回数据标号的偏移量。这个偏移量按字节计算，表示的是该数据标号距离数据段起始地址的距离。</p>
+<h2 id="间接寻址（数组）"><a href="#间接寻址（数组）" class="headerlink" title="间接寻址（数组）"></a>间接寻址（数组）</h2><p><strong>间接操作数</strong><br>任何一个32位通用寄存器（eax，ebx等）加上中括号就能构成一个间接操作数。寄存器中存放的是数据的地址。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.data</span><br><span class="line">a BYTE 10h</span><br><span class="line">b BYTE 20h</span><br><span class="line">.code</span><br><span class="line">mov esi,offset a</span><br><span class="line">mov al,[esi]		;al是通用寄存器, al&#x3D;10h;</span><br><span class="line">mov [esi],b			;a&#x3D;b&#x3D;20h</span><br></pre></td></tr></table></figure>
+<p>在该示例中，esi存放的是a的偏移量，mov指令使用间接操作数作为源操作数，<strong>解析</strong>esi中的偏移量，并将一个字节送入al。再解析esi中的偏移量，将一个字节送入a。</p>
+<p><strong>变址操作数</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.data</span><br><span class="line">a BYTE 10h,20h,30h,40h</span><br><span class="line">.code</span><br><span class="line">mov esi,0</span><br><span class="line">mov al,[a+esi] ;也可以写成mov al,a[esi]</span><br></pre></td></tr></table></figure><br>在中括号内用变量名加上寄存器。变量名会由汇编器转化为常数，代表的是该变量的偏移量。</p>
 <h2 id="第五章-过程"><a href="#第五章-过程" class="headerlink" title="第五章-过程"></a>第五章-过程</h2><p><strong>栈堆相关寄存器</strong><br>运行时堆栈是内存数组，CPU用ESP寄存器（堆栈指针寄存器），对其进行管理。<br>ESP存放的是堆栈中某个位置的32位偏移量，每个堆栈位置都是32位长。<br>对应64位下的rsp（低位为esp）</p>
 <p>几个常用的寄存器<br>sp/esp/rsp（16bit/32bit/64bit）栈寄存器—-指向栈顶<br>bp/ebp/rbp 栈基址寄存器—-指向栈底<br>ip/eip/rip 程序指令寄存器—-指向下一条待执行指令</p>
 <p>运行时堆栈在内存中是向下生长的，即从高地址向低地址扩展，故栈顶指针指向低地址。</p>
