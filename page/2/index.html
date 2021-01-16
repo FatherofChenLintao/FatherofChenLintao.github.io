@@ -442,7 +442,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-14 17:13:13" itemprop="dateModified" datetime="2021-01-14T17:13:13+08:00">2021-01-14</time>
+                <time title="Modified: 2021-01-16 21:43:09" itemprop="dateModified" datetime="2021-01-16T21:43:09+08:00">2021-01-16</time>
               </span>
 
           
@@ -489,7 +489,6 @@
 <hr>
 <h1 id="列表文件"><a href="#列表文件" class="headerlink" title="列表文件"></a>列表文件</h1><p><strong>符号表</strong><br>符号表包含程序中所有的标识符的名称，段和相关信息。<br>最左边为代码段的地址，这个地址为相对地址，对应可执行指令的起始偏移量。<br>非可执行指令无偏移量。</p>
 <h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><h2 id="第一个masm程序"><a href="#第一个masm程序" class="headerlink" title="第一个masm程序"></a>第一个masm程序</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">.386									伪指令，表示这是一个32位程序，能访问32位寄存器的地址</span><br><span class="line">.modle flat,stdcall	</span><br><span class="line">;选择程序的内存模式为（flat），并确定了子程序的调用规范（stdcall）（32位windows服务要求使用stdcall规范）</span><br><span class="line">.stack 4096								;STACK伪指令标识的程序区段定义了运行时堆栈，并设置了其大小，4096字节</span><br><span class="line">ExitProcess proto, dwexitcode:dword</span><br><span class="line">;这是一个函数原型的声明，声明ExitProcess函数（一个标准的windows服务）</span><br><span class="line">;原型包括：函数名、PROTO关键字、一个逗号、以及一个输入参数列表</span><br><span class="line">;ExitProcess的输入参数为dwexitcode</span><br><span class="line"></span><br><span class="line">.data					;此为数据区</span><br><span class="line">sum dword 999			;定义名为sum的变量,大小为32位，使用了关键字DWORD</span><br><span class="line"></span><br><span class="line">.code					;此为代码区</span><br><span class="line">main proc				;声明，标记了程序开始执行的地址</span><br><span class="line">	mov eax,8</span><br><span class="line">	mov ebx,8</span><br><span class="line">	add eax,ebx</span><br><span class="line">	inc eax</span><br><span class="line">	imul eax,sum,8				;X86指令集不允许将变量直接与变量相加，但允许变量与寄存器相加</span><br><span class="line">comment !be太苣了!</span><br><span class="line">	invoke ExitProcess,0		</span><br><span class="line">	;调用Windows服务（也被成为函数）ExitProcess停止程序，并将控制权交还给操作系统。还有invoke也是伪指令</span><br><span class="line">main endp						;是主程序结束的标记</span><br><span class="line">end main						;end伪指令，标记汇编的最后一行，标识程序入口main</span><br></pre></td></tr></table></figure>
-<hr>
 <p><strong>保留字</strong>由计算机保留，<strong>标识符</strong>由程序员定义</p>
 <p><strong>伪指令</strong><br>伪指令是嵌入源代码中的命令，有汇编器识别和执行。伪指令不在运行时执行，但是可以定义变量、宏和子程序，为内存段分配名称等等。</p>
 <p><strong>指令</strong><br>一条指令有四个组成部分：<br>标号（可选）<br>指令助记符<br>操作数<br>注释（可选）</p>
@@ -502,8 +501,13 @@
 <p>.code 标记一个程序代码区的起点</p>
 <p>endp标记一个过程的结束，在此处为对应main的过程。<br>main PROC············main ENDP</p>
 <p>end标记一个程序的结束，并要引用入口</p>
+<p><strong>汇编器生成包含机器语言的文件（目标文件object file），传递给链接器（linker）程序，从而生成可执行文件（exe）——在操作系统命令提示符下执行。</strong></p>
 <h2 id="32位模板"><a href="#32位模板" class="headerlink" title="32位模板"></a>32位模板</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">.386</span><br><span class="line">.model flat,stdcall</span><br><span class="line">.stack 4096</span><br><span class="line">ExitProcess PROTO, dwExitCode:DWORD</span><br><span class="line"></span><br><span class="line">.data</span><br><span class="line">	;在这里声明变量</span><br><span class="line">.code</span><br><span class="line">main PROC</span><br><span class="line">	;在这里编写自己的代码</span><br><span class="line">	INVOKE ExitProcess,0</span><br><span class="line">main endp</span><br><span class="line">END main</span><br></pre></td></tr></table></figure>
-<p>汇编器生成包含机器语言的文件（目标文件object file），传递给链接器（linker）程序，从而生成可执行文件（exe）——在操作系统命令提示符下执行。</p>
+<h2 id="段"><a href="#段" class="headerlink" title="段"></a>段</h2><p>bss段：<br>　　bss段（bss segment）通常是指用来存放程序中未初始化的全局变量的一块内存区域。<br>　　bss是英文Block Started by Symbol的简称。<br>　　bss段属于静态内存分配。 </p>
+<p>data段：<br>　　数据段（data segment）通常是指用来存放程序中已初始化的全局变量的一块内存区域。<br>　　数据段属于静态内存分配。<br>　　<br>text段/code段：<br>　　代码段（code segment/text segment）通常是指用来存放程序执行代码的一块内存区域。<br>　　这部分区域的大小在程序运行前就已经确定，并且内存区域通常属于只读(某些架构也允许代码段为可写，即允许修改程序)。<br>　　在代码段中，也有可能包含一些只读的常数变量，例如字符串常量等。 </p>
+<p>堆（heap）：<br>　　堆是用于存放进程运行中被动态分配的内存段，它的大小并不固定，可动态扩张或缩减。<br>　　当进程调用malloc等函数分配内存时，新分配的内存就被动态添加到堆上（堆被扩张）；<br>　　当利用free等函数释放内存时，被释放的内存从堆中被剔除（堆被缩减）。</p>
+<p>栈(stack)：<br>　　 栈又称堆栈，是用户存放程序临时创建的局部变量，<br>　　也就是说我们函数括弧“{}”中定义的变量（但不包括static声明的变量，static意味着在数据段中存放变量）。<br>　　除此以外，在函数被调用时，其参数也会被压入发起调用的进程栈中，并且待到调用结束后，函数的返回值也会被存放回栈中。<br>　　由于栈的先进先出(FIFO)特点，所以栈特别方便用来保存/恢复调用现场。<br>　　从这个意义上讲，我们可以把堆栈看成一个寄存、交换临时数据的内存区。 </p>
+<p>​        一个程序本质上都是由 bss段、data段、code段三个组成的。<br>　　这样的概念，不知道最初来源于哪里的规定，但在当前的计算机程序设计中是很重要的一个基本概念。<br>　　而且在嵌入式系统的设计中也非常重要，牵涉到嵌入式系统运行时的内存大小分配，存储单元占用空间大小的问题。<br>   在采用段式内存管理的架构中（比如intel的80x86系统），bss段通常是指用来存放程序中未初始化的全局变量的一块内存区域，<br>　　一般在初始化时bss 段部分将会清零。bss段属于静态内存分配，即程序一开始就将其清零了。<br>   比如，在C语言之类的程序编译完成之后，已初始化的全局变量保存在.data 段中，未初始化的全局变量保存在.bss 段中。<br>　　code和data段都在可执行文件中（在嵌入式系统里一般是固化在镜像文件中），由系统从可执行文件中加载；<br>　　而bss段不在可执行文件中，由系统初始化。</p>
 <h2 id="数据定义伪指令"><a href="#数据定义伪指令" class="headerlink" title="数据定义伪指令"></a>数据定义伪指令</h2><div class="table-container">
 <table>
 <thead>
