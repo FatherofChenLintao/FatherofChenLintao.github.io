@@ -257,7 +257,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-16 22:19:10" itemprop="dateModified" datetime="2021-01-16T22:19:10+08:00">2021-01-16</time>
+                <time title="Modified: 2021-01-25 21:55:05" itemprop="dateModified" datetime="2021-01-25T21:55:05+08:00">2021-01-25</time>
               </span>
 
           
@@ -277,10 +277,82 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> b=<span class="number">0</span>;</span><br><span class="line">print(<span class="string">&quot;01234568789%n&quot;</span>,b); <span class="comment">//%n将之前输出的字符个数存入b</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> a;</span><br><span class="line">fgets(a,<span class="number">10</span>,<span class="built_in">stdin</span>);<span class="comment">//从键盘输入中获取数据，当读取 (10-1) 个字符时，或者读取到换行符时停止</span></span><br><span class="line"><span class="comment">//如果成功，该函数返回相同的 a 参数。</span></span><br><span class="line"><span class="comment">//如果到达文件末尾或者没有读取到任何字符，a 的内容保持不变，并返回一个空指针。如果发生错误，返回一个空指针。</span></span><br><span class="line">fp = fopen(<span class="string">&quot;file.txt&quot;</span> , <span class="string">&quot;r&quot;</span>);</span><br><span class="line">	<span class="keyword">if</span>(fp == <span class="literal">NULL</span>) &#123;perror(<span class="string">&quot;打开文件时发生错误&quot;</span>);<span class="keyword">return</span>(<span class="number">-1</span>);&#125;</span><br><span class="line">	<span class="keyword">if</span>( fgets (str, <span class="number">60</span>, fp)!=<span class="literal">NULL</span> ) &#123;...&#125;<span class="comment">//从文件中获取数据</span></span><br><span class="line">fclose(fp);</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> c;</span><br><span class="line">fgets(&amp;c,<span class="number">100</span>,<span class="built_in">stdin</span>);<span class="comment">//改写c的地址</span></span><br></pre></td></tr></table></figure>
 <p><strong>堆栈中的printf函数</strong></p>
 <p>printf(“format”,输出表列)<br>format意思是格式化字符串</p>
-<p>printf函数右序进栈<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d%c%s&quot;</span>,a,b,c);</span><br><span class="line"><span class="comment">//c进栈，b进栈，a进栈，格式化字符串进栈</span></span><br></pre></td></tr></table></figure><br><img src="/2020/12/31/AD-CGfsb/1.jpg" class></p>
-<p><strong>格式化字符串漏洞</strong><br>条件：<br>1.printf()函数未声明格式化字符串（format）<br>2.可以控制输出表列<br>使用：在输出表列中手动加入format<br>作用：暴露高地址的数据<br><img src="/2020/12/31/AD-CGfsb/2.jpg" class><br>暴露顺序：format中从左至右顺序对应低地址偏移量至高地址偏移量</p>
-<p><strong>格式化字符串用于暴露</strong></p>
-
+<p>printf函数右序进栈</p>
+<p>printf 函数有一个 bug 就是当 format 字符串中所需要替换的参数数量，多于提供的参数数量，就会产生任意地址读漏洞。<br>例如，printf(“abcde%X %p %x %x”, a, b, c)这句命令中，format 需要 4 个参数，我们只提供了 3 个，所以 printf就会在栈上延续读取数据作为其参数。<br>如下所示，位于栈上的数据“我是你爹”由于挨着参数 3，在 printf 函数需要的参数不够时，被认作为 printf所缺的参数读取了</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">地址</th>
+<th style="text-align:center">栈</th>
+<th style="text-align:center">内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">高地址</td>
+<td style="text-align:center">返回地址</td>
+<td style="text-align:center">不晓得</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">EBP</td>
+<td style="text-align:center">某个指针，不晓得</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">main函数局部变量</td>
+<td style="text-align:center">保存用</td>
+</tr>
+<tr>
+<td style="text-align:center">0x12</td>
+<td style="text-align:center">format字符串</td>
+<td style="text-align:center">abcde%X %p %x %x</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">main函数局部变量</td>
+<td style="text-align:center">不晓得为什么有两个</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">printf参数：我是你爹</td>
+<td style="text-align:center">%x形式读取，可能是来自main的某个局部变量</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">printf参数：参数3</td>
+<td style="text-align:center">%x形式读取</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">printf参数：参数2</td>
+<td style="text-align:center">%p形式读取</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">printf参数：参数1</td>
+<td style="text-align:center">%X形式读取</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">printf参数：format地址</td>
+<td style="text-align:center">0x12</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">返回地址</td>
+<td style="text-align:center">不晓得为什么有两个</td>
+</tr>
+<tr>
+<td style="text-align:center">低地址</td>
+<td style="text-align:center">printf母函数EBP</td>
+<td style="text-align:center">不晓得</td>
+</tr>
+</tbody>
+</table>
+</div>
+<img src="/2020/12/31/AD-CGfsb/2.png" class>
       
     </div>
 
