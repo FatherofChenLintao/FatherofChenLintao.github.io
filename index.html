@@ -151,101 +151,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/10/AD-int-overflow/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="带废物">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="全宇宙最蒻的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/10/AD-int-overflow/" class="post-title-link" itemprop="url">AD_int_overflow</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-03-10 13:48:26 / Modified: 14:12:06" itemprop="dateCreated datePublished" datetime="2021-03-10T13:48:26+08:00">2021-03-10</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="关于溢出"><a href="#关于溢出" class="headerlink" title="关于溢出"></a>关于溢出</h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">类型</th>
-<th style="text-align:center">占用字节数</th>
-<th style="text-align:center">取值范围</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">int</td>
-<td style="text-align:center">4</td>
-<td style="text-align:center">-2147483648~2147483647</td>
-</tr>
-<tr>
-<td style="text-align:center">short int</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">-32768~32767</td>
-</tr>
-<tr>
-<td style="text-align:center">unsigned int</td>
-<td style="text-align:center">4</td>
-<td style="text-align:center">0~4294967295</td>
-</tr>
-<tr>
-<td style="text-align:center">unsigned short int</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">0~65535</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>65535D=0000 <strong>1111 1111 1111 1111</strong>B</p>
-<p>65536D=0001 <strong>0000 0000 0000 0000</strong>B</p>
-<p>65537D=0001 <strong>0000 0000 0000 0001</strong>B</p>
-<p>在一个unsigned short int 类型的变量中，由于溢出部分直接忽略（加粗部分为有效值），故65536D=0D，65537D=1D</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/16/%E7%8F%AD%E9%95%BF%E5%A4%A7%E4%BA%BA%E6%9D%A5%E4%BA%86%EF%BC%8C%E9%9D%92%E5%A4%A9%E5%B0%B1%E6%9C%89%E4%BA%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -303,6 +208,101 @@
 <h2 id="爷青结"><a href="#爷青结" class="headerlink" title="爷青结"></a>爷青结</h2><img src="/2020/11/16/%E7%8F%AD%E9%95%BF%E5%A4%A7%E4%BA%BA%E6%9D%A5%E4%BA%86%EF%BC%8C%E9%9D%92%E5%A4%A9%E5%B0%B1%E6%9C%89%E4%BA%86/QQ%E5%9B%BE%E7%89%8720201116230017.png" class>
 <img src="/2020/11/16/%E7%8F%AD%E9%95%BF%E5%A4%A7%E4%BA%BA%E6%9D%A5%E4%BA%86%EF%BC%8C%E9%9D%92%E5%A4%A9%E5%B0%B1%E6%9C%89%E4%BA%86/QQ%E5%9B%BE%E7%89%8720201116231454.png" class>
 <img src="/2020/11/16/%E7%8F%AD%E9%95%BF%E5%A4%A7%E4%BA%BA%E6%9D%A5%E4%BA%86%EF%BC%8C%E9%9D%92%E5%A4%A9%E5%B0%B1%E6%9C%89%E4%BA%86/1.jpg" class>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/10/AD-int-overflow/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="带废物">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="全宇宙最蒻的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/10/AD-int-overflow/" class="post-title-link" itemprop="url">AD_int_overflow</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-03-10 13:48:26 / Modified: 14:16:23" itemprop="dateCreated datePublished" datetime="2021-03-10T13:48:26+08:00">2021-03-10</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="关于溢出"><a href="#关于溢出" class="headerlink" title="关于溢出"></a>关于溢出</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">占用字节数</th>
+<th style="text-align:center">取值范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">int</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">-2147483648~2147483647</td>
+</tr>
+<tr>
+<td style="text-align:center">short int</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">-32768~32767</td>
+</tr>
+<tr>
+<td style="text-align:center">unsigned int</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">0~4294967295</td>
+</tr>
+<tr>
+<td style="text-align:center">unsigned short int</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">0~65535</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>65535D=0000 <strong>1111 1111 1111 1111</strong>B</p>
+<p>65536D=0001 <strong>0000 0000 0000 0000</strong>B</p>
+<p>65537D=0001 <strong>0000 0000 0000 0001</strong>B</p>
+<p>在一个unsigned short int 类型的变量中，由于溢出部分直接忽略（加粗部分为有效值），故65536D=0D，65537D=1D</p>
+
       
     </div>
 
