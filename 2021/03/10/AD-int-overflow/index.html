@@ -20,22 +20,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="邻接表邻接表的建立直接上cpp代码  12345678910111213141516171819202122struct edge&amp;#123;int w,v,next;&amp;#125;G[MAXM];int head [MAXN];int tot&#x3D;0;int n,m;void add(int u,int v,int w)&amp;#123;	G[++tot].next&#x3D;head[u];	G[tot].w&#x3D;w;">
+  <meta name="description" content="关于溢出    类型 占用字节数 取值范围     int 4 -2147483648~2147483647   short int 2 -32768~32767   unsigned int 4 0~4294967295   unsigned short int 2 0~65535     65535D&#x3D;0000 1111 1111 1111 1111B 65536D&#x3D;0001 0000 000">
 <meta property="og:type" content="article">
-<meta property="og:title" content="邻接表及其cpp代码">
-<meta property="og:url" content="http://example.com/2020/11/03/%E9%82%BB%E6%8E%A5%E8%A1%A8%E5%8F%8A%E5%85%B6cpp%E4%BB%A3%E7%A0%81/index.html">
+<meta property="og:title" content="AD_int_overflow">
+<meta property="og:url" content="http://example.com/2021/03/10/AD-int-overflow/index.html">
 <meta property="og:site_name" content="全宇宙最蒻的博客">
-<meta property="og:description" content="邻接表邻接表的建立直接上cpp代码  12345678910111213141516171819202122struct edge&amp;#123;int w,v,next;&amp;#125;G[MAXM];int head [MAXN];int tot&#x3D;0;int n,m;void add(int u,int v,int w)&amp;#123;	G[++tot].next&#x3D;head[u];	G[tot].w&#x3D;w;">
+<meta property="og:description" content="关于溢出    类型 占用字节数 取值范围     int 4 -2147483648~2147483647   short int 2 -32768~32767   unsigned int 4 0~4294967295   unsigned short int 2 0~65535     65535D&#x3D;0000 1111 1111 1111 1111B 65536D&#x3D;0001 0000 000">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2020/11/03/%E9%82%BB%E6%8E%A5%E8%A1%A8%E5%8F%8A%E5%85%B6cpp%E4%BB%A3%E7%A0%81/QQ%E5%9B%BE%E7%89%8720201104165325.jpg">
-<meta property="article:published_time" content="2020-11-03T11:39:36.000Z">
-<meta property="article:modified_time" content="2020-12-17T02:31:35.378Z">
+<meta property="article:published_time" content="2021-03-10T05:48:26.000Z">
+<meta property="article:modified_time" content="2021-03-10T06:12:06.021Z">
 <meta property="article:author" content="带废物">
-<meta property="article:tag" content="ACM">
+<meta property="article:tag" content="PWN">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2020/11/03/%E9%82%BB%E6%8E%A5%E8%A1%A8%E5%8F%8A%E5%85%B6cpp%E4%BB%A3%E7%A0%81/QQ%E5%9B%BE%E7%89%8720201104165325.jpg">
 
-<link rel="canonical" href="http://example.com/2020/11/03/%E9%82%BB%E6%8E%A5%E8%A1%A8%E5%8F%8A%E5%85%B6cpp%E4%BB%A3%E7%A0%81/">
+<link rel="canonical" href="http://example.com/2021/03/10/AD-int-overflow/">
 
 
 <script id="page-configurations">
@@ -48,7 +46,7 @@
   };
 </script>
 
-  <title>邻接表及其cpp代码 | 全宇宙最蒻的博客</title>
+  <title>AD_int_overflow | 全宇宙最蒻的博客</title>
   
 
 
@@ -159,7 +157,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/03/%E9%82%BB%E6%8E%A5%E8%A1%A8%E5%8F%8A%E5%85%B6cpp%E4%BB%A3%E7%A0%81/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/10/AD-int-overflow/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -172,7 +170,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          邻接表及其cpp代码
+          AD_int_overflow
         </h1>
 
         <div class="post-meta">
@@ -181,16 +179,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2020-11-03 19:39:36" itemprop="dateCreated datePublished" datetime="2020-11-03T19:39:36+08:00">2020-11-03</time>
+              <time title="Created: 2021-03-10 13:48:26 / Modified: 14:12:06" itemprop="dateCreated datePublished" datetime="2021-03-10T13:48:26+08:00">2021-03-10</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-17 10:31:35" itemprop="dateModified" datetime="2020-12-17T10:31:35+08:00">2020-12-17</time>
-              </span>
 
           
 
@@ -203,11 +195,43 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="邻接表"><a href="#邻接表" class="headerlink" title="邻接表"></a>邻接表</h1><h3 id="邻接表的建立"><a href="#邻接表的建立" class="headerlink" title="邻接表的建立"></a>邻接表的建立</h3><p>直接上cpp代码 </p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">edge</span>&#123;</span><span class="keyword">int</span> w,v,next;&#125;G[MAXM];</span><br><span class="line"><span class="keyword">int</span> head [MAXN];</span><br><span class="line"><span class="keyword">int</span> tot=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> n,m;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v,<span class="keyword">int</span> w)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	G[++tot].next=head[u];</span><br><span class="line">	G[tot].w=w;</span><br><span class="line">	G[tot].v=v;</span><br><span class="line">	head[u]=tot;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;</span><br><span class="line">	<span class="keyword">int</span> u,v,w;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=m; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; u &gt;&gt; v &gt;&gt; w;</span><br><span class="line">		add(u,v,w);   </span><br><span class="line">		<span class="comment">//如果是无向图再加上一句add(v,u,w);</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>n</strong> 个点，<strong>m</strong> 条边，<strong>MAXN</strong>、<strong>MAXM</strong> 是数据范围<br><strong>w</strong> 为当前边权值，<strong>v</strong> 为当前边可到达的点，<strong>next</strong> 为下一条边的位置<br><strong>G</strong> 数组是邻接表主体，是图<br>具体来说，<strong>G[1]</strong> 是第一条边，<strong>G[2]</strong> 是第二条边<br><strong>head[i]</strong> 存储：以 <strong>i</strong> 为起点的第一条边再数组里的位置，其中 <strong>i</strong> 是具体的点，即是<strong>u</strong><br><strong>tot</strong>为当前已经存在的边的数量</p>
-<img src="/2020/11/03/%E9%82%BB%E6%8E%A5%E8%A1%A8%E5%8F%8A%E5%85%B6cpp%E4%BB%A3%E7%A0%81/QQ%E5%9B%BE%E7%89%8720201104165325.jpg" class>
-<h3 id="邻接表的遍历"><a href="#邻接表的遍历" class="headerlink" title="邻接表的遍历"></a>邻接表的遍历</h3><p>cpp代码<br>（待更新）</p>
+        <h2 id="关于溢出"><a href="#关于溢出" class="headerlink" title="关于溢出"></a>关于溢出</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">占用字节数</th>
+<th style="text-align:center">取值范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">int</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">-2147483648~2147483647</td>
+</tr>
+<tr>
+<td style="text-align:center">short int</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">-32768~32767</td>
+</tr>
+<tr>
+<td style="text-align:center">unsigned int</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">0~4294967295</td>
+</tr>
+<tr>
+<td style="text-align:center">unsigned short int</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">0~65535</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>65535D=0000 <strong>1111 1111 1111 1111</strong>B</p>
+<p>65536D=0001 <strong>0000 0000 0000 0000</strong>B</p>
+<p>65537D=0001 <strong>0000 0000 0000 0001</strong>B</p>
+<p>在一个unsigned short int 类型的变量中，由于溢出部分直接忽略（加粗部分为有效值），故65536D=0D，65537D=1D</p>
 
     </div>
 
@@ -217,7 +241,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/ACM/" rel="tag"># ACM</a>
+              <a href="/tags/PWN/" rel="tag"># PWN</a>
           </div>
 
         
@@ -225,11 +249,11 @@
 
         
     <div class="post-nav">
-      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/2020/11/16/%E7%8F%AD%E9%95%BF%E5%A4%A7%E4%BA%BA%E6%9D%A5%E4%BA%86%EF%BC%8C%E9%9D%92%E5%A4%A9%E5%B0%B1%E6%9C%89%E4%BA%86/" rel="next" title="班长大人什么时候女装">
-      班长大人什么时候女装 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/12/31/AD-CGfsb/" rel="prev" title="AD_CGfsb">
+      <i class="fa fa-chevron-left"></i> AD_CGfsb
     </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -288,7 +312,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%82%BB%E6%8E%A5%E8%A1%A8"><span class="nav-number">1.</span> <span class="nav-text">邻接表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%82%BB%E6%8E%A5%E8%A1%A8%E7%9A%84%E5%BB%BA%E7%AB%8B"><span class="nav-number">1.0.1.</span> <span class="nav-text">邻接表的建立</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%82%BB%E6%8E%A5%E8%A1%A8%E7%9A%84%E9%81%8D%E5%8E%86"><span class="nav-number">1.0.2.</span> <span class="nav-text">邻接表的遍历</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E6%BA%A2%E5%87%BA"><span class="nav-number">1.</span> <span class="nav-text">关于溢出</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
