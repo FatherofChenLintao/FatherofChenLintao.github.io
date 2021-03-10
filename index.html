@@ -251,7 +251,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-03-10 13:48:26 / Modified: 14:16:23" itemprop="dateCreated datePublished" datetime="2021-03-10T13:48:26+08:00">2021-03-10</time>
+              <time title="Created: 2021-03-10 13:48:26 / Modified: 16:21:27" itemprop="dateCreated datePublished" datetime="2021-03-10T13:48:26+08:00">2021-03-10</time>
             </span>
 
           
@@ -265,7 +265,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="关于溢出"><a href="#关于溢出" class="headerlink" title="关于溢出"></a>关于溢出</h2><div class="table-container">
+          <h2 id="溢出距离"><a href="#溢出距离" class="headerlink" title="溢出距离"></a>溢出距离</h2><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -302,6 +302,13 @@
 <p>65536D=0001 <strong>0000 0000 0000 0000</strong>B</p>
 <p>65537D=0001 <strong>0000 0000 0000 0001</strong>B</p>
 <p>在一个unsigned short int 类型的变量中，由于溢出部分直接忽略（加粗部分为有效值），故65536D=0D，65537D=1D</p>
+<h2 id="题目中的溢出"><a href="#题目中的溢出" class="headerlink" title="题目中的溢出"></a>题目中的溢出</h2><img src="/2021/03/10/AD-int-overflow/1.png" class>
+<p>得出&amp;buf能存储409个字符</p>
+<img src="/2021/03/10/AD-int-overflow/2.png" class>
+<p>&amp;buf的参数传递给s</p>
+<p>v3用于存储s的长度</p>
+<p>unsigned _ int8 v3;代表v3的大小为8位，即能存储的数字范围为0到255，256相当于0，257相当于1。</p>
+<p>也就是说，如果s字符串的长度在259到264之间，也能通过if。</p>
 
       
     </div>
