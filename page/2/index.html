@@ -121,7 +121,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">21</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">22</span></a>
 
   </li>
   </ul>
@@ -147,6 +147,97 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/16/%E5%AD%A6%E4%B9%A0Linux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="带废物">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="全宇宙最蒻的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/16/%E5%AD%A6%E4%B9%A0Linux/" class="post-title-link" itemprop="url">学习Linux</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-12-16 21:00:38" itemprop="dateCreated datePublished" datetime="2020-12-16T21:00:38+08:00">2020-12-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-12-25 21:38:05" itemprop="dateModified" datetime="2020-12-25T21:38:05+08:00">2020-12-25</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="VM-ubuntu"><a href="#VM-ubuntu" class="headerlink" title="VM+ubuntu"></a>VM+ubuntu</h1><p>我在系统中找到的文件bin  boot  cdrom  dev  etc  home  lib  lib32  lib64  libx32  lost+found  media  mnt  opt  proc  root  run  sbin  snap  srv  swapfile  sys  tmp  usr  var<br>home        是家目录，通常您自己创建的文件，都保存在这里<br>usr            应用程序目录。大部分的软件都安装在这里<br>var            一些服务器方面的应用</p>
+<h4 id="linux有特定的语法结构"><a href="#linux有特定的语法结构" class="headerlink" title="linux有特定的语法结构"></a>linux有特定的语法结构</h4><p>用中文举例子<br>我们郑重地推荐您Ubuntu/Linux！</p>
+<p>这个句子的语法尽管简单，却是大部分的命令行采用的句型。让我们看一下，这个句子里都有些什么：</p>
+<p>我们</p>
+<p>主语，Linux命令的执行者只有一个，所以主语一概省略。</p>
+<p>推荐</p>
+<p>一个动词，作为谓语而存在。Linux命令中，这一部分是必须的。这一部分也是不同命令之间最根本的区别方式，所以它通常作为命令名，写在最前面。</p>
+<p>郑重的</p>
+<p>状语，用来修饰谓语。与之相对应，Linux命令可以使用参数来精细调节程序的行为。为了与命令的操作对象相区别，参数前通常要加 - 或者 — 符号。原则上，在命令名之后，参数的位置可以随意，但是为了养成一个良好的习惯，建议在命令名后直接跟参数。</p>
+<p>您 Ubuntu/linux</p>
+<p>这两个部分都是宾语，它们是命令的操作对象。大部分的命令只有一个操作对象，也有一些命令是双宾语结构的，具有一个直接宾语和一个间接宾语。比如 拷贝 这个命令 cp (copy)</p>
+<p>分隔符</p>
+<p>我们的汉语是象形文字，没有分隔符。但是所有的拼音文字中都有分隔符，来分隔单词。Linux命令中同样使用空格作分隔符。</p>
+<p>cp a /home 表示把当前目录下的 a 文件，拷贝到 /home 目录下。（命令的不同部分使用空格分隔，连续的空格视为一个空格）</p>
+<p>上面的那句话，翻译成Linux的命令，应该是这个样子的：</p>
+<p>推荐 —郑重的 您 Ubuntu/Linux （按照传统，“-”后跟简写为单个字母的参数，“—”后跟完整单词的参数。不过也有例外：）</p>
+<h4 id="路径相关命令"><a href="#路径相关命令" class="headerlink" title="路径相关命令"></a>路径相关命令</h4><p>cd (change directory) 更改目录。</p>
+<p>pwd (print working directory)显示当前路径。</p>
+<p>ls (list) 显示当前目录中的文件列表。</p>
+<h4 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h4><p>Linux中没有<strong><em>注册表\</em></strong>这个概念。安装软件，理论上讲，只要拷贝所有相关文件，并运行它的主程序就可以了。</p>
+<p>按照传统，一个软件通常分别拷贝到同级目录下的 bin、etc、lib、share等文件夹。</p>
+<p><strong>Bin</strong>      可执行文件，程序的可执行文件通常在这个目录下。在环境变量中设定搜索路径，就可以直接执行，而不需要定位其路径。</p>
+<p><strong>Etc</strong>       配置文件，大部分系统程序的配置文件保存于 /etc 目录，便于集中修改。</p>
+<p><strong>Lib</strong>       库文件，集中在一起，方便共享给不同程序。相较不同的软件单独保存库文件，能够节约一些磁盘空间。</p>
+<p><strong>Share</strong>    程序运行所需要的其它资源，例如图标、文本。这部分文件是专有的，不需要共享；而且目录结构相对复杂，混放在一起比较混乱，所以单独存放。</p>
+<h4 id="隐藏文件"><a href="#隐藏文件" class="headerlink" title="隐藏文件"></a>隐藏文件</h4><p>Linux下，名称中第一个字符为 . 的文件或者文件夹，系统默认情况下将它们隐藏起来</p>
+<h4 id="新建文件"><a href="#新建文件" class="headerlink" title="新建文件"></a>新建文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; text.py</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -1068,72 +1159,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/17/HTML%E8%AF%AD%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="带废物">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="全宇宙最蒻的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/17/HTML%E8%AF%AD%E6%B3%95/" class="post-title-link" itemprop="url">HTML语法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-11-17 10:57:31" itemprop="dateCreated datePublished" datetime="2020-11-17T10:57:31+08:00">2020-11-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-17 10:32:09" itemprop="dateModified" datetime="2020-12-17T10:32:09+08:00">2020-12-17</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;							浏览器声明为 HTML5 文档</span><br><span class="line"></span><br><span class="line">&lt;html&gt;&lt;&#x2F;html&gt;							是 HTML 页面的根元素</span><br><span class="line"></span><br><span class="line">&lt;head&lt;&#x2F;head&gt;</span><br><span class="line"></span><br><span class="line">&lt;head&gt;包含了文档的元（meta）数据，如 &lt;meta charset&#x3D;&quot;utf-8&quot;&gt; 定义网页编码格式为 utf-8。对于中文网页需要使用 &lt;meta charset&#x3D;&quot;utf-8&quot;&gt; 声明编码，否则会出现乱码。有些浏览器(如 360 浏览器)会设置 GBK 为默认编码，则你需要设置为 &lt;meta charset&#x3D;&quot;gbk&quot;&gt;。</span><br><span class="line">目前在大部分浏览器中，直接输出中文会出现中文乱码的情况，这时候需要在头部将字符声明为 UTF-8</span><br><span class="line"></span><br><span class="line">&lt;title&gt;&lt;&#x2F;title&gt;							作为网页的标题显示在浏览器上方，不在网页上</span><br><span class="line"></span><br><span class="line">&lt;body&gt;&lt;&#x2F;body&gt;							包含网页可见部分</span><br><span class="line"> </span><br><span class="line">&lt;h1&gt;&lt;&#x2F;h1&gt;								一级标题</span><br><span class="line"></span><br><span class="line">&lt;p&gt;&lt;&#x2F;p&gt;									一级段落</span><br><span class="line"></span><br><span class="line">&lt;a href&#x3D;&quot;http:&#x2F;&#x2F;FatherofChenLintao.github.io&quot;&gt; 我的博客 &lt;&#x2F;a&gt;</span><br><span class="line">这是一个使用了herf属性的链接，现实可点击的“我的博客”的链接</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset&#x3D;&quot;utf-8&quot;&gt;</span><br><span class="line">&lt;title&gt;be大佬太苣苣苣苣了&lt;&#x2F;title&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt; </span><br><span class="line"> </span><br><span class="line">&lt;h1&gt;我的第一个标题&lt;&#x2F;h1&gt;</span><br><span class="line">&lt;p&gt;我的第一个段落。&lt;&#x2F;p&gt;</span><br><span class="line"></span><br><span class="line">&lt;a href&#x3D;&quot;http:&#x2F;&#x2F;FatherofChenLintao.github.io&quot;&gt; 我的博客 &lt;&#x2F;a&gt;</span><br><span class="line"> </span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;-- --&gt;										中间写注释</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1203,7 +1228,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
