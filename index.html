@@ -248,10 +248,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-03-14 12:52:34 / Modified: 14:36:11" itemprop="dateCreated datePublished" datetime="2021-03-14T12:52:34+08:00">2021-03-14</time>
+              <time title="Created: 2021-03-14 12:52:34" itemprop="dateCreated datePublished" datetime="2021-03-14T12:52:34+08:00">2021-03-14</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-03-16 00:24:31" itemprop="dateModified" datetime="2021-03-16T00:24:31+08:00">2021-03-16</time>
+              </span>
 
           
 
@@ -270,7 +276,9 @@
 <p>​    <img src="/2021/03/14/AD-level2/2.png" class><br>​    敏感函数system的地址：0x08048320<br>​    <code>_system</code>函数里面有system(command)</p>
 <img src="/2021/03/14/AD-level2/3.png" class>
 <p>关键字符串的地址：0x0804A024</p>
-
+<p>在32位程序运行中，函数参数直接压入栈中。<br>调用函数时栈的结构为：1调用<strong>函数地址</strong>，2调用<strong>函数返回地址</strong>，参数n，参数n-1，参数。。。</p>
+<p>用0x88个字符覆盖栈，在用0x04个字符覆盖ebp的地址，将返回地址覆写为system函数。<br>根据调用函数时栈的结构，system函数需要返回地址，故写入0x04个字符作为虚假的返回地址（不起作用），在写入bin_sh命令作为system的参数。<br>关键在于，弄清system函数的底层结构。</p>
+<img src="/2021/03/14/AD-level2/1.jpg" class>
       
     </div>
 
