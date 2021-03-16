@@ -121,7 +121,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">22</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">23</span></a>
 
   </li>
   </ul>
@@ -147,6 +147,97 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/17/AD_get_shell/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="带废物">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="全宇宙最蒻的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/17/AD_get_shell/" class="post-title-link" itemprop="url">AD_get_shell</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-12-17 16:25:39" itemprop="dateCreated datePublished" datetime="2020-12-17T16:25:39+08:00">2020-12-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-12-25 20:18:22" itemprop="dateModified" datetime="2020-12-25T20:18:22+08:00">2020-12-25</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <img src="/2020/12/17/AD_get_shell/1.jpg" class>
+<h3 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h3><p>1.打开Linux<br>2.在浏览器打开题目网站，获取在线环境（一串数字）<br>3.下载附件<br>4.在附近所在文件夹nc 那串数字（删掉”:”符号）<br>5.输入命令ls<br>6.输入命令cat flag<br>7.好了<br>8.？？？？？？？？？？？？？？？</p>
+<p>尝试在本机获取在线环境，在linux nc，成功</p>
+<p>尝试关闭在线环境，在linux  nc ，失败</p>
+<p>尝试删除附件，获取在线环境，nc ，成功</p>
+<p><strong>结论：本题解法不止一种。获取在线环境，nc接入，得到答案。或者下载附件，离线操作。</strong></p>
+<p>netcat通过TCP和UDP在网络中读写数据。通过与其他工具结合和重定向，可以在脚本中以多种方式使用它。</p>
+<p>netcat所做的就是在两台电脑之间建立链接并返回两个数据流。<br>能建立一个服务器，传输文件，与朋友聊天，传输流媒体或者用它作为其它协议的独立客户端。</p>
+<p>用于打开一个shell<br>当在题目网页点击获取在线环境，云端便搭建了一个服务器<br>我在客户端仅仅简单连接到服务器（直观上感觉了进入一个文件夹）</p>
+<p>$nc -n ip地址 ip端口<br>你会得到一个shell提示符在客户端</p>
+<p>Linux nc命令<br>参数说明（用一个写一个）：<br>-n 直接使用IP地址，而不通过域名服务器。<br>-p&lt;通信端口&gt; 设置本地主机使用的通信端口。</p>
+<h3 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h3><p>下载附件，将附件重命名为a，在附件所在文件夹，输入命令checksec a<br><img src="/2020/12/17/AD_get_shell/2.png" class></p>
+<p><strong>checksec：</strong><br>checksec是一个脚本软件，也就是用脚本写的一个文件，不到2000行，可用来学习shell。<br>checksec是用来检查可执行文件属性，例如PIE, RELRO, PaX, Canaries, ASLR, Fortify Source等等属性。<br>checksec的使用方法：<br>checksec –file /usr/sbin/sshd</p>
+<img src="/2020/12/17/AD_get_shell/3.png" class>
+<p>（这张是我在网上随便找的）</p>
+<p><strong>Arch</strong><br>程序架构信息，判断是64位还是32位，exp编写的时候是p64还是p32</p>
+<p><strong>RELRO</strong><br>Relocation Read-Onl（RELRO）此项技术主要针对GOT改写的攻击方式，它分成两种，Partial RELRO和FULL RELRO<br>Partial RELRO容易受到攻击，例如攻击者可以atoi.got为system.plt进而输入/bin/sh\x00获得shell，Full RELRO使整个GOT只读，从而无法被覆盖，但这样会大大增加程序的启动时间，因为程序在启动之前需要解析所有的符号。</p>
+<p><strong>Stack-canary</strong><br>栈溢出保护是一种缓冲区溢出攻击缓解手段，当函数存在缓冲区溢出攻击漏洞是，攻击者可以覆盖栈上的返回地址来让shellcode能够得到执行，当启用栈保护后，函数开始执行的时候先会往栈里插入类似cookie信息，当函数真正返回的时候会验证cookie信息是否合法，如果不合法就停止程序运行，攻击者在覆盖返回地址的时候往往会将cookie信息给覆盖掉，导致栈保护检车失败而阻止shellcode的执行，在linux中我们将cookie信息称为canary。因此我们需要获取 Canary 的值，或者防止触发 stack_chk_fail 函数，或是利用此函数。</p>
+<p><strong>NX</strong><br>Non-Executable Memory，不可执行内存。了解 Linux 的都知道其文件有三种属性，即 rwx，而 NX 即没有 x 属性。如果没有 w 属性，我们就不能向内存单元中写入数据，如果没有 x 属性，写入的 shellcode 就无法执行。所以，我们此时应该使用其他方法来 pwn 掉程序，其中最常见的方法为 ROP (Return-Oriented Programming 返回导向编程)，利用栈溢出在栈上布置地址，每个内存地址对应一个 gadget，利用 ret 等指令进行衔接来执行某项功能，最终达到 pwn 掉程序的目的。<br>NX enabled如果这个保护开启就是意味着栈中数据没有执行权限，如此一来，当攻击者在堆栈上部署自己的shellcode并触发时，智慧直接造成程序的崩溃，但是可以利用rop这种方法绕过</p>
+<p><strong>PIE</strong><br>PTE（Position-Independent  Executable，位置无关可执行文件）技术与ASLR技术类似，ASLR将程序运行时的堆栈以及共享库的加载地址随机化，而PIE及时则在编译时将程序编译为位置无关，即程序运行时各个段（如代码但等）加载的虚拟地址也是在装载时才确定，这就意味着。在PIE和ASLR同时开启的情况下，攻击者将对程序的内存布局一无所知，传统改写GOT表项也难以进行，因为攻击者不能获得程序的.got段的虚地址。若开始一般需在攻击时歇够地址信息</p>
+<p>回到正题<br><img src="/2020/12/17/AD_get_shell/2.png" class><br>从图上可以看出它是一个64位程序，开了NX防护（堆栈不可执行）。唔，好的，基本信息咱们已经知道了，然后可以试着执行一下这个程序（Linux下）</p>
+<p>Linux执行命令：./名字</p>
+<p>提示权限不够</p>
+<p>在当前文件下输入命令：chmod 777 名字</p>
+<p>再次Linux执行命令：./名字</p>
+<img src="/2020/12/17/AD_get_shell/4.png" class>
+<p><strong>成功执行程序。。。。不明所以。。。老子flag呢？？？？<br>到头来还是要用nc，这个附件不讲武德，欺骗老子感情</strong></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -1088,77 +1179,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/17/PHP%E8%AF%AD%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="带废物">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="全宇宙最蒻的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/17/PHP%E8%AF%AD%E6%B3%95/" class="post-title-link" itemprop="url">PHP语法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-11-17 11:53:13" itemprop="dateCreated datePublished" datetime="2020-11-17T11:53:13+08:00">2020-11-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-17 10:32:17" itemprop="dateModified" datetime="2020-12-17T10:32:17+08:00">2020-12-17</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">PHP 脚本以 &lt;?php 开始,以 ?&gt; 结束，且可以放在文档中的任何位置。</span><br><span class="line"></span><br><span class="line">PHP 注释方式与C++一致</span><br><span class="line"></span><br><span class="line">PHP，有两种在浏览器输出文本的基础指令：echo 和 print</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;h1&gt;My first PHP page&lt;&#x2F;h1&gt;</span><br><span class="line"></span><br><span class="line">&lt;?php</span><br><span class="line">echo &quot;Hello World!&quot;;</span><br><span class="line">print &quot;Hello again!&quot;;</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">变量名是区分大小写的（$y 和 $Y 是两个不同的变量）</span><br><span class="line"></span><br><span class="line">PHP 语句和 PHP 变量都是区分大小写的</span><br><span class="line"></span><br><span class="line">PHP 没有声明变量的命令，变量在您第一次赋值给它的时候被创建</span><br><span class="line"></span><br><span class="line">PHP 是一门弱类型语言</span><br><span class="line"></span><br><span class="line">PHP 会根据变量的值，自动把变量转换为正确的数据类型。</span><br><span class="line"></span><br><span class="line">PHP 有四种不同的变量作用域：</span><br><span class="line">	local(一般忽略)</span><br><span class="line">	global</span><br><span class="line">	static</span><br><span class="line">	parameter（参数）</span><br><span class="line"></span><br><span class="line">要在一个函数中访问一个全局变量，需要使用 global 关键字。</span><br><span class="line"></span><br><span class="line">PHP 将所有全局变量存储在一个名为 $GLOBALS[index] 的数组中。 index 保存变量的名称。这个数组可以在函数内部访问，也可以直接用来更新全局变量。</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$x&#x3D;5;	$y&#x3D;10;</span><br><span class="line">function myTest()</span><br><span class="line">&#123;</span><br><span class="line">    $GLOBALS[&#39;y&#39;]&#x3D;$GLOBALS[&#39;x&#39;]+$GLOBALS[&#39;y&#39;];</span><br><span class="line">    global $y&#x3D;$y+1;</span><br><span class="line">&#125; </span><br><span class="line">myTest();</span><br><span class="line">echo $y;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Static 作用域</span><br><span class="line">当一个函数完成时，它的所有变量通常都会被删除。然而，有时候您希望某个局部变量不要被删除。</span><br><span class="line">要做到这一点，请在您第一次声明变量时使用 static 关键字：</span><br><span class="line">然后，每次调用该函数时，该变量将会保留着函数前一次被调用时的值。</span><br><span class="line">注释：该变量仍然是函数的局部变量。</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">function myTest()</span><br><span class="line">&#123;</span><br><span class="line">    static $x&#x3D;0;</span><br><span class="line">    echo $x;</span><br><span class="line">    $x++;</span><br><span class="line">    echo PHP_EOL;    &#x2F;&#x2F; 换行符</span><br><span class="line">&#125;</span><br><span class="line">myTest();</span><br><span class="line">myTest();</span><br><span class="line">myTest();</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">echo 和 print 区别:</span><br><span class="line">    echo - 可以输出一个或多个字符串(速度快，没有返回值)</span><br><span class="line">    print - 只允许输出一个字符串，返回值总为 1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1228,7 +1248,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
