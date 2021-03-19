@@ -256,7 +256,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-03-19 20:23:25" itemprop="dateModified" datetime="2021-03-19T20:23:25+08:00">2021-03-19</time>
+                <time title="Modified: 2021-03-19 20:27:08" itemprop="dateModified" datetime="2021-03-19T20:27:08+08:00">2021-03-19</time>
               </span>
 
           
@@ -276,7 +276,7 @@
 <p>rand()需要srand()提供的种子，只要种子相同，rand()就一定相同。</p>
 <p>此处种子为seed</p>
 <img src="/2021/03/16/AD-guess-num/2.png" class>
-<img src="/2021/03/16/AD-guess-num/1.jpg" class>
+<p>该图中地址为ida地址，1代表1个字节<br><img src="/2021/03/16/AD-guess-num/1.jpg" class></p>
 <p>该程序用gets来读取&amp;v7（name）（），所以可以用名字覆盖种子（写入我们需要的种子），再另外写一个cpp程序来看看该种子对应的rand（）函数值。</p>
 <p><strong>ida地址表示1相当于1个字节</strong></p>
 <p>名字写入0x24个a，相当于从客户端·输入32个a，一个a一个字节，刚好覆盖完-30h到-10h的地址，触及seed的地址，seed的类型是unsigned int，故seed[0]的大小为4个字节，故选取的种子4个a。</p>
