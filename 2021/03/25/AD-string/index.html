@@ -20,15 +20,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="全宇宙最蒻的博客">
-<meta property="og:url" content="http://example.com/archives/2020/12/index.html">
+  <meta name="description" content="分析： 在main()中定义指针v3，malloc函数返回给v3一个地址（这里称作[0]），此时指针v3存放一个[0]，指向未知内容。定义整型v5，将令v5&#x3D;v3&#x3D;[0]。令v3指向68。修改v3的下一个地址（这里称作[1]）为85。 在sub_400D72(v5)中参数传递int a1&#x3D;v5 在sub_400CA6(a1)中参数传递新变量，指针a1（局部函数同名）存放a1，即存放[0]，指向68">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AD_string">
+<meta property="og:url" content="http://example.com/2021/03/25/AD-string/index.html">
 <meta property="og:site_name" content="全宇宙最蒻的博客">
+<meta property="og:description" content="分析： 在main()中定义指针v3，malloc函数返回给v3一个地址（这里称作[0]），此时指针v3存放一个[0]，指向未知内容。定义整型v5，将令v5&#x3D;v3&#x3D;[0]。令v3指向68。修改v3的下一个地址（这里称作[1]）为85。 在sub_400D72(v5)中参数传递int a1&#x3D;v5 在sub_400CA6(a1)中参数传递新变量，指针a1（局部函数同名）存放a1，即存放[0]，指向68">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-03-25T08:03:12.000Z">
+<meta property="article:modified_time" content="2021-03-25T11:36:40.539Z">
 <meta property="article:author" content="带废物">
+<meta property="article:tag" content="PWN">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/archives/2020/12/">
+<link rel="canonical" href="http://example.com/2021/03/25/AD-string/">
 
 
 <script id="page-configurations">
@@ -36,12 +41,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>Archive | 全宇宙最蒻的博客</title>
+  <title>AD_string | 全宇宙最蒻的博客</title>
   
 
 
@@ -145,234 +150,86 @@
         <div class="content-wrap">
           
 
-          <div class="content archive">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <span class="collection-header">Um..! 25 posts in total. Keep on posting.</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/25/AD-string/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="带废物">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="全宇宙最蒻的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          AD_string
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-03-25 16:03:12 / Modified: 19:36:40" itemprop="dateCreated datePublished" datetime="2021-03-25T16:03:12+08:00">2021-03-25</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2020</span>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-12-31T16:04:37+08:00"
-              content="2020-12-31">
-          12-31
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/12/31/AD-CGfsb/" itemprop="url">
-            <span itemprop="name">AD_CGfsb</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-12-19T18:09:29+08:00"
-              content="2020-12-19">
-          12-19
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/12/19/AD-level0/" itemprop="url">
-            <span itemprop="name">AD_level0</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-12-19T17:27:36+08:00"
-              content="2020-12-19">
-          12-19
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/12/19/AD-when-did-you-born/" itemprop="url">
-            <span itemprop="name">AD_when_did_you_born</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-12-19T15:53:00+08:00"
-              content="2020-12-19">
-          12-19
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/12/19/pwn%E7%94%A8%E5%88%B0%E7%9A%84%E5%B7%A5%E5%85%B7%E6%B1%87%E6%80%BB/" itemprop="url">
-            <span itemprop="name">pwn用到的工具汇总</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-12-18T18:54:01+08:00"
-              content="2020-12-18">
-          12-18
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/12/18/AD-hello-pwn/" itemprop="url">
-            <span itemprop="name">AD_hello_pwn</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-12-17T19:19:48+08:00"
-              content="2020-12-17">
-          12-17
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/12/17/python/" itemprop="url">
-            <span itemprop="name">python</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-12-17T16:25:39+08:00"
-              content="2020-12-17">
-          12-17
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/12/17/AD_get_shell/" itemprop="url">
-            <span itemprop="name">AD_get_shell</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-12-16T21:00:38+08:00"
-              content="2020-12-16">
-          12-16
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/12/16/%E5%AD%A6%E4%B9%A0Linux/" itemprop="url">
-            <span itemprop="name">学习Linux</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-12-13T16:24:17+08:00"
-              content="2020-12-13">
-          12-13
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/12/13/cpp%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A4%B4%E6%96%87%E4%BB%B6/" itemprop="url">
-            <span itemprop="name">cpp自定义头文件</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-12-12T16:52:41+08:00"
-              content="2020-12-12">
-          12-12
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/12/12/%E5%AF%B9%E6%8B%8D/" itemprop="url">
-            <span itemprop="name">对拍</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
+        <p>分析：</p>
+<p>在main()中<br>定义指针v3，malloc函数返回给v3一个地址（这里称作[0]），此时指针v3存放一个[0]，指向未知内容。<br>定义整型v5，将令v5=v3=[0]。<br>令v3指向68。<br>修改v3的下一个地址（这里称作[1]）为85。</p>
+<p>在sub_400D72(v5)中<br>参数传递int a1=v5</p>
+<p>在sub_400CA6(a1)中<br>参数传递新变量，指针a1（局部函数同名）存放a1，即存放[0]，指向68</p>
+<p>因为指针a1与指针v3存放同一个地址，所以a1就是v3，故<strong>*a1</strong>=68，a1[1]=85。<br>题目要求使<strong>*a1</strong>等于a1[1]，这里选择将<strong>*a1</strong>更改为85。</p>
+<p>主要思路：利用printf格式化字符串漏洞，算出修改地址[0]所需要的偏移量。再利用一遍，往[0]写入68。最后用shellcode拿到flag。</p>
 
     </div>
-  </div>
-  
-  
-  
 
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/PWN/" rel="tag"># PWN</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/03/24/Nep-1/" rel="prev" title="Nep_1">
+      <i class="fa fa-chevron-left"></i> Nep_1
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
   
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/2020/12/page/2/">2</a><a class="extend next" rel="next" href="/archives/2020/12/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
-  </nav>
+  
+  
 
 
 
