@@ -28,7 +28,7 @@
 <meta property="og:description" content="分析： 在main()中定义指针v3，malloc函数返回给v3一个地址（这里称作[0]），此时指针v3存放一个[0]，指向未知内容。定义整型v5，将令v5&#x3D;v3&#x3D;[0]。令v3指向68。修改v3的下一个地址（这里称作[1]）为85。 在sub_400D72(v5)中参数传递int a1&#x3D;v5 在sub_400CA6(a1)中参数传递新变量，指针a1（局部函数同名）存放a1，即存放[0]，指向68">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-03-25T08:03:12.000Z">
-<meta property="article:modified_time" content="2021-03-25T11:36:40.539Z">
+<meta property="article:modified_time" content="2021-03-26T13:36:19.114Z">
 <meta property="article:author" content="带废物">
 <meta property="article:tag" content="PWN">
 <meta name="twitter:card" content="summary">
@@ -126,7 +126,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">25</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">26</span></a>
 
   </li>
   </ul>
@@ -179,10 +179,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-03-25 16:03:12 / Modified: 19:36:40" itemprop="dateCreated datePublished" datetime="2021-03-25T16:03:12+08:00">2021-03-25</time>
+              <time title="Created: 2021-03-25 16:03:12" itemprop="dateCreated datePublished" datetime="2021-03-25T16:03:12+08:00">2021-03-25</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-03-26 21:36:19" itemprop="dateModified" datetime="2021-03-26T21:36:19+08:00">2021-03-26</time>
+              </span>
 
           
 
@@ -222,7 +228,10 @@
     <a href="/2021/03/24/Nep-1/" rel="prev" title="Nep_1">
       <i class="fa fa-chevron-left"></i> Nep_1
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/03/26/AD-cgpwn2/" rel="next" title="AD_cgpwn2">
+      AD_cgpwn2 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -294,7 +303,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
