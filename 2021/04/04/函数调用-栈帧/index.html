@@ -28,8 +28,9 @@
 <meta property="og:description" content="代码生成可执行文件可执行文件运行加载到内存其中机器指令位于代码段  栈有高地址向低地址生成 函数调用时，用栈来存放局部变量、参数、返回地址等。 ebp指向栈底部（在高地址）（该寄存器存放的是栈地址）esp指向栈顶（在低地址）（该寄存器存放的是栈地址）eip指向下一条需要指向的指令（在代码段）（该寄存器存放的是代码段的地址） call指令只做两件事：1.打入返回地址 （push eip）2.跳转（e">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2021/04/04/%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8-%E6%A0%88%E5%B8%A7/1.jpg">
+<meta property="og:image" content="http://example.com/2021/04/04/%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8-%E6%A0%88%E5%B8%A7/1.png">
 <meta property="article:published_time" content="2021-04-04T12:28:56.000Z">
-<meta property="article:modified_time" content="2021-04-08T06:39:50.219Z">
+<meta property="article:modified_time" content="2021-04-08T06:44:49.419Z">
 <meta property="article:author" content="带废物">
 <meta property="article:tag" content="PWN">
 <meta name="twitter:card" content="summary">
@@ -189,7 +190,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-04-08 14:39:50" itemprop="dateModified" datetime="2021-04-08T14:39:50+08:00">2021-04-08</time>
+                <time title="Modified: 2021-04-08 14:44:49" itemprop="dateModified" datetime="2021-04-08T14:44:49+08:00">2021-04-08</time>
               </span>
 
           
@@ -211,6 +212,7 @@
 <p>call指令只做两件事：<br>1.打入返回地址 （push eip）<br>2.跳转（eip=%%%%）</p>
 <p>函数开头：<br>1.分配栈帧大小（esp=esp-n）（之后用栈就往[esp+m]里写东西）<br>2.保存母函数的栈基地址于栈中（[esp+m1]=ebp）（母函数也有其栈帧）<br>3.确定子函数的栈基地址，即当前栈最新空着的地方（ebp=esp+m2）<br>函数中间：<br>执行该子函数在代码段的其它指令，其中栈会刚好用到esp+n处<br>函数结尾：<br>1.恢复ebp存储母函数的栈基地址（ebp=[esp+m1]）<br>2.释放该子栈帧的空间（esp=esp+n）</p>
 <p>ret指令只做两件事：<br>1.弹出返回地址 （eip=pop）<br>2.跳转</p>
+<p>这是函数嵌套调用时栈的模样：<br><img src="/2021/04/04/%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8-%E6%A0%88%E5%B8%A7/1.png" class></p>
 
     </div>
 
