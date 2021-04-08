@@ -245,10 +245,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-04-04 20:28:56 / Modified: 20:29:40" itemprop="dateCreated datePublished" datetime="2021-04-04T20:28:56+08:00">2021-04-04</time>
+              <time title="Created: 2021-04-04 20:28:56" itemprop="dateCreated datePublished" datetime="2021-04-04T20:28:56+08:00">2021-04-04</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-04-08 14:39:50" itemprop="dateModified" datetime="2021-04-08T14:39:50+08:00">2021-04-08</time>
+              </span>
 
           
 
@@ -261,7 +267,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>得硬啃一阵子了</p>
+          <p><strong>代码</strong>生成<strong>可执行文件</strong><br><strong>可执行文件</strong>运行加载到<strong>内存</strong><br>其中<strong>机器指令</strong>位于<strong>代码段</strong></p>
+<img src="/2021/04/04/%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8-%E6%A0%88%E5%B8%A7/1.jpg" class>
+<p>栈有高地址向低地址生成</p>
+<p>函数调用时，用栈来存放局部变量、参数、返回地址等。</p>
+<p>ebp指向栈底部（在高地址）（该寄存器存放的是栈地址）<br>esp指向栈顶（在低地址）（该寄存器存放的是栈地址）<br>eip指向下一条需要指向的指令（在代码段）（该寄存器存放的是代码段的地址）</p>
+<p>call指令只做两件事：<br>1.打入返回地址 （push eip）<br>2.跳转（eip=%%%%）</p>
+<p>函数开头：<br>1.分配栈帧大小（esp=esp-n）（之后用栈就往[esp+m]里写东西）<br>2.保存母函数的栈基地址于栈中（[esp+m1]=ebp）（母函数也有其栈帧）<br>3.确定子函数的栈基地址，即当前栈最新空着的地方（ebp=esp+m2）<br>函数中间：<br>执行该子函数在代码段的其它指令，其中栈会刚好用到esp+n处<br>函数结尾：<br>1.恢复ebp存储母函数的栈基地址（ebp=[esp+m1]）<br>2.释放该子栈帧的空间（esp=esp+n）</p>
+<p>ret指令只做两件事：<br>1.弹出返回地址 （eip=pop）<br>2.跳转</p>
 
       
     </div>
