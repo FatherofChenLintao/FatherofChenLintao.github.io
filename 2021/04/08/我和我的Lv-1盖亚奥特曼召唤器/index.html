@@ -20,13 +20,15 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="article">
+  <meta name="description" content="泄露数据printf函数格式化字符串漏洞修改数据数据偏移给定读入数据范围过大，以至于可覆盖掉其它数据strcpy函数的粘贴过程也可以理解为读入 printf函数格式化字符串漏洞向栈内某处出写入数据 整型变量溢出伪随机伪随机函数，只要给出同一个种子，在同一个环境下（windows或Linux），会产生相同的结果 栈溢出shellcode修改返回地址，让其指向溢出数据中的一段指令（shellcode）">
+<meta property="og:type" content="article">
 <meta property="og:title" content="我和我的Lv.1盖亚奥特曼召唤器">
 <meta property="og:url" content="http://example.com/2021/04/08/%E6%88%91%E5%92%8C%E6%88%91%E7%9A%84Lv-1%E7%9B%96%E4%BA%9A%E5%A5%A5%E7%89%B9%E6%9B%BC%E5%8F%AC%E5%94%A4%E5%99%A8/index.html">
 <meta property="og:site_name" content="全宇宙最蒻的博客">
+<meta property="og:description" content="泄露数据printf函数格式化字符串漏洞修改数据数据偏移给定读入数据范围过大，以至于可覆盖掉其它数据strcpy函数的粘贴过程也可以理解为读入 printf函数格式化字符串漏洞向栈内某处出写入数据 整型变量溢出伪随机伪随机函数，只要给出同一个种子，在同一个环境下（windows或Linux），会产生相同的结果 栈溢出shellcode修改返回地址，让其指向溢出数据中的一段指令（shellcode）">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-04-08T14:09:04.000Z">
-<meta property="article:modified_time" content="2021-04-08T14:16:04.056Z">
+<meta property="article:modified_time" content="2021-04-10T08:12:29.582Z">
 <meta property="article:author" content="带废物">
 <meta property="article:tag" content="PWN">
 <meta name="twitter:card" content="summary">
@@ -177,10 +179,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-04-08 22:09:04 / Modified: 22:16:04" itemprop="dateCreated datePublished" datetime="2021-04-08T22:09:04+08:00">2021-04-08</time>
+              <time title="Created: 2021-04-08 22:09:04" itemprop="dateCreated datePublished" datetime="2021-04-08T22:09:04+08:00">2021-04-08</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-04-10 16:12:29" itemprop="dateModified" datetime="2021-04-10T16:12:29+08:00">2021-04-10</time>
+              </span>
 
           
 
@@ -193,7 +201,22 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <h1 id="泄露数据"><a href="#泄露数据" class="headerlink" title="泄露数据"></a>泄露数据</h1><h3 id="printf函数格式化字符串漏洞"><a href="#printf函数格式化字符串漏洞" class="headerlink" title="printf函数格式化字符串漏洞"></a>printf函数格式化字符串漏洞</h3><h1 id="修改数据"><a href="#修改数据" class="headerlink" title="修改数据"></a>修改数据</h1><h3 id="数据偏移"><a href="#数据偏移" class="headerlink" title="数据偏移"></a>数据偏移</h3><p>给定读入数据范围过大，以至于可覆盖掉其它数据<br>strcpy函数的粘贴过程也可以理解为读入</p>
+<h3 id="printf函数格式化字符串漏洞-1"><a href="#printf函数格式化字符串漏洞-1" class="headerlink" title="printf函数格式化字符串漏洞"></a>printf函数格式化字符串漏洞</h3><p>向栈内某处出写入数据</p>
+<h3 id="整型变量溢出"><a href="#整型变量溢出" class="headerlink" title="整型变量溢出"></a>整型变量溢出</h3><h1 id="伪随机"><a href="#伪随机" class="headerlink" title="伪随机"></a>伪随机</h1><p>伪随机函数，只要给出同一个种子，在同一个环境下（windows或Linux），会产生相同的结果</p>
+<h1 id="栈溢出"><a href="#栈溢出" class="headerlink" title="栈溢出"></a>栈溢出</h1><h3 id="shellcode"><a href="#shellcode" class="headerlink" title="shellcode"></a>shellcode</h3><p>修改返回地址，让其指向溢出数据中的一段指令（shellcode）</p>
+<p>shellcode 可以用汇编语言来写再转成对应的机器码，也可以上网搜索直接复制粘贴，这里简单介绍，具体在pwn工具的博客里<br>（以下为获取pwntools内置集成）<br>（1）先设置目标机的参数<br>context(os=’linux’, arch=’amd64’, log_level=’debug’)<br>os设置系统为linux系统，arch设置架构为amd64，32位下是i386<br>log_level用于debug<br>（2）获取shellcode<br>获得执行system(“/bin/sh”)汇编代码所对应的机器码<br>asm(shellcraft.sh())<br>例子</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span>*</span><br><span class="line">context(log_level = <span class="string">&#x27;debug&#x27;</span>, arch = <span class="string">&#x27;i386&#x27;</span>, os = <span class="string">&#x27;linux&#x27;</span>)</span><br><span class="line">shellcode=asm(shellcraft.sh())</span><br></pre></td></tr></table></figure>
+<p>获取shellcode的起始地址：</p>
+<p>覆盖完ebp后，填充若干长度的 “\x90”，在写入shellcode。”\x90”这个机器码对应的指令是 NOP (No Operation)，也就是告诉 CPU  什么也不做，然后跳到下一条指令。有了这一段 NOP 的填充，只要返回地址能够命中这一段中的任意位置，都可以无副作用地跳转到 shellcode  的起始处，所以这种方法被称为 NOP Sled（中文含义是“滑雪橇”）。</p>
+<p>ps：当函数调用的栈中的数据没有可执行权限，此攻击手法彻底无效</p>
+<h3 id="return2libc"><a href="#return2libc" class="headerlink" title="return2libc"></a>return2libc</h3><p>修改返回地址，让其指向内存中已有的某个函数（return2libc）</p>
+<h3 id="ROP"><a href="#ROP" class="headerlink" title="ROP"></a>ROP</h3><p>修改返回地址，让其指向内存中已有的一段指令（ROP）</p>
+<h3 id="hijack-GOT"><a href="#hijack-GOT" class="headerlink" title="hijack GOT"></a>hijack GOT</h3><p>修改某个被调用函数的地址，让其指向另一个函数（hijack GOT）</p>
+<h1 id="爆破"><a href="#爆破" class="headerlink" title="爆破"></a>爆破</h1><p>一旦程序开启了金丝雀保护，除了低3位的地址以外其余全是扯淡，低位地址靠查，高位地址试出来</p>
+<p>一个例子</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">	io = remote(<span class="string">&quot;node2.hackingfor.fun&quot;</span>,<span class="number">36058</span>)</span><br><span class="line">	io.send(<span class="string">&quot;a&quot;</span>*<span class="number">16</span>+p16(<span class="number">0x64e1</span>))</span><br><span class="line">	res = io.recvall()</span><br><span class="line">	<span class="keyword">if</span> <span class="string">&quot;&#123;&quot;</span> <span class="keyword">in</span> res: <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
     </div>
 
     
@@ -273,6 +296,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%84%E9%9C%B2%E6%95%B0%E6%8D%AE"><span class="nav-number">1.</span> <span class="nav-text">泄露数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#printf%E5%87%BD%E6%95%B0%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%BC%8F%E6%B4%9E"><span class="nav-number">1.0.1.</span> <span class="nav-text">printf函数格式化字符串漏洞</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE"><span class="nav-number">2.</span> <span class="nav-text">修改数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%81%8F%E7%A7%BB"><span class="nav-number">2.0.1.</span> <span class="nav-text">数据偏移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#printf%E5%87%BD%E6%95%B0%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%BC%8F%E6%B4%9E-1"><span class="nav-number">2.0.2.</span> <span class="nav-text">printf函数格式化字符串漏洞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E5%9E%8B%E5%8F%98%E9%87%8F%E6%BA%A2%E5%87%BA"><span class="nav-number">2.0.3.</span> <span class="nav-text">整型变量溢出</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%AA%E9%9A%8F%E6%9C%BA"><span class="nav-number">3.</span> <span class="nav-text">伪随机</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%88%E6%BA%A2%E5%87%BA"><span class="nav-number">4.</span> <span class="nav-text">栈溢出</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#shellcode"><span class="nav-number">4.0.1.</span> <span class="nav-text">shellcode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#return2libc"><span class="nav-number">4.0.2.</span> <span class="nav-text">return2libc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ROP"><span class="nav-number">4.0.3.</span> <span class="nav-text">ROP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hijack-GOT"><span class="nav-number">4.0.4.</span> <span class="nav-text">hijack GOT</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%88%86%E7%A0%B4"><span class="nav-number">5.</span> <span class="nav-text">爆破</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
