@@ -20,20 +20,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="跟上一题一毛一样的题型，就这，就这，就这。 写入v5，v4。第一次判断v5为1926不让通过，第二次判断v5为2019通过。没有给第二次写v5的机会。查询v5，v4的地址，在读v4时使其偏移到v5的位置，写入2019覆盖掉v5原本的数值就好。（第一次写v5随便写，不是1926就行） 注意：溢出向下覆盖，跟编号无关">
+  <meta name="description" content="getpagesize()获得分页大小 1234#include &lt;unistd.h&gt;#include &lt;sys&#x2F;mman.h&gt;void *mmap(void *start, size_t length, int prot, int flags, int fd, off_t offsize)&#x2F;&#x2F;定义&#x2F;&#x2F;说明：mmap()用来">
 <meta property="og:type" content="article">
-<meta property="og:title" content="AD_when_did_you_born">
-<meta property="og:url" content="http://example.com/2020/12/19/AD-when-did-you-born/index.html">
+<meta property="og:title" content="mmap函数">
+<meta property="og:url" content="http://example.com/2021/04/29/mmap%E5%87%BD%E6%95%B0/index.html">
 <meta property="og:site_name" content="全宇宙最蒻的博客">
-<meta property="og:description" content="跟上一题一毛一样的题型，就这，就这，就这。 写入v5，v4。第一次判断v5为1926不让通过，第二次判断v5为2019通过。没有给第二次写v5的机会。查询v5，v4的地址，在读v4时使其偏移到v5的位置，写入2019覆盖掉v5原本的数值就好。（第一次写v5随便写，不是1926就行） 注意：溢出向下覆盖，跟编号无关">
+<meta property="og:description" content="getpagesize()获得分页大小 1234#include &lt;unistd.h&gt;#include &lt;sys&#x2F;mman.h&gt;void *mmap(void *start, size_t length, int prot, int flags, int fd, off_t offsize)&#x2F;&#x2F;定义&#x2F;&#x2F;说明：mmap()用来">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-12-19T09:27:36.000Z">
-<meta property="article:modified_time" content="2020-12-19T12:32:47.640Z">
+<meta property="article:published_time" content="2021-04-29T06:18:38.000Z">
+<meta property="article:modified_time" content="2021-04-29T07:37:39.340Z">
 <meta property="article:author" content="带废物">
 <meta property="article:tag" content="PWN">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2020/12/19/AD-when-did-you-born/">
+<link rel="canonical" href="http://example.com/2021/04/29/mmap%E5%87%BD%E6%95%B0/">
 
 
 <script id="page-configurations">
@@ -46,7 +46,7 @@
   };
 </script>
 
-  <title>AD_when_did_you_born | 全宇宙最蒻的博客</title>
+  <title>mmap函数 | 全宇宙最蒻的博客</title>
   
 
 
@@ -157,7 +157,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/19/AD-when-did-you-born/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/29/mmap%E5%87%BD%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -170,7 +170,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          AD_when_did_you_born
+          mmap函数
         </h1>
 
         <div class="post-meta">
@@ -181,7 +181,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-12-19 17:27:36 / Modified: 20:32:47" itemprop="dateCreated datePublished" datetime="2020-12-19T17:27:36+08:00">2020-12-19</time>
+              <time title="Created: 2021-04-29 14:18:38 / Modified: 15:37:39" itemprop="dateCreated datePublished" datetime="2021-04-29T14:18:38+08:00">2021-04-29</time>
             </span>
 
           
@@ -195,9 +195,53 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>跟上一题一毛一样的题型，就这，就这，就这。</p>
-<p>写入v5，v4。<br>第一次判断v5为1926不让通过，第二次判断v5为2019通过。没有给第二次写v5的机会。<br>查询v5，v4的地址，在读v4时使其偏移到v5的位置，写入2019覆盖掉v5原本的数值就好。<br>（第一次写v5随便写，不是1926就行）</p>
-<p>注意：溢出向下覆盖，跟编号无关</p>
+        <p>getpagesize()获得分页大小</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;sys&#x2F;mman.h&gt;</span><br><span class="line">void *mmap(void *start, size_t length, int prot, int flags, int fd, off_t offsize)&#x2F;&#x2F;定义</span><br><span class="line">&#x2F;&#x2F;说明：mmap()用来将某个文件内容映射到内存中，对该内存区域的存取即是直接对该文件内容的读写</span><br></pre></td></tr></table></figure>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>start</td>
+<td>指向欲对应的内存起始地址，通常设为NULL，代表让系统自动选定地址，对应成功后该地址会返回。</td>
+</tr>
+<tr>
+<td>length</td>
+<td>代表将文件中多大的部分对应到内存。</td>
+</tr>
+<tr>
+<td>prot</td>
+<td>代表映射区域的保护方式，有下列组合：1.PROT_EXEC  映射区域可被执行；2.PROT_READ  映射区域可被读取； PROT_WRITE  映射区域可被写入；3.PROT_NONE  映射区域不能存取。</td>
+</tr>
+<tr>
+<td>flags</td>
+<td>会影响映射区域的各种特性： MAP_FIXED  如果参数 start 所指的地址无法成功建立映射时，则放弃映射，不对地址做修正。通常不鼓励用此旗标。 MAP_SHARED  对应射区域的写入数据会复制回文件内，而且允许其他映射该文件的进程共享。 MAP_PRIVATE  对应射区域的写入操作会产生一个映射文件的复制，即私人的”写入时复制” (copy on write)对此区域作的任何修改都不会写回原来的文件内容。 MAP_ANONYMOUS  建立匿名映射，此时会忽略参数fd，不涉及文件，而且映射区域无法和其他进程共享。 MAP_DENYWRITE  只允许对应射区域的写入操作，其他对文件直接写入的操作将会被拒绝。 MAP_LOCKED  将映射区域锁定住，这表示该区域不会被置换(swap)。       在调用mmap()时必须要指定MAP_SHARED 或MAP_PRIVATE。</td>
+</tr>
+<tr>
+<td>fd</td>
+<td>open()返回的文件描述词，代表欲映射到内存的文件。</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>文件映射的偏移量，通常设置为0，代表从文件最前方开始对应，offset必须是分页大小的整数倍。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>返回值：若映射成功则返回映射区的内存起始地址，否则返回MAP_FAILED(-1)，错误原因存于errno 中。</p>
+<p>错误代码：</p>
+<ul>
+<li>EBADF  参数fd 不是有效的文件描述词。</li>
+<li>EACCES  存取权限有误。如果是MAP_PRIVATE 情况下文件必须可读，使用MAP_SHARED 则要有PROT_WRITE 以及该文件要能写入。</li>
+<li>EINVAL  参数start、length 或offset 有一个不合法。</li>
+<li>EAGAIN  文件被锁住，或是有太多内存被锁住。</li>
+<li>ENOMEM  内存不足。</li>
+</ul>
 
     </div>
 
@@ -216,12 +260,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/12/19/pwn%E7%94%A8%E5%88%B0%E7%9A%84%E5%B7%A5%E5%85%B7%E6%B1%87%E6%80%BB/" rel="prev" title="pwn用到的工具汇总">
-      <i class="fa fa-chevron-left"></i> pwn用到的工具汇总
+    <a href="/2021/04/11/AD-forgot/" rel="prev" title="AD_forgot">
+      <i class="fa fa-chevron-left"></i> AD_forgot
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/12/19/AD-level0/" rel="next" title="AD_level0">
-      AD_level0 <i class="fa fa-chevron-right"></i>
+    <a href="/2021/04/29/read-byte-word/" rel="next" title="read_byte_word">
+      read_byte_word <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>

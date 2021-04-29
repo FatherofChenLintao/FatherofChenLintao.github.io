@@ -121,7 +121,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">31</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">33</span></a>
 
   </li>
   </ul>
@@ -197,6 +197,204 @@
 
       
           <img src="/2020/11/16/%E7%8F%AD%E9%95%BF%E5%A4%A7%E4%BA%BA%E6%9D%A5%E4%BA%86%EF%BC%8C%E9%9D%92%E5%A4%A9%E5%B0%B1%E6%9C%89%E4%BA%86/7.jpg" class>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/29/read-byte-word/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="带废物">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="全宇宙最蒻的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/29/read-byte-word/" class="post-title-link" itemprop="url">read_byte_word</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-04-29 14:50:27 / Modified: 15:43:47" itemprop="dateCreated datePublished" datetime="2021-04-29T14:50:27+08:00">2021-04-29</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>从相对于 FS 段开头的偏移量指定的位置读取内存。</p>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><p>C</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> <span class="keyword">char</span> __readfsbyte(<span class="keyword">unsigned</span> <span class="keyword">long</span> Offset);</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">short</span> __readfsword(<span class="keyword">unsigned</span> <span class="keyword">long</span> Offset);</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">long</span> __readfsdword(<span class="keyword">unsigned</span> <span class="keyword">long</span> Offset);</span><br><span class="line"><span class="keyword">unsigned</span> __int64 __readfsqword(<span class="keyword">unsigned</span> <span class="keyword">long</span> Offset);</span><br></pre></td></tr></table></figure>
+<h2 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h2><p>字节、字、双字名为的函数的名称指示 <code>FS:[Offset]</code> 。</p>
+<h2 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Intrinsic</th>
+<th>体系结构</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>__readfsbyte</code></td>
+<td>x86</td>
+</tr>
+<tr>
+<td><code>__readfsdword</code></td>
+<td>x86</td>
+</tr>
+<tr>
+<td><code>__readfsqword</code></td>
+<td>x86</td>
+</tr>
+<tr>
+<td><code>__readfsword</code></td>
+<td>x86</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>头文件</strong> <intrin.h></intrin.h></p>
+<p>例子：</p>
+<img src="/2021/04/29/read-byte-word/1.png" class>
+<img src="/2021/04/29/read-byte-word/2.png" class>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/29/mmap%E5%87%BD%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="带废物">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="全宇宙最蒻的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/29/mmap%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">mmap函数</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-04-29 14:18:38 / Modified: 15:37:39" itemprop="dateCreated datePublished" datetime="2021-04-29T14:18:38+08:00">2021-04-29</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>getpagesize()获得分页大小</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;sys&#x2F;mman.h&gt;</span><br><span class="line">void *mmap(void *start, size_t length, int prot, int flags, int fd, off_t offsize)&#x2F;&#x2F;定义</span><br><span class="line">&#x2F;&#x2F;说明：mmap()用来将某个文件内容映射到内存中，对该内存区域的存取即是直接对该文件内容的读写</span><br></pre></td></tr></table></figure>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>start</td>
+<td>指向欲对应的内存起始地址，通常设为NULL，代表让系统自动选定地址，对应成功后该地址会返回。</td>
+</tr>
+<tr>
+<td>length</td>
+<td>代表将文件中多大的部分对应到内存。</td>
+</tr>
+<tr>
+<td>prot</td>
+<td>代表映射区域的保护方式，有下列组合：1.PROT_EXEC  映射区域可被执行；2.PROT_READ  映射区域可被读取； PROT_WRITE  映射区域可被写入；3.PROT_NONE  映射区域不能存取。</td>
+</tr>
+<tr>
+<td>flags</td>
+<td>会影响映射区域的各种特性： MAP_FIXED  如果参数 start 所指的地址无法成功建立映射时，则放弃映射，不对地址做修正。通常不鼓励用此旗标。 MAP_SHARED  对应射区域的写入数据会复制回文件内，而且允许其他映射该文件的进程共享。 MAP_PRIVATE  对应射区域的写入操作会产生一个映射文件的复制，即私人的”写入时复制” (copy on write)对此区域作的任何修改都不会写回原来的文件内容。 MAP_ANONYMOUS  建立匿名映射，此时会忽略参数fd，不涉及文件，而且映射区域无法和其他进程共享。 MAP_DENYWRITE  只允许对应射区域的写入操作，其他对文件直接写入的操作将会被拒绝。 MAP_LOCKED  将映射区域锁定住，这表示该区域不会被置换(swap)。       在调用mmap()时必须要指定MAP_SHARED 或MAP_PRIVATE。</td>
+</tr>
+<tr>
+<td>fd</td>
+<td>open()返回的文件描述词，代表欲映射到内存的文件。</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>文件映射的偏移量，通常设置为0，代表从文件最前方开始对应，offset必须是分页大小的整数倍。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>返回值：若映射成功则返回映射区的内存起始地址，否则返回MAP_FAILED(-1)，错误原因存于errno 中。</p>
+<p>错误代码：</p>
+<ul>
+<li>EBADF  参数fd 不是有效的文件描述词。</li>
+<li>EACCES  存取权限有误。如果是MAP_PRIVATE 情况下文件必须可读，使用MAP_SHARED 则要有PROT_WRITE 以及该文件要能写入。</li>
+<li>EINVAL  参数start、length 或offset 有一个不合法。</li>
+<li>EAGAIN  文件被锁住，或是有太多内存被锁住。</li>
+<li>ENOMEM  内存不足。</li>
+</ul>
+
       
     </div>
 
@@ -747,167 +945,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/16/AD-guess-num/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="带废物">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="全宇宙最蒻的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/16/AD-guess-num/" class="post-title-link" itemprop="url">AD_guess_num</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-03-16 17:18:41" itemprop="dateCreated datePublished" datetime="2021-03-16T17:18:41+08:00">2021-03-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-03-19 21:20:22" itemprop="dateModified" datetime="2021-03-19T21:20:22+08:00">2021-03-19</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <img src="/2021/03/16/AD-guess-num/1.png" class>
-<p>可以看出要进行10次猜测，保证每次猜测（v4）与v6相等，即可执行sub_C3E，sub_C3E是能得到的flag函数。</p>
-<p>v6来自伪随机函数rand()</p>
-<p>rand()需要srand()提供的种子，只要种子相同，rand()就一定相同。</p>
-<p>此处种子为seed</p>
-<img src="/2021/03/16/AD-guess-num/2.png" class>
-<p>该图中地址为ida地址，1代表1个字节<br><img src="/2021/03/16/AD-guess-num/1.jpg" class></p>
-<p>该程序用gets来读取&amp;v7（name）（），所以可以用名字覆盖种子（写入我们需要的种子），再另外写一个cpp程序来看看该种子对应的rand（）函数值。</p>
-<p><strong>ida地址表示1相当于1个字节</strong></p>
-<p>名字写入0x24个a，相当于从客户端·输入32个a，一个a一个字节，刚好覆盖完-30h到-10h的地址，触及seed的地址，seed的类型是unsigned int，故seed[0]的大小为4个字节，故选取的种子4个a。</p>
-<p>这里特别要注意，由于题目本身是在linux下的，所以我们自己写的程序也要在linux下进行测试，不同的平台所产生的结果是不同的（我吐了，卡了老子这久）</p>
-<img src="/2021/03/16/AD-guess-num/2.jpg" class>
-<p><em>顺便需要学习在Linux中编写c</em></p>
-<p><em>首先确保安装了gcc，g++。我的linux里已经有了</em></p>
-<p><em>新建文件夹命名为xxx.cpp或xxx.c</em></p>
-<p><em>编写，保存</em></p>
-<p><em>用命令编译，g++ xxx.cpp 或 gcc xxx.c</em></p>
-<p><em>如果成功，会得到一个可执行程序，xxx.out</em></p>
-<p><em>运行，./xxx.out，会输出结果</em></p>
-<p>回到这题</p>
-<p>附件只提供参考，flag不在附件中，如果单纯运行附件答题能成功，但给不出flag（怎么想怎么对，我之前竟然不知道）</p>
-<p>所以有两个方法完成这题</p>
-<p>第一种方法nc服务器，输入0x24个a，也就是36个a，答题，得到flag </p>
-<p>第二种方法是使用脚本</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> * </span><br><span class="line">io = remote(<span class="string">&quot;111.200.241.244&quot;</span>, <span class="number">47746</span>)</span><br><span class="line"></span><br><span class="line">io.recvuntil(<span class="string">&quot;Your name:&quot;</span>)</span><br><span class="line">payload=<span class="string">&#x27;a&#x27;</span>*<span class="number">0x24</span></span><br><span class="line">io.sendline(payload)</span><br><span class="line"></span><br><span class="line">ans=[<span class="number">5</span>,<span class="number">6</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">6</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">2</span>,<span class="number">2</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> ans:</span><br><span class="line">	io.recvuntil(<span class="string">&quot;Please input your guess number:&quot;</span>)</span><br><span class="line">	io.sendline(str(i))</span><br><span class="line"></span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/14/AD-level2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="带废物">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="全宇宙最蒻的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/14/AD-level2/" class="post-title-link" itemprop="url">AD_level2</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-03-14 12:52:34" itemprop="dateCreated datePublished" datetime="2021-03-14T12:52:34+08:00">2021-03-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-03-16 00:47:01" itemprop="dateModified" datetime="2021-03-16T00:47:01+08:00">2021-03-16</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>庆祝第一次自己找到漏洞</p>
-<img src="/2021/03/14/AD-level2/1.png" class>
-<p>buf的大小为0x88，但却能读入0x100，造成了溢出</p>
-<p>​    <img src="/2021/03/14/AD-level2/2.png" class><br>​    敏感函数system的地址：0x08048320<br>​    <code>_system</code>函数里面有system(command)</p>
-<img src="/2021/03/14/AD-level2/3.png" class>
-<p>关键字符串的地址：0x0804A024</p>
-<p>在32位程序运行中，函数参数直接压入栈中。<br>调用函数时栈的结构为：1调用<strong>函数地址</strong>，2调用<strong>函数返回地址</strong>，参数n，参数n-1，参数。。。</p>
-<p>用0x88个字符覆盖栈，在用0x04个字符覆盖ebp的地址，将返回地址覆写为system函数。<br>根据调用函数时栈的结构，system函数需要返回地址，故写入0x04个字符作为虚假的返回地址（不起作用），在写入bin_sh命令作为system的参数。<br>关键在于，弄清system函数的底层结构。</p>
-<img src="/2021/03/14/AD-level2/1.jpg" class>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -977,7 +1014,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
