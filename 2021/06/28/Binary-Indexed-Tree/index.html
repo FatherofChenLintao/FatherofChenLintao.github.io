@@ -20,20 +20,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="VM+ubuntu我在系统中找到的文件bin  boot  cdrom  dev  etc  home  lib  lib32  lib64  libx32  lost+found  media  mnt  opt  proc  root  run  sbin  snap  srv  swapfile  sys  tmp  usr  varhome        是家目录，通常您自己创建的文件，都">
+  <meta name="description" content="区间求和 区间最大值 区间修改 单点修改     前缀和 √ × × ×   树状数组 √ √ × √   线段树 √ √ √ √     引入一： 当i&amp;(-i)时会发生什么： 先看例子：     十进制 二进制 二进制（补） i&amp;(-i)     0 0000 0000 0000   1 0001 1111 0001   2 0010 1110 0010   3 00">
 <meta property="og:type" content="article">
-<meta property="og:title" content="学习Linux">
-<meta property="og:url" content="http://example.com/2020/12/16/%E5%AD%A6%E4%B9%A0Linux/index.html">
+<meta property="og:title" content="前缀和、树状数组、线段树">
+<meta property="og:url" content="http://example.com/2021/06/28/Binary-Indexed-Tree/index.html">
 <meta property="og:site_name" content="全宇宙最蒻的博客">
-<meta property="og:description" content="VM+ubuntu我在系统中找到的文件bin  boot  cdrom  dev  etc  home  lib  lib32  lib64  libx32  lost+found  media  mnt  opt  proc  root  run  sbin  snap  srv  swapfile  sys  tmp  usr  varhome        是家目录，通常您自己创建的文件，都">
+<meta property="og:description" content="区间求和 区间最大值 区间修改 单点修改     前缀和 √ × × ×   树状数组 √ √ × √   线段树 √ √ √ √     引入一： 当i&amp;(-i)时会发生什么： 先看例子：     十进制 二进制 二进制（补） i&amp;(-i)     0 0000 0000 0000   1 0001 1111 0001   2 0010 1110 0010   3 00">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-12-16T13:00:38.000Z">
-<meta property="article:modified_time" content="2020-12-25T13:38:05.007Z">
+<meta property="article:published_time" content="2021-06-28T09:45:06.000Z">
+<meta property="article:modified_time" content="2021-06-28T10:56:44.338Z">
 <meta property="article:author" content="带废物">
-<meta property="article:tag" content="PWN">
+<meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2020/12/16/%E5%AD%A6%E4%B9%A0Linux/">
+<link rel="canonical" href="http://example.com/2021/06/28/Binary-Indexed-Tree/">
 
 
 <script id="page-configurations">
@@ -46,7 +46,7 @@
   };
 </script>
 
-  <title>学习Linux | 全宇宙最蒻的博客</title>
+  <title>前缀和、树状数组、线段树 | 全宇宙最蒻的博客</title>
   
 
 
@@ -157,7 +157,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/16/%E5%AD%A6%E4%B9%A0Linux/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/28/Binary-Indexed-Tree/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -170,7 +170,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          学习Linux
+          前缀和、树状数组、线段树
         </h1>
 
         <div class="post-meta">
@@ -179,16 +179,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2020-12-16 21:00:38" itemprop="dateCreated datePublished" datetime="2020-12-16T21:00:38+08:00">2020-12-16</time>
+              <time title="Created: 2021-06-28 17:45:06 / Modified: 18:56:44" itemprop="dateCreated datePublished" datetime="2021-06-28T17:45:06+08:00">2021-06-28</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-25 21:38:05" itemprop="dateModified" datetime="2020-12-25T21:38:05+08:00">2020-12-25</time>
-              </span>
 
           
 
@@ -201,33 +195,106 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="VM-ubuntu"><a href="#VM-ubuntu" class="headerlink" title="VM+ubuntu"></a>VM+ubuntu</h1><p>我在系统中找到的文件bin  boot  cdrom  dev  etc  home  lib  lib32  lib64  libx32  lost+found  media  mnt  opt  proc  root  run  sbin  snap  srv  swapfile  sys  tmp  usr  var<br>home        是家目录，通常您自己创建的文件，都保存在这里<br>usr            应用程序目录。大部分的软件都安装在这里<br>var            一些服务器方面的应用</p>
-<h4 id="linux有特定的语法结构"><a href="#linux有特定的语法结构" class="headerlink" title="linux有特定的语法结构"></a>linux有特定的语法结构</h4><p>用中文举例子<br>我们郑重地推荐您Ubuntu/Linux！</p>
-<p>这个句子的语法尽管简单，却是大部分的命令行采用的句型。让我们看一下，这个句子里都有些什么：</p>
-<p>我们</p>
-<p>主语，Linux命令的执行者只有一个，所以主语一概省略。</p>
-<p>推荐</p>
-<p>一个动词，作为谓语而存在。Linux命令中，这一部分是必须的。这一部分也是不同命令之间最根本的区别方式，所以它通常作为命令名，写在最前面。</p>
-<p>郑重的</p>
-<p>状语，用来修饰谓语。与之相对应，Linux命令可以使用参数来精细调节程序的行为。为了与命令的操作对象相区别，参数前通常要加 - 或者 — 符号。原则上，在命令名之后，参数的位置可以随意，但是为了养成一个良好的习惯，建议在命令名后直接跟参数。</p>
-<p>您 Ubuntu/linux</p>
-<p>这两个部分都是宾语，它们是命令的操作对象。大部分的命令只有一个操作对象，也有一些命令是双宾语结构的，具有一个直接宾语和一个间接宾语。比如 拷贝 这个命令 cp (copy)</p>
-<p>分隔符</p>
-<p>我们的汉语是象形文字，没有分隔符。但是所有的拼音文字中都有分隔符，来分隔单词。Linux命令中同样使用空格作分隔符。</p>
-<p>cp a /home 表示把当前目录下的 a 文件，拷贝到 /home 目录下。（命令的不同部分使用空格分隔，连续的空格视为一个空格）</p>
-<p>上面的那句话，翻译成Linux的命令，应该是这个样子的：</p>
-<p>推荐 —郑重的 您 Ubuntu/Linux （按照传统，“-”后跟简写为单个字母的参数，“—”后跟完整单词的参数。不过也有例外：）</p>
-<h4 id="路径相关命令"><a href="#路径相关命令" class="headerlink" title="路径相关命令"></a>路径相关命令</h4><p>cd (change directory) 更改目录。</p>
-<p>pwd (print working directory)显示当前路径。</p>
-<p>ls (list) 显示当前目录中的文件列表。</p>
-<h4 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h4><p>Linux中没有<strong><em>注册表\</em></strong>这个概念。安装软件，理论上讲，只要拷贝所有相关文件，并运行它的主程序就可以了。</p>
-<p>按照传统，一个软件通常分别拷贝到同级目录下的 bin、etc、lib、share等文件夹。</p>
-<p><strong>Bin</strong>      可执行文件，程序的可执行文件通常在这个目录下。在环境变量中设定搜索路径，就可以直接执行，而不需要定位其路径。</p>
-<p><strong>Etc</strong>       配置文件，大部分系统程序的配置文件保存于 /etc 目录，便于集中修改。</p>
-<p><strong>Lib</strong>       库文件，集中在一起，方便共享给不同程序。相较不同的软件单独保存库文件，能够节约一些磁盘空间。</p>
-<p><strong>Share</strong>    程序运行所需要的其它资源，例如图标、文本。这部分文件是专有的，不需要共享；而且目录结构相对复杂，混放在一起比较混乱，所以单独存放。</p>
-<h4 id="隐藏文件"><a href="#隐藏文件" class="headerlink" title="隐藏文件"></a>隐藏文件</h4><p>Linux下，名称中第一个字符为 . 的文件或者文件夹，系统默认情况下将它们隐藏起来</p>
-<h4 id="新建文件"><a href="#新建文件" class="headerlink" title="新建文件"></a>新建文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; text.py</span><br></pre></td></tr></table></figure>
+        <div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>区间求和</th>
+<th>区间最大值</th>
+<th>区间修改</th>
+<th>单点修改</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>前缀和</td>
+<td>√</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+</tr>
+<tr>
+<td>树状数组</td>
+<td>√</td>
+<td>√</td>
+<td>×</td>
+<td>√</td>
+</tr>
+<tr>
+<td>线段树</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>引入一：</p>
+<p>当i&amp;(-i)时会发生什么：</p>
+<p>先看例子：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>十进制</th>
+<th>二进制</th>
+<th>二进制（补）</th>
+<th>i&amp;(-i)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0000</td>
+<td>0000</td>
+<td>0000</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0001</td>
+<td>1111</td>
+<td>0001</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0010</td>
+<td>1110</td>
+<td>0010</td>
+</tr>
+<tr>
+<td>3</td>
+<td>0011</td>
+<td>1101</td>
+<td>0001</td>
+</tr>
+<tr>
+<td>4</td>
+<td>0100</td>
+<td>1100</td>
+<td>0100</td>
+</tr>
+<tr>
+<td>5</td>
+<td>0101</td>
+<td>1011</td>
+<td>0001</td>
+</tr>
+<tr>
+<td>6</td>
+<td>0110</td>
+<td>1010</td>
+<td>0010</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>也就是说</p>
+<p>设x=i&amp;(-i)，则x相当于 （将i的所有高位1砍掉，只保留最低的1）之后的i。</p>
+<p>那么现在假设我想知道这个1在第几位，比如说第k位，易得$k=log_2x$</p>
+<p>即$x=2^k$=i&amp;(-i)</p>
+<p>现在有人给i&amp;(-i)取了个名字——lowbit，即$2^k$=lowbit(i)=i&amp;(-i)</p>
 
     </div>
 
@@ -237,7 +304,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/PWN/" rel="tag"># PWN</a>
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
           </div>
 
         
@@ -246,13 +313,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/12/13/cpp%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A4%B4%E6%96%87%E4%BB%B6/" rel="prev" title="cpp自定义头文件">
-      <i class="fa fa-chevron-left"></i> cpp自定义头文件
+    <a href="/2021/05/30/Pow(n,x)/" rel="prev" title="Pow(x,n)">
+      <i class="fa fa-chevron-left"></i> Pow(x,n)
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/12/17/AD_get_shell/" rel="next" title="AD_get_shell">
-      AD_get_shell <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -311,7 +375,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#VM-ubuntu"><span class="nav-number">1.</span> <span class="nav-text">VM+ubuntu</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#linux%E6%9C%89%E7%89%B9%E5%AE%9A%E7%9A%84%E8%AF%AD%E6%B3%95%E7%BB%93%E6%9E%84"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">linux有特定的语法结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B7%AF%E5%BE%84%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">路径相关命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6"><span class="nav-number">1.0.0.3.</span> <span class="nav-text">软件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9A%90%E8%97%8F%E6%96%87%E4%BB%B6"><span class="nav-number">1.0.0.4.</span> <span class="nav-text">隐藏文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6"><span class="nav-number">1.0.0.5.</span> <span class="nav-text">新建文件</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
